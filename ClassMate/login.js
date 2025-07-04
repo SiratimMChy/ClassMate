@@ -1,5 +1,10 @@
+
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-app.js";
-import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-auth.js";
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  signOut,
+} from "https://www.gstatic.com/firebasejs/11.9.1/firebase-auth.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBr5S5yoBXdroviWV-T9pLaQl-dFFZ3eF8",
@@ -7,63 +12,94 @@ const firebaseConfig = {
   projectId: "classmateex",
   storageBucket: "classmateex.firebasestorage.app",
   messagingSenderId: "325155552857",
-  appId: "1:325155552857:web:b654aec07a4a6e2e233b48"
+  appId: "1:325155552857:web:b654aec07a4a6e2e233b48",
 };
 
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
+class LoginHandler {
+  constructor(config) {
+    this.app = initializeApp(config);
+    this.auth = getAuth(this.app);
 
-window.loginUser = function (event) {
+    this.emailPattern =
+      /^(?:(?:cse|eee|law)_\d{10}@lus\.ac\.bd|[a-z0-9._]+@(gmail|yahoo)\.com)$/;
+    this.passPattern =
+      /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*()_+?><]).{8,20}$/;
+  }
+
+  clearErrors() {
+    document.getElementById("email-error").textContent = "";
+    document.getElementById("password-error").textContent = "";
+  }
+
+  validateInput(email, password) {
+    this.clearErrors();
+    let valid = true;
+
+    if (!this.emailPattern.test(email)) {
+      document.getElementById("email-error").textContent =
+        "Email must be like: cse_1234567890@lus.ac.bd or valid Gmail/Yahoo.";
+      valid = false;
+    }
+
+    if (!this.passPattern.test(password)) {
+      document.getElementById("password-error").textContent =
+        "Password must be 8–20 characters and include uppercase, lowercase, digit, and special character.";
+      valid = false;
+    }
+
+    return valid;
+  }
+
+  async login(event) {
     event.preventDefault();
 
     const email = document.getElementById("email").value.trim();
-    const password = document.getElementById("password").value.trim();
+    const password = document.getElementById("ipass").value.trim();
 
-    const emailError = document.getElementById("email-error");
-    const passwordError = document.getElementById("password-error");
-
-    emailError.textContent = "";
-    passwordError.textContent = "";
-
-    
-    const emailPattern = /^(?:(?:cse|eee|law)_\d{10}@lus\.ac\.bd|[a-z0-9._]+@(gmail|yahoo)\.com)$/;
-    const passPattern = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*()_+?><]).{8,20}$/;
-
-    let hasError = false;
-
-    if (!emailPattern.test(email)) {
-        emailError.textContent = "Email must be like: cse_1234567890@lus.ac.bd or valid Gmail/Yahoo.";
-        hasError = true;
+    if (!this.validateInput(email, password)) {
+      return false;
     }
 
-    if (!passPattern.test(password)) {
-        passwordError.textContent = "Password must be 8–20 characters and include uppercase, lowercase, digit, and special character.";
-        hasError = true;
-    }
+    try {
+      const userCredential = await signInWithEmailAndPassword(
+        this.auth,
+        email,
+        password
+      );
 
-    if (hasError) {
-        return false; 
-    }
+      const user = userCredential.user;
 
-    signInWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-            alert("Login successful!");
-            window.location.href = "main.html"; 
-        })
-        .catch((error) => {
-            
-            console.log("Firebase Auth Error:", error.code, error.message);
-            
-            if (error.code === 'auth/user-not-found') {
-                emailError.textContent = "Email is not registered. Please register first.";
-            } else if (error.code === 'auth/wrong-password') {
-                passwordError.textContent = "Password does not match. Please try again.";
-            } else if (error.code === 'auth/email-already-in-use') {
-                emailError.textContent = "This email is already in use. Please use a different email.";
-            } else {
-                emailError.textContent = "Please check your credentials.";
-            }
-        });
+      if (!user.emailVerified) {
+        alert(
+          "Your email is not verified. Please verify your email before logging in."
+        );
+        await signOut(this.auth);
+        return false;
+      }
+
+      alert("Login successful!");
+      window.location.href = "main.html";
+    } catch (error) {
+      console.error("Firebase Auth Error:", error.code, error.message);
+
+      switch (error.code) {
+        case "auth/user-not-found":
+          document.getElementById("email-error").textContent =
+            "Email is not registered. Please register first.";
+          break;
+        case "auth/wrong-password":
+          document.getElementById("password-error").textContent =
+            "Password does not match. Please try again.";
+          break;
+        default:
+          document.getElementById("email-error").textContent =
+            "Please check your credentials.";
+      }
+    }
 
     return false;
-};
+  }
+}
+
+const loginHandler = new LoginHandler(firebaseConfig);
+window.loginUser = loginHandler.login.bind(loginHandler);

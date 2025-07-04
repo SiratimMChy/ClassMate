@@ -239,56 +239,82 @@
   }
 
   .services .row {
-      display: flex;
-      align-items: center;
-      gap: 2rem;
-      flex-wrap: wrap;
-      padding: 2rem 0;
-      padding-bottom: 3rem;
-  }
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+    padding: 2rem 0;
+    padding-bottom: 3rem;
+}
 
-  .services .row .video-container {
-      flex: 1 1 40rem;
-      position: relative;
-  }
+.services .row .video-container {
+    flex: 1 1 40rem; 
+    position: relative;
+    transition: transform 0.3s ease; 
+}
 
-  .services .row .video-container video {
-      width: 100%;
-      border: 1.5rem solid #fff;
-      border-radius: .5rem;
-      box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .1);
-      height: 100%;
-      object-fit: cover;
-  }
+.services .row .video-container:hover {
+    transform: scale(1.05);
+}
 
-  .services .row .video-container h3 {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      font-size: 3rem;
-      width: 100%;
-      padding: 1rem 2rem;
-      background: #fff;
-      text-align: center;
-      mix-blend-mode: screen;
-  }
+.services .row .video-container video {
+    width: 100%;
+    border: 1.5rem solid #fff;
+    border-radius: 0.5rem;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+    height: 100%;
+    object-fit: cover;
+}
 
-  .services .row .content {
-      flex: 1 1 40rem;
-  }
+.services .row .video-container h3 {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 2.5rem; 
+    width: 100%;
+    padding: 1rem 2rem;
+    background: rgba(255, 255, 255, 0.8); 
+    text-align: center;
+    mix-blend-mode: screen;
+    transition: background 0.3s ease; 
+}
 
-  .services .row .content h3 {
-      font-size: 3rem;
-      color: #333;
-  }
+.services .row .video-container h3:hover {
+    background: rgba(255, 255, 255, 1); 
+}
 
-  .services .row .content p {
-      font-size: 1.5rem;
-      color: #9999;
-      padding: .5rem 0;
-      padding-top: 1rem;
-      line-height: 1.5;
-  }
+.services .row .content {
+    flex: 1 1 40rem;
+}
+
+.services .row .content h3 {
+    font-size: 2.5rem; 
+    color: #333;
+}
+
+.services .row .content p {
+    font-size: 1.5rem;
+    color: #666; 
+    padding: 0.5rem 0;
+    padding-top: 1rem;
+    line-height: 1.6; 
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .services .row .video-container {
+        flex: 1 1 100%; 
+    }
+
+    .services .row .video-container h3 {
+        font-size: 2rem;
+    }
+
+    .services .row .content h3 {
+        font-size: 2rem; 
+    }
+}
+
 
   /* Club Section Styles  */
 
