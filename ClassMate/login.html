@@ -1,72 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
-        <head>
-            <meta charset="UTF-8" />
-            <meta name="viewport" content="width=device-width, initial-scale=1" />
-            <title>Login - Class Mate</title>
-            <link
-                rel="stylesheet"
-                href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-            />
-            <link rel="stylesheet" href="mainPageStylesheet.css">
-            <link rel="stylesheet" href="login.css" />
-            <script type="module" src="login.js" defer></script>
-        </head>
-        <body>
-            <section class="login" id="login">
-                <h1 class="heading">Login to <span>Class Mate</span></h1>
-                <form onsubmit="return loginUser(event);">
-                    <input
-                        type="email"
-                        placeholder="Email"
-                        name="email"
-                        class="box"
-                        id="email"
-                        required
-                    />
-                    <div id="email-error" class="error"></div>
 
-                    <div class="password-container">
-                        <input
-                            type="password"
-                            placeholder="Password"
-                            name="password"
-                            class="box"
-                            id="ipass"
-                            required
-                        />
-                        <i class="fa-solid fa-eye" id="togglePass"></i>
-                    </div>
-                    <div id="password-error" class="error"></div>
-                    <div class="options">
-                        <label>
-                            <input type="checkbox" name="remember_me" /> Remember Me
-                        </label>
-                        <div class="forgot-password">
-                            <a href="forgot__password.html">Forgot Password?</a>
-                        </div>
-                    </div>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Login - Class Mate</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="mainPageStylesheet.css">
+    <link rel="stylesheet" href="login.css" />
+    <script type="module" src="login.js" defer></script>
+</head>
 
-                    <input type="submit" value="Login" class="btn" />
-                </form>
+<body>
+    <section class="login" id="login">
+        <h1 class="heading">Login to <span>Class Mate</span></h1>
+        <form onsubmit="return loginUser(event);">
+            <input type="email" placeholder="Email" name="email" class="box" id="email" required />
+            <div id="email-error" class="error"></div>
 
-                <div class="already-account">
-                    <p>
-                        Don't have an account? <a href="register.html">Register here</a>
-                    </p>
+            <div class="password-container">
+                <input type="password" placeholder="Password" name="password" class="box" id="ipass" required />
+                <i class="fa-solid fa-eye" id="togglePass"></i>
+            </div>
+            <div id="password-error" class="error"></div>
+            <div class="options">
+                <label>
+                    <input type="checkbox" name="remember_me" /> Remember Me
+                </label>
+                <div class="forgot-password">
+                    <a href="forgot__password.html">Forgot Password?</a>
                 </div>
-            </section>
+            </div>
 
-            <script>
-                const togglePass = document.getElementById("togglePass");
-                const passwordInput = document.getElementById("ipass");
+            <input type="submit" value="Login" class="btn" />
+        </form>
 
-                togglePass.addEventListener("click", function () {
-      const isHidden = passwordInput.type === "password";
-                passwordInput.type = isHidden ? "text" : "password";
-                this.classList.toggle("fa-eye");
-                this.classList.toggle("fa-eye-slash");
-    });
-            </script>
-        </body>
-    </html>
+        <div class="already-account">
+            <p>
+                Don't have an account? <a href="register.html">Register here</a>
+            </p>
+        </div>
+    </section>
+
+    <script>
+        const togglePass = document.getElementById("togglePass");
+        const passwordInput = document.getElementById("ipass");
+
+        togglePass.addEventListener("click", function () {
+            const isHidden = passwordInput.type === "password";
+            passwordInput.type = isHidden ? "text" : "password";
+            this.classList.toggle("fa-eye");
+            this.classList.toggle("fa-eye-slash");
+        });
+    </script>
+</body>
+
+</html>
