@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ClassMate</title>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
+  <link rel="stylesheet" href="mainPageStylesheet.css">
+</head>
+
+<body>
+
+  <!-- Header Section Start -->
+  <header>
+    <a href="#" class="logo">Class <span>Mate</span></a>
+    <input type="checkbox" id="toggler">
+    <label for="toggler" class="fas fa-bars"></label>
+    <nav class="navbar">
+      <ul>
+        <li class="dropdown"><a href="#home">Home</a></li>
+        <li class="dropdown"><a href="#services">Services</a></li>
+        <li class="dropdown"><a href="#club">Clubs</a></li>
+        <li class="dropdown"><a href="#contact">Contact</a></li>
+        <li class="dropdown"><a href="#about">About Us</a></li>
+
+
+        <li class="dropdown">
+          <a href="#">Departments</a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Business Administration</a></li>
+            <li><a href="#">Computer Science & Engineering</a></li>
+            <li><a href="#">English</a></li>
+            <li><a href="#">Electrical & Electronic Engineering</a></li>
+            <li><a href="#">Civil Engineering</a></li>
+            <li><a href="#">Architecture</a></li>
+            <li><a href="#">Law</a></li>
+            <li><a href="#">Islamic Studies</a></li>
+            <li><a href="#">Public Health</a></li>
+            <li><a href="#">Tourism and Hospitality Management</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#">Student Portal</a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Fetch Result</a></li>
+            <li><a href="#">Your Ranking On Campus</a></li>
+            <li><a href="#">Register</a></li>
+          </ul>
+        </li>
+        <li class="dropdown user-icon">
+          <a href="#" class="fas fa-user ic"></a>
+          <ul class="dropdown-menu">
+            <li><a href="login.html">Login</a></li>
+            <li><a href="register.html">Sign Up</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+  </header>
+  <!-- Header Section End -->
+
+  <!-- Home Section Start -->
+  <section class="home" id="home">
+    <video autoplay muted loop playsinline class="background-video">
+      <source src="images/homeVideo.mp4" type="video/mp4">
+    </video>
+
+    <div class="content">
+      <h3>CLASS MATE</h3>
+      <span>Your Ultimate University Companion</span>
+      <p>Class Mate is a student-friendly platform designed to simplify university life. From accessing academic
+        resources to staying updated on events, Class Mate keeps you connected.</p>
+      <a href="#" class="btn">Learn More</a>
+    </div>
+  </section>
+
+  <!-- Home Section End -->
+
+  <!-- Services Section Start -->
+  <section class="services" id="services">
+    <h1 class="heading">Check our <span>Services</span></h1>
+    <div class="row">
+      <div class="video-container">
+        <video src="images/5637948-uhd_3840_2160_24fps.mp4" loop autoplay muted></video>
+        <h3><a href="FrontPG.html">Generate Font Page</a></h3>
+      </div>
+      <div class="video-container">
+        <video src="images/routine_time.mp4" loop autoplay muted></video>
+        <h3><a href="routine.html">Generate Routine</a></h3>
+      </div>
+      <div class="row">
+        <div class="video-container">
+          <video src="images/question_paper.mp4" loop autoplay muted></video>
+          <h3><a href="PreviousQ.html">Find Previous Questions</a></h3>
+        </div>
+        <div class="video-container">
+          <video src="images/boothPermission.mp4" loop autoplay muted></video>
+          <h3>Booth/Classroom/Event Permission</h3>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="video-container">
+        <video src="images/Makeup_exam.mp4" loop autoplay muted></video>
+        <h3>Apply for Makeup Exam</h3>
+      </div>
+      <div class="video-container">
+        <video src="images/background.mp4" loop autoplay muted></video>
+        <h3>Apply for Supplementary/Reading Exam</h3>
+      </div>
+    </div>
+
+  </section>
+  <!-- Services Section End -->
+  <!-- Clubs Section Start -->
+  <section class="clubs-section blur-bg" id="club">
+    <div class="clubs-content">
+      <h1>Want to <span class="highlight">Register a Club?</span></h1>
+      <p>Leading University proudly hosts 16 officially recognized clubs. Would you like to explore and join them?</p>
+      <button class="btn">From up now ➜</button>
+    </div>
+    <div class="clubs-carousel">
+      <div class="carousel-card">
+        <img src="images/club10.jpg" alt="Club 1" />
+      </div>
+      <button class="carousel-btn prev">&lt;</button>
+      <button class="carousel-btn next">&gt;</button>
+    </div>
+  </section>
+
+  <script>
+    const images = [
+      "images/club1.jpg",
+      "images/club2.jpg",
+      "images/club3.jpg",
+      "images/club4.jpg",
+      "images/club5.jpg",
+      "images/club6.jpg",
+      "images/club7.jpg",
+      "images/club8.jpg",
+      "images/club9.jpg",
+      "images/club10.jpg",
+      "images/club11.jpg",
+      "images/club12.jpg",
+      "images/club13.jpg",
+      "images/club14.jpg",
+      "images/club15.jpg",
+      "images/club16.jpg",
+      "images/club17.jpg",
+      "images/club18.jpg"
+    ];
+
+    let currentIndex = 0;
+
+    const carouselCard = document.querySelector(".carousel-card img");
+    const prevBtn = document.querySelector(".carousel-btn.prev");
+    const nextBtn = document.querySelector(".carousel-btn.next");
+
+    function showImage(index) {
+      if (index < 0) index = images.length - 1;
+      if (index >= images.length) index = 0;
+      carouselCard.src = images[index];
+      currentIndex = index;
+    }
+
+    prevBtn.addEventListener("click", () => {
+      showImage(currentIndex - 1);
+    });
+
+    nextBtn.addEventListener("click", () => {
+      showImage(currentIndex + 1);
+    });
+    setInterval(() => {
+      showImage(currentIndex + 1);
+    }, 4000);
+
+    
+    showImage(currentIndex);
+  </script>
+  <!-- Clubs Section End -->
+
+  <!-- Contact Section Start -->
+  <section class="contact" id="contact">
+    <h1 class="heading"><span>Contact</span> Us</h1>
+    <div class="row">
+      <form action="">
+        <input type="text" placeholder="Name" class="box" required>
+        <input type="email" placeholder="Email" class="box" required>
+        <input type="number" placeholder="Number" class="box" required>
+        <textarea name="message" class="box" placeholder="Message" cols="30" rows="10" required></textarea>
+        <input type="submit" value="Send Message" class="btn">
+      </form>
+      <div class="image">
+        <img src="images/GoogleMap.png" alt="" />
+      </div>
+    </div>
+  </section>
+  <!-- Contact Section End -->
+
+  <!-- About Section Start -->
+  <section class="about" id="about">
+    <h1 class="heading">About <span>Developers</span></h1>
+    <div class="box-container">
+      <div class="box">
+        <p>Hello, I'm Masarrat Majed. A frontend developer focused on design and user experience. Skilled in building
+          responsive web interfaces and passionate about clean code and continuous learning.</p>
+        <div class="user">
+          <img src="images/pic-1.jpg" alt="">
+          <div class="user-info">
+            <h3>Majedur Rahman </h3>
+            <span>Frontend Developer</span><br>
+            <span>2132020067</span>
+          </div>
+        </div>
+        <span class="fas fa-quote-right" style="font-size:35px"></span>
+      </div>
+      <div class="box">
+        <p>Hello, I'm Siratim Mustakim, a Full Stack Developer passionate about coding and building efficient web and
+          mobile apps. I am dedicated to continuous learning and delivering innovative solutions.</p>
+        <div class="user">
+          <img src="images/SMC.jpg" alt="">
+          <div class="user-info">
+            <h3>Siratim Mustakim Chy</h3>
+            <span>Full Stack Developer</span><br>
+            <span>2132020056</span>
+          </div>
+        </div>
+        <span class="fas fa-quote-right" style="font-size:35px"></span>
+      </div>
+      <div class="box">
+        <p>Hello, I'm Raz. A Full Stack Developer i love technology and enjoy turning ideas into easy-to-use websites
+          and apps. I have experience in web and mobile development and like learning new things to get better.</p>
+        <div class="user">
+          <img src="images/raz.jpg" alt="">
+          <div class="user-info">
+            <h3>Ruhit Dhar Raz</h3>
+            <span>Full Stack Developer</span><br>
+            <span>2132020062</span>
+          </div>
+        </div>
+        <span class="fas fa-quote-right" style="font-size:35px"></span>
+      </div>
+    </div>
+  </section>
+  <!-- About Section End -->
+
+
+
+  <!-- Footer Section Start -->
+  <section class="footer">
+    <div class="box-container">
+      <div class="box">
+        <h3>Quick Links</h3>
+        <a href="routine.html">Schedule Builder</a>
+        <a href="FrontPG.html">Front Page Generator</a>
+        <a href="PreviousQ.html">Previous Questions</a>
+        <a href="#">Booth Permission</a>
+        <a href="#">Makeup Exam</a>
+        <a href="#">Supplementary Exam</a>
+      </div>
+      <div class="box">
+        <h3>About ClassMate</h3>
+        <p>ClassMate is a student-friendly platform that simplifies university life.
+          It offers academic tools, club management, and exam-related services in one place.
+          Stay connected, organized, and involved throughout your university journey.
+        </p>
+      </div>
+      <div class="box">
+        <h3>Locations</h3>
+        <a href="https://maps.app.goo.gl/EuNhvDuMvFdUV18p8">Leading University</a>
+        <span>Ragibnagar, South Surma, Sylhet-3112</span><br>
+        <span>Bangladesh</span>
+        <a href="https://maps.app.goo.gl/YmGR6VRDru97e3J87">Bandar Bazar</a><br>
+        <span>Surma Tower, Taltola</span><br>
+        <span>Sylhet, Bangladesh</span>
+      </div>
+      <div class="box">
+        <h3>Contact Information</h3>
+        <address>
+          <div class="contact-item">
+            <i class="fas fa-phone"></i>
+            <span>+880-1763-777626</span>
+          </div>
+          <div class="contact-item">
+            <i class="fas fa-envelope"></i>
+            <span>cse_2132020056@lus.ac.bd</span>
+          </div>
+          <div class="contact-item">
+            <i class="fas fa-envelope"></i>
+            <span>cse_2132020062@lus.ac.bd</span>
+          </div>
+          <div class="contact-item">
+            <i class="fas fa-envelope"></i>
+            <span>cse_2132020067@lus.ac.bd</span>
+          </div>
+          <div class="contact-item">
+            <i class="fas fa-map-marker-alt"></i>
+            <span>Sylhet, Bangladesh</span>
+          </div>
+        </address>
+      </div>
+    </div>
+    <div class="credit">Created by <span>SRM Technologies</span> | &copy; all rights reserved<br>
+      <a href="https://www.facebook.com" target="_blank" aria-label="Facebook">
+        <i class="fab fa-facebook-f"></i>
+      </a>
+      <a href="https://www.twitter.com" target="_blank" aria-label="Twitter">
+        <i class="fab fa-twitter"></i>
+      </a>
+      <a href="https://www.instagram.com" target="_blank" aria-label="Instagram">
+        <i class="fab fa-instagram"></i>
+      </a>
+      <a href="https://www.linkedin.com" target="_blank" aria-label="LinkedIn">
+        <i class="fab fa-linkedin-in"></i>
+      </a>
+    </div>
+    </div>
+
+  </section>
+  <!-- Footer Section End -->
+
+</body>
+
+</html>

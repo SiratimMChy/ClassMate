@@ -1,0 +1,792 @@
+  :root {
+      --pink: #FF4500;
+  }
+
+  * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Verdana, Geneva, Tahoma, sans-serif;
+      outline: none;
+      border: none;
+      text-decoration: none;
+      text-transform: none;
+      transition: .2s linear;
+  }
+
+  html {
+      font-size: 62.5%;
+      scroll-behavior: smooth;
+      scroll-padding-top: 6rem;
+      overflow-x: hidden;
+  }
+
+  section {
+      padding: 2rem 9%;
+  }
+
+  .heading {
+      text-align: center;
+      font-size: 4rem;
+      color: #333;
+      padding: 1rem;
+      margin: 2rem 0;
+      background: rgba(255, 120, 10, 0.15);
+  }
+
+  .heading span {
+      color: var(--pink);
+  }
+
+  .btn {
+      display: inline-block;
+      margin-top: 1rem;
+      border-radius: 5rem;
+      background: #333;
+      color: #fff;
+      padding: .9rem 3.5rem;
+      cursor: pointer;
+      font-size: 1.7rem;
+  }
+
+  .btn:hover {
+      background: var(--pink);
+  }
+
+  header {
+      position: sticky;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: #fff;
+      padding: 2rem 9%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      z-index: 1000;
+      box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .1);
+  }
+
+  header .logo {
+      font-size: 3rem;
+      color: #333;
+      font-weight: bolder;
+  }
+
+  header .logo span {
+      color: var(--pink);
+  }
+
+  header .navbar li a {
+      font-size: 1.5rem;
+      padding: 0 1.5rem;
+      color: #666;
+  }
+
+  header .navbar li a .ic {
+      color: #333 !important;
+      size: 17px;
+  }
+
+  .dropdown {
+      position: relative;
+      display: inline-block;
+  }
+
+  /* Hide all dropdown menus by default */
+  .dropdown-menu {
+      display: none !important;
+      position: absolute;
+      background-color: #f9f9f9;
+      min-width: 200px;
+      box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+      z-index: 1001;
+      top: 100%;
+      left: 0;
+      border-radius: 0.5rem;
+  }
+
+  /* Show dropdown on hover */
+  .dropdown:hover .dropdown-menu {
+      display: block !important;
+  }
+
+  .dropdown-menu li {
+      padding: 8px 12px;
+      list-style: none;
+  }
+
+  .dropdown-menu li a {
+      text-decoration: none;
+      color: black;
+      display: block;
+      padding: 0.5rem;
+  }
+
+  .dropdown-menu li a:hover {
+      background-color: #ddd;
+      border-radius: 0.3rem;
+  }
+
+  ul,
+  li {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+  }
+
+  header .navbar ul {
+      display: flex;
+      align-items: center;
+  }
+
+  header .navbar a:hover {
+      color: var(--pink);
+  }
+
+  header .icons a {
+      font-size: 2.5rem;
+      color: #333;
+      margin-left: 1.5rem;
+  }
+
+  header .icons a:hover {
+      color: var(--pink);
+  }
+
+  header #toggler {
+      display: none;
+  }
+
+  header .fa-bars {
+      font-size: 3rem;
+      color: #333;
+      border-radius: .5rem;
+      padding: .5rem 1.5rem;
+      cursor: pointer;
+      border: .1rem solid rgba(0, 0, 0, .3);
+      display: none;
+  }
+
+  .home {
+      position: relative;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      min-height: 100vh;
+      padding: 5rem 10%;
+      text-align: left;
+      overflow: hidden;
+  }
+
+  .home .background-video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: blur(6px) brightness(0.7);
+      z-index: -1;
+  }
+
+  .home .content {
+      position: relative;
+      z-index: 1;
+      max-width: 80rem;
+      color: #fff;
+  }
+
+  .home .content h3 {
+      font-size: 10rem;
+      font-weight: 800;
+      margin-bottom: 2rem;
+      letter-spacing: 2px;
+      color: #fff;
+      text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.4);
+  }
+
+  .home .content span {
+      font-size: 3.5rem;
+      color: var(--pink);
+      font-weight: 600;
+      margin-bottom: 2rem;
+      display: block;
+  }
+
+  .home .content p {
+      font-size: 1.5rem;
+      color: #f2f2f2;
+      line-height: 2.5;
+      margin-bottom: 3rem;
+      max-width: 750rem;
+  }
+
+  .home .btn {
+      background: var(--pink);
+      color: #fff;
+      font-size: 2rem;
+      padding: 1.3rem 4rem;
+      border-radius: 50px;
+      box-shadow: 0 6px 16px rgba(255, 69, 0, 0.4);
+      transition: all 0.3s ease;
+  }
+
+  .home .btn:hover {
+      background: #fff;
+      color: var(--pink);
+      transform: scale(1.05);
+  }
+
+  .services .row {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+      padding: 2rem 0;
+      padding-bottom: 3rem;
+  }
+
+  .services .row .video-container {
+      flex: 1 1 40rem;
+      position: relative;
+  }
+
+  .services .row .video-container video {
+      width: 100%;
+      border: 1.5rem solid #fff;
+      border-radius: .5rem;
+      box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .1);
+      height: 100%;
+      object-fit: cover;
+  }
+
+  .services .row .video-container h3 {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 3rem;
+      width: 100%;
+      padding: 1rem 2rem;
+      background: #fff;
+      text-align: center;
+      mix-blend-mode: screen;
+  }
+
+  .services .row .content {
+      flex: 1 1 40rem;
+  }
+
+  .services .row .content h3 {
+      font-size: 3rem;
+      color: #333;
+  }
+
+  .services .row .content p {
+      font-size: 1.5rem;
+      color: #9999;
+      padding: .5rem 0;
+      padding-top: 1rem;
+      line-height: 1.5;
+  }
+
+  /* Club Section Styles  */
+
+
+  .clubs-section {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 2rem 9%;
+      background: #fefefe;
+      gap: 4rem;
+      min-height: 80vh;
+  }
+
+  .clubs-content {
+      flex: 1;
+      max-width: 60rem;
+      margin-bottom: -6rem;
+      position: relative;
+      z-index: 2;
+  }
+
+  .clubs-content h1 {
+      font-size: 8rem;
+      color: #fff;
+      margin-bottom: 2rem;
+      font-weight: 900;
+      line-height: 1.1;
+      text-transform: capitalize;
+      z-index: 2;
+      position: relative;
+      text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+  }
+
+  .clubs-content h1 .highlight {
+      color: var(--pink);
+  }
+
+  .clubs-content p {
+      font-size: 1.5rem;
+      color: #999;
+      margin-bottom: 3rem;
+      line-height: 1.8;
+  }
+
+  .clubs-content .btn {
+      display: inline-block;
+      margin-top: 1rem;
+      border-radius: 5rem;
+      background: #333;
+      color: #fff;
+      padding: .9rem 3.5rem;
+      cursor: pointer;
+      font-size: 1.7rem;
+      transition: .2s linear;
+  }
+
+  .clubs-content .btn:hover {
+      background: var(--pink);
+      transform: translateY(-2px);
+  }
+
+  .clubs-carousel {
+      flex: 1.2;
+      position: relative;
+      max-width: 70rem;
+      width: 100%;
+      height: 50rem;
+      border-radius: .5rem;
+      overflow: hidden;
+      box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .1);
+      background: transparent;
+      margin-left: auto;
+  }
+
+  .carousel-card {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      border-radius: .5rem;
+      overflow: hidden;
+  }
+
+  .carousel-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 1.5rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      border: none;
+  }
+
+  .carousel-card:hover img {
+      transform: scale(1.02);
+  }
+
+  .carousel-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255, 255, 255, 0.9);
+      border: .1rem solid rgba(0, 0, 0, .1);
+      width: 4rem;
+      height: 4rem;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: #333;
+      transition: .2s linear;
+      z-index: 10;
+      box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .1);
+  }
+
+  .carousel-btn:hover {
+      background: var(--pink);
+      color: white;
+      transform: translateY(-50%) scale(1.05);
+  }
+
+  .carousel-btn.prev {
+      left: 2rem;
+  }
+
+  .carousel-btn.next {
+      right: 2rem;
+  }
+
+  .blur-bg {
+      position: relative;
+      background: transparent;
+      overflow: hidden;
+      z-index: 1;
+      min-height: 100vh;
+  }
+
+  .blur-bg::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('images/festival.jpg') no-repeat center center/cover;
+      filter: blur(8px) brightness(0.5);
+      z-index: -1;
+      opacity: 0.9;
+  }
+
+
+
+  /* Club section End */
+
+  .contact .row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      align-items: center;
+  }
+
+  .contact .row form {
+      flex: 1 1 40rem;
+      padding: 2rem 2.5rem;
+      box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .1);
+      border: .1rem solid rgba(0, 0, 0, .1);
+      background: #fff;
+      border-radius: .5rem;
+  }
+
+  .contact .row .image {
+      flex: 1 1 40rem;
+  }
+
+  .contact .row .image img {
+      width: 100%;
+  }
+
+  .contact .row form .box {
+      padding: 1rem;
+      font-size: 1.7rem;
+      color: #333;
+      text-transform: none;
+      border: .1rem solid rgba(0, 0, 0, .1);
+      border-radius: .5rem;
+      margin: .7rem 0;
+      width: 100%;
+  }
+
+  .contact .row form .box:focus {
+      border-color: var(--pink);
+  }
+
+  .contact .row form textarea {
+      height: 15rem;
+      resize: none;
+  }
+
+  .about .box-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+  }
+
+  .about .box-container .box {
+      flex: 1 1 30rem;
+      box-shadow: 0 .5rem 1.5rem rgba(0, 0, 0, .1);
+      border-radius: .5rem;
+      padding: 3rem 2rem;
+      position: relative;
+      border: .1rem solid rgba(0, 0, 0, .1);
+  }
+
+  .about .box-container .box .fa-quote-right {
+      position: absolute;
+      bottom: 3rem;
+      right: 3rem;
+      font-size: 6rem;
+      color: #eee;
+  }
+
+  .about .box-container .box .stars i {
+      color: var(--pink);
+      font-size: 2rem;
+  }
+
+  .about .box-container .box p {
+      color: #999;
+      font-size: 1.5rem;
+      line-height: 1.5rem;
+      padding-top: 2rem;
+      text-align: justify;
+  }
+
+  .about .box-container .box .user {
+      display: flex;
+      align-items: center;
+      padding-top: 2rem;
+  }
+
+  .about .box-container .box .user img {
+      height: 6rem;
+      width: 6rem;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-right: 1rem;
+  }
+
+  .about .box-container .box .user h3 {
+      font-size: 2rem;
+      color: #333;
+  }
+
+  .about .box-container .box .user span {
+      font-size: 1.5rem;
+      color: #999;
+  }
+
+  .footer .box-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+  }
+
+  .footer .box-container .box {
+      flex: 1 1 25rem;
+  }
+
+  .footer .box-container .box h3 {
+      color: #333;
+      font-size: 2.5rem;
+      padding: 1rem 0;
+  }
+
+  .footer .box-container .box a {
+      display: block;
+      color: #333;
+      font-size: 1.5rem;
+      padding: 1rem 0;
+  }
+
+  .footer .box-container .box span {
+      color: #999;
+      font-size: 1.3rem;
+      line-height: 1.6rem;
+      text-align: justify;
+  }
+
+  .footer .box-container .box a:hover {
+      color: var(--pink);
+      text-decoration: underline;
+  }
+
+  .footer .box-container .box p {
+      font-size: 15px;
+  }
+
+  .footer .box-container .box img {
+      margin-top: 1rem;
+  }
+
+  .footer .credit {
+      text-align: center;
+      padding: 1.5rem;
+      margin-top: 1.5rem;
+      padding-top: 2.5rem;
+      font-size: 2rem;
+      color: #333;
+      border-top: .1rem solid rgba(0, 0, 0, .1);
+
+  }
+
+  .footer .credit a {
+      color: #333;
+      
+      transition: color 0.3s ease;
+      
+  }
+
+  .footer .credit a:hover {
+      color: var(--pink);
+     
+  }
+
+  .footer .credit span {
+      color: var(--pink);
+  }
+
+
+
+  
+  @media(max-width:991px) {
+      html {
+          font-size: 55%;
+      }
+
+      header {
+          padding: 2rem;
+      }
+
+      section {
+          padding: 2rem;
+      }
+
+      .home {
+          background-position: left;
+      }
+  }
+
+  @media(max-width: 865px) {
+      header .fa-bars {
+          display: block;
+      }
+
+      header .navbar {
+          position: absolute;
+          top: 100%;
+          left: 0;
+          right: 0;
+          background: #eee;
+          border-top: .1rem solid rgba(0, 0, 0, .1);
+          clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+          transition: clip-path 0.3s ease;
+      }
+
+      header #toggler:checked~.navbar {
+          clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+      }
+
+      header .navbar ul {
+          flex-direction: column;
+          width: 100%;
+      }
+
+      header .navbar li {
+          width: 100%;
+          margin: 0.5rem 0;
+      }
+
+      header .navbar li a {
+          display: block;
+          width: 100%;
+          margin: 0;
+          padding: 1.5rem;
+          background: #fff;
+          border: .1rem solid rgba(0, 0, 0, .1);
+          text-align: center;
+          border-radius: 0.5rem;
+      }
+
+  
+      .dropdown-menu {
+          position: static !important;
+          box-shadow: none !important;
+          background-color: #f0f0f0 !important;
+          margin-top: 0.5rem;
+          border-radius: 0.5rem;
+          display: none !important;
+          min-width: auto !important;
+          width: 100%;
+      }
+
+      .dropdown:hover .dropdown-menu {
+          display: block !important;
+      }
+
+      .home .content h3 {
+          font-size: 5rem;
+      }
+
+      .home .content span {
+          font-size: 2.5rem;
+      }
+  }
+
+  @media(max-width:450px) {
+      html {
+          font-size: 50%;
+      }
+
+      .heading {
+          font-size: 3rem;
+      }
+  }
+
+
+
+  /* Responsive Design for Club Section */
+  @media(min-width: 1400px) {
+      .clubs-carousel {
+          max-width: 90rem;
+          height: 62rem;
+      }
+  }
+
+  @media(max-width: 991px) {
+      .clubs-section {
+          flex-direction: column;
+          text-align: center;
+          padding: 2rem;
+          gap: 3rem;
+      }
+
+      .clubs-content h1 {
+          font-size: 3rem;
+      }
+
+      .clubs-carousel {
+          max-width: 100%;
+          height: 40rem;
+          margin-left: 0;
+      }
+  }
+
+  @media(max-width: 768px) {
+      .clubs-section {
+          padding: 2rem;
+      }
+
+      .clubs-content h1 {
+          font-size: 2.5rem;
+      }
+
+      .clubs-content p {
+          font-size: 1.4rem;
+      }
+
+      .clubs-carousel {
+          height: 35rem;
+          max-width: 100%;
+      }
+
+      .carousel-btn {
+          width: 3.5rem;
+          height: 3.5rem;
+          font-size: 1.6rem;
+      }
+
+      .carousel-btn.prev {
+          left: 1.5rem;
+      }
+
+      .carousel-btn.next {
+          right: 1.5rem;
+      }
+  }
+
+  @media(max-width: 450px) {
+      .clubs-content h1 {
+          font-size: 2rem;
+      }
+
+      .clubs-carousel {
+          height: 25rem;
+      }
+
+      .carousel-btn {
+          width: 3rem;
+          height: 3rem;
+          font-size: 1.4rem;
+      }
+  }

@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>University Academic Front Page Generator</title>
+     <link rel="stylesheet" href="FrontPG.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav>
+        <div class="navbar-container">
+            <div class="nav-logo">
+                <img src="https://images.seeklogo.com/logo-png/44/1/leading-university-logo-png_seeklogo-445048.png"
+                    alt="University Logo">
+                <h1 class="heading">Academic<span> Front Page </span>Generator</h1>
+            </div>
+            <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('active')">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="nav-links">
+                <a href="main.html"><i class="fas fa-home"></i> Home</a>
+                <a href="#"><i class="fas fa-file-alt"></i> Templates</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <h1><i class="fas fa-graduation-cap"></i> Academic Front Page Generator</h1>
+        <p>Create professional assignment cover pages with university branding and formatting standards.</p>
+    </div>
+
+    <div class="container">
+        <div class="form-section">
+            <h2 class="section-title">
+                <i class="fas fa-book"></i>
+                Course Information
+            </h2>
+
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="courseDept"><i class="fas fa-building"></i> Course Department</label>
+                    <input type="text" id="courseDept" placeholder="e.g., Computer Science & Engineering">
+                </div>
+                <div class="form-group">
+                    <label for="courseCode"><i class="fas fa-code"></i> Course Code</label>
+                    <input type="text" id="courseCode" placeholder="e.g., CSE-1111">
+                </div>
+                <div class="form-group full-width">
+                    <label for="courseTitle"><i class="fas fa-bookmark"></i> Course Title</label>
+                    <input type="text" id="courseTitle" placeholder="e.g., Introduction to Computer Programming">
+                </div>
+                <div class="form-group full-width">
+                    <label for="topic"><i class="fas fa-clipboard-list"></i> Assignment Topic</label>
+                    <input type="text" id="topic" placeholder="e.g., Final Project Report on Web Development">
+                </div>
+            </div>
+
+            <h2 class="section-title">
+                <i class="fas fa-chalkboard-teacher"></i>
+                Instructor Information
+            </h2>
+
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="teacherName"><i class="fas fa-user-tie"></i> Instructor's Name</label>
+                    <input type="text" id="teacherName" placeholder="e.g., Dr. Mohammad Rahman">
+                </div>
+                <div class="form-group">
+                    <label for="teacherDesignation"><i class="fas fa-medal"></i> Designation</label>
+                    <input type="text" id="teacherDesignation" placeholder="e.g., Associate Professor">
+                </div>
+                <div class="form-group full-width">
+                    <label for="teacherFaculty"><i class="fas fa-university"></i> Faculty/Department</label>
+                    <input type="text" id="teacherFaculty" placeholder="e.g., Faculty of Science & Engineering">
+                </div>
+            </div>
+
+            <h2 class="section-title">
+                <i class="fas fa-user-graduate"></i>
+                Student Information
+            </h2>
+
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="studentName"><i class="fas fa-id-card"></i> Student Name</label>
+                    <input type="text" id="studentName" placeholder="e.g., Ahmed Hassan">
+                </div>
+                <div class="form-group">
+                    <label for="studentId"><i class="fas fa-hashtag"></i> Student ID</label>
+                    <input type="text" id="studentId" placeholder="e.g., 2021123456">
+                </div>
+                <div class="form-group">
+                    <label for="studentDept"><i class="fas fa-building"></i> Department</label>
+                    <input type="text" id="studentDept" placeholder="e.g., Computer Science & Engineering">
+                </div>
+                <div class="form-group">
+                    <label for="batch"><i class="fas fa-calendar-alt"></i> Batch</label>
+                    <input type="text" id="batch" placeholder="e.g., Spring 2021">
+                </div>
+                <div class="form-group">
+                    <label for="section"><i class="fas fa-users"></i> Section</label>
+                    <input type="text" id="section" placeholder="e.g., A (Optional)">
+                </div>
+                <div class="form-group">
+                    <label for="submissionDate"><i class="fas fa-calendar-check"></i> Submission Date</label>
+                    <input type="date" id="submissionDate">
+                </div>
+            </div>
+
+            <div class="buttons">
+                <button type="button" class="btn-preview" onclick="updatePreview()">
+                    <i class="fas fa-eye"></i> Preview Front Page
+                </button>
+
+                <button type="button" class="btn-pdf" id="pdfBtn" onclick="downloadPDF()">
+                    <i class="fas fa-file-pdf"></i> Download PDF
+                </button>
+                <button type="button" class="btn-clear" onclick="clearForm()">
+                    <i class="fas fa-eraser"></i> Clear Form
+                </button>
+            </div>
+        </div>
+
+        <div class="front-page-template" id="frontPageTemplate">
+            <div class="university-logo">
+                <i class="fas fa-university"></i>
+            </div>
+
+            <div class="template-header">
+                <div class="template-title" id="displayTopic">[Assignment Topic]</div>
+                <div class="template-subtitle">Academic Assignment Submission</div>
+            </div>
+
+            <div class="template-section">
+                <h3>Course Details</h3>
+                <div class="template-item">
+                    <span class="template-label">Course Title:</span>
+                    <span class="template-value" id="displayCourseTitle">[Course Title]</span>
+                </div>
+                <div class="template-item">
+                    <span class="template-label">Course Code:</span>
+                    <span class="template-value" id="displayCourseCode">[Course Code]</span>
+                </div>
+                <div class="template-item">
+                    <span class="template-label">Department:</span>
+                    <span class="template-value" id="displayCourseDept">[Course Department]</span>
+                </div>
+            </div>
+
+            <div class="template-section">
+                <h3>Instructor Information</h3>
+                <div class="template-item">
+                    <span class="template-label">Instructor:</span>
+                    <span class="template-value" id="displayTeacherName">[Instructor Name]</span>
+                </div>
+                <div class="template-item">
+                    <span class="template-label">Designation:</span>
+                    <span class="template-value" id="displayTeacherDesignation">[Designation]</span>
+                </div>
+                <div class="template-item">
+                    <span class="template-label">Faculty:</span>
+                    <span class="template-value" id="displayTeacherFaculty">[Faculty/Department]</span>
+                </div>
+            </div>
+
+            <div class="template-section">
+                <h3>Student Information</h3>
+                <div class="template-item">
+                    <span class="template-label">Student Name:</span>
+                    <span class="template-value" id="displayStudentName">[Student Name]</span>
+                </div>
+                <div class="template-item">
+                    <span class="template-label">Student ID:</span>
+                    <span class="template-value" id="displayStudentId">[Student ID]</span>
+                </div>
+                <div class="template-item">
+                    <span class="template-label">Department:</span>
+                    <span class="template-value" id="displayStudentDept">[Student Department]</span>
+                </div>
+                <div class="template-item">
+                    <span class="template-label">Batch:</span>
+                    <span class="template-value" id="displayBatch">[Batch]</span>
+                </div>
+                <div class="template-item" id="sectionRow">
+                    <span class="template-label">Section:</span>
+                    <span class="template-value" id="displaySection">[Section]</span>
+                </div>
+            </div>
+
+            <div class="template-date">
+                <strong>Submission Date:</strong> <span id="displayDate">[Date]</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <p>&copy; 2024 University Academic Resources. All rights reserved.</p>
+        </div>
+    </footer>
+
+
+</body>
+
+</html>

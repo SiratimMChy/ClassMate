@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Schedule Builder | ClassMate</title>
+  <link rel="stylesheet" href="routine.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+</head>
+
+<body>
+  <!-- Navbar -->
+  <nav>
+    <div class="navbar-container">
+      <div class="nav-logo">
+        <img src="https://images.seeklogo.com/logo-png/44/1/leading-university-logo-png_seeklogo-445048.png"
+          alt="University Logo" />
+        <h1 class="heading">Schedule <span>Builder</span></h1>
+      </div>
+      <button class="nav-toggle">
+        <i class="fas fa-bars"></i>
+      </button>
+      <div class="nav-links">
+        <a href="main.html">Home</a>
+        <a href="#">Find Material</a>
+        <a href="#">Exam Schedule Builder </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Search -->
+  <div class="search-container">
+    <h1>Class Routine Extractor</h1>
+    <p>Create your personal schedule from shared spreadsheets.</p>
+    <div class="search-box">
+      <form id="extraction-form">
+        <input type="url" id="spreadsheet-link" required class="form-input" placeholder="Google Sheets Link"
+          value="https://docs.google.com/spreadsheets/d/1_GSq4X3TorErokcPcp8fwe3ytxjQeJcBvsvDfCtsrnk/edit" />
+
+        <select id="department" class="form-input">
+          <option value="" disabled selected>Select Department</option>
+          <option>CSE</option>
+          <option>EEE</option>
+          <option>ME</option>
+          <option>CE</option>
+        </select>
+
+        <select id="batch" class="form-input">
+          <option value="" disabled selected>Select Batch</option>
+          <option>2023</option>
+          <option>2022</option>
+          <option>2021</option>
+          <option>2020</option>
+        </select>
+
+        <select id="section" class="form-input">
+          <option value="" disabled selected>Select Section</option>
+          <option>A</option>
+          <option>B</option>
+          <option>C</option>
+          <option>D</option>
+        </select>
+
+        <h3 class="retake-improve-heading">Retake/Improve Course</h3>
+
+        <select id="additional-batch" class="form-input">
+          <option value="" disabled selected>Select Additional Batch</option>
+          <option>2023</option>
+          <option>2022</option>
+          <option>2021</option>
+          <option>2020</option>
+        </select>
+
+        <select id="additional-section" class="form-input">
+          <option value="" disabled selected>Select Additional Section</option>
+          <option>A</option>
+          <option>B</option>
+          <option>C</option>
+          <option>D</option>
+        </select>
+
+        <button type="submit" class="btn-primary">
+          <i class="fas fa-calendar-alt"></i> Generate Routine
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Results Section -->
+  <div class="results-section" id="results-section">
+    <h2 class="results-header">Show Routine</h2>
+    <div class="overflow-x-auto">
+      <table class="routine-table">
+        <thead>
+          <tr>
+            <th>Day</th>
+            <th>Time</th>
+            <th>Course</th>
+            <th>Room</th>
+            <th>Instructor</th>
+            <th>Type</th>
+          </tr>
+        </thead>
+        <tbody id="routine-body">
+          <!-- Filled by JS -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-container">
+      <div>
+        <h3>About ClassMate</h3>
+        <p>ClassMate is a student-friendly platform that simplifies university life.
+          It offers academic tools, club management, and exam-related services in one place.
+          Stay connected, organized, and involved throughout your university journey.
+        </p>
+      </div>
+      <div>
+        <h3>Services</h3>
+        <ul>
+          <li><a href="#">Schedule Builder</a></li>
+          <li><a href="#">Front Page Generator</a></li>
+          <li><a href="#">Previous Questions</a></li>
+          <li><a href="#">Booth Permission</a></li>
+          <li><a href="#">Makeup Exam</a></li>
+          <li><a href="#">Supplementary Exam</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="main.html">Home</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#clubs">Clubs</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li><a href="#about">About Us</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Contact Information</h3>
+        <address>
+          <div class="contact-item">
+            <i class="fas fa-phone"></i>
+            <span>+880-1763-777626</span>
+          </div>
+          <div class="contact-item">
+            <i class="fas fa-envelope"></i>
+            <span>cse_2132020056@lus.ac.bd</span>
+          </div>
+          <div class="contact-item">
+            <i class="fas fa-envelope"></i>
+            <span>cse_2132020056@lus.ac.bd</span>
+          </div>
+          <div class="contact-item">
+            <i class="fas fa-envelope"></i>
+            <span>cse_2132020056@lus.ac.bd</span>
+          </div>
+          <div class="contact-item">
+            <i class="fas fa-map-marker-alt"></i>
+            <span>Sylhet, Bangladesh</span>
+          </div>
+        </address>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-bottom-content">
+        <div class="copyright">
+          <p>&copy; 2025 ClassMate by SRM Technologies. All rights reserved.</p>
+        </div>
+        <div class="social-links">
+          <span>Follow us:</span>
+          <a href="https://www.facebook.com" target="_blank" aria-label="Facebook">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+          <a href="https://www.twitter.com" target="_blank" aria-label="Twitter">
+            <i class="fab fa-twitter"></i>
+          </a>
+          <a href="https://www.instagram.com" target="_blank" aria-label="Instagram">
+            <i class="fab fa-instagram"></i>
+          </a>
+          <a href="https://www.linkedin.com" target="_blank" aria-label="LinkedIn">
+            <i class="fab fa-linkedin-in"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+
+
+  <!-- Script -->
+  <script>
+    document.querySelector('.nav-toggle').addEventListener('click', () => {
+      document.querySelector('.nav-links').classList.toggle('active');
+    });
+
+    document.getElementById('extraction-form').addEventListener('submit', function (event) {
+      event.preventDefault();
+      alert("Routine generated! (Demo)");
+    });
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>University Question Bank | Past Exam Question Repository</title>
+  <link rel="stylesheet" href="PreviousQ.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+</head>
+
+<body>
+
+  <!-- Navbar -->
+  <nav>
+    <div class="navbar-container">
+      <div class="nav-logo">
+        <img src="https://images.seeklogo.com/logo-png/44/1/leading-university-logo-png_seeklogo-445048.png"
+          alt="University Logo">
+        <h1 class="heading">University<span> Question Bank </span></h1>
+      </div>
+      <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('active')">
+        <i class="fas fa-bars"></i>
+      </button>
+      <div class="nav-links">
+        <a href="main.html">Home</a>
+        <a href="#">Find Material</a>
+        <a href="#">Submit Questions</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero & Search -->
+  <div class="search-container">
+    <h1>Academic Resource Center</h1>
+    <p>Access past exam questions organized by course, semester, and year to help with your studies.</p>
+    <div class="search-box">
+      <form class="search-form">
+        <div>
+          <label for="course-code">Course Code</label>
+          <input type="text" id="course-code" placeholder="e.g. CSE-1111" required>
+        </div>
+        <div>
+          <label for="course-title">Course Title</label>
+          <input type="text" id="course-title" placeholder="e.g. Introduction to Computing" required>
+        </div>
+        <div>
+          <label for="department">Department</label>
+          <select id="department" required>
+            <option value="">Select Department</option>
+            <option value="CSE">Computer Science</option>
+            <option value="EEE">Electrical Engineering</option>
+            <option value="ME">Mechanical Engineering</option>
+            <option value="CE">Civil Engineering</option>
+            <option value="ARCH">Architecture</option>
+            <option value="BBA">Business Administration</option>
+            <option value="ECON">Economics</option>
+            <option value="ENG">English</option>
+          </select>
+        </div>
+        <div>
+          <label for="semester">Semester</label>
+          <select id="semester" required>
+            <option value="">Select Semester</option>
+            <option value="Summer">Summer</option>
+            <option value="Fall">Fall</option>
+            <option value="Spring">Spring</option>
+          </select>
+        </div>
+        <div>
+          <label for="year">Year</label>
+          <select id="year" required>
+            <option value="">Select Year</option>
+            <option value="2022">2022</option>
+            <option value="2023">2023</option>
+            <option value="2024">2024</option>
+            <option value="2025">2025</option>
+          </select>
+        </div>
+        <div style="margin-top: 24px;">
+          <button type="button" id="search-btn"><i class="fas fa-search"></i> Find Exam Questions</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Results Section -->
+  <div class="results-section">
+    <h2 class="results-header">Exam Question Repository</h2>
+    <div class="filters">
+      <div>
+        <select>
+          <option>All Departments</option>
+          <option>CSE</option>
+          <option>EEE</option>
+          <option>BBA</option>
+          <option>ENG</option>
+        </select>
+        <select>
+          <option>All Semesters</option>
+          <option>Summer</option>
+          <option>Fall</option>
+          <option>Spring</option>
+        </select>
+      </div>
+      <div>
+        <input type="text" placeholder="Search in results...">
+      </div>
+    </div>
+    <div class="placeholder" id="result-placeholder">
+      <p>No exam questions found matching your criteria. Try adjusting your filters.</p>
+    </div>
+
+    <div class="pagination">
+      <a href="#">Previous</a>
+      <a href="#" style="color: blue;">1</a>
+      <a href="#">2</a>
+      <a href="#">3</a>
+      <a href="#">Next</a>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-container">
+      <div>
+        <h3>About ClassMate</h3>
+        <p>ClassMate revolutionizes academic scheduling by automatically extracting personalized routines from complex university spreadsheets. Built for Leading University students, our platform simplifies course management, eliminates scheduling conflicts, and keeps you organized throughout your academic journey.</p>
+      </div>
+      <div>
+        <h3>Services</h3>
+        <ul>
+          <li><a href="#">Schedule Builder</a></li>
+          <li><a href="#">Front Page Generator</a></li>
+          <li><a href="#">Previous Questions</a></li>
+          <li><a href="#">Booth Permission</a></li>
+          <li><a href="#">Makeup Exam</a></li>
+          <li><a href="#">Supplementary Exam</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#clubs">Clubs</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li><a href="#about">About Us</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Service</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Contact Information</h3>
+        <address>
+          <div class="contact-item">
+            <i class="fas fa-phone"></i>
+            <span>+880-1763-777626</span>
+          </div>
+           <div class="contact-item">
+            <i class="fas fa-envelope"></i>
+            <span>cse_2132020056@lus.ac.bd</span>
+          </div>
+           <div class="contact-item">
+            <i class="fas fa-envelope"></i>
+            <span>cse_2132020056@lus.ac.bd</span>
+          </div>
+          <div class="contact-item">
+            <i class="fas fa-envelope"></i>
+            <span>cse_2132020056@lus.ac.bd</span>
+          </div>
+          <div class="contact-item">
+            <i class="fas fa-map-marker-alt"></i>
+            <span>Sylhet, Bangladesh</span>
+          </div>
+        </address>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-bottom-content">
+        <div class="copyright">
+          <p>&copy; 2025 ClassMate by SRM Technologies. All rights reserved.</p>
+        </div>
+        <div class="social-links">
+          <span>Follow us:</span>
+          <a href="https://www.facebook.com" target="_blank" aria-label="Facebook">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+          <a href="https://www.twitter.com" target="_blank" aria-label="Twitter">
+            <i class="fab fa-twitter"></i>
+          </a>
+          <a href="https://www.instagram.com" target="_blank" aria-label="Instagram">
+            <i class="fab fa-instagram"></i>
+          </a>
+          <a href="https://www.linkedin.com" target="_blank" aria-label="LinkedIn">
+            <i class="fab fa-linkedin-in"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Register - Class Mate</title>
+
+  <!-- Font Awesome CDN link -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" />
+  <!-- CSS file link -->
+  <link rel="stylesheet" href="mainPageStylesheet.css" />
+  <script type="module" src="register.js" defer></script>
+<link rel="stylesheet" href="register.css" />
+  <style>
+    
+  </style>
+</head>
+
+<body>
+
+  <!-- Registration Section Start -->
+  <section class="register" id="register">
+    <h1 class="heading">Register to <span>Class Mate</span></h1>
+    <form onsubmit="return form(event);">
+
+      <input type="text" placeholder="Username" name="username" class="box" id="ifname" required>
+      <div id="efname" class="error"></div>
+
+      <input type="text" placeholder="Student ID" name="student_id" class="box" id="istudentid" required>
+      <div id="estudentid" class="error"></div>
+
+      <input type="text" placeholder="Department" name="department" class="box" id="idept" required>
+      <div id="edept" class="error"></div>
+
+      <input type="text" placeholder="Batch" name="batch" class="box" id="ibatch" required>
+      <div id="ebatch" class="error"></div>
+
+      <input type="text" placeholder="Mobile Number" name="mobile" class="box" id="imob" required>
+      <div id="emob" class="error"></div>
+
+      <input type="email" placeholder="Email" name="email" class="box" id="iemail" required>
+      <div id="eemail" class="error"></div>
+
+      <div class="password-container">
+        <input type="password" placeholder="Password" name="password" class="box" id="ipass" required>
+        <i class="fa-solid fa-eye" id="togglePass"></i>
+      </div>
+      <div id="epass" class="error"></div>
+
+
+
+      <div class="options">
+        <label>
+          <input type="checkbox" name="terms" required> I agree to the terms and conditions
+        </label>
+      </div>
+
+      <input type="submit" value="Register" class="btn">
+    </form>
+
+    <div class="already-account">
+      <p>Already have an account? <a href="login.html">Login here</a></p>
+    </div>
+  </section>
+ <script>
+  const togglePass = document.getElementById('togglePass');
+  const passwordInput = document.getElementById('ipass');
+
+  togglePass.addEventListener('click', function () {
+    const isHidden = passwordInput.type === 'password';
+    passwordInput.type = isHidden ? 'text' : 'password';
+    this.classList.toggle('fa-eye');
+    this.classList.toggle('fa-eye-slash');
+  });
+</script>
+
+</body>
+
+</html>

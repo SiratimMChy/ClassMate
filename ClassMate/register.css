@@ -1,0 +1,113 @@
+body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .register {
+      padding: 20px;
+      background-color: #fff;
+      max-width: 500px;
+      width: 100%;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .register .heading {
+      font-size: 2.4rem;
+      margin-bottom: 15px;
+      text-align: center;
+      color: #333;
+      padding: 0.8rem;
+      background: rgba(255, 120, 10, 0.15);
+      border: 2px solid var(--pink);
+      border-radius: 10px;
+    }
+
+    .register .heading span {
+      color: var(--pink);
+    }
+
+    .register .box {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      text-transform: none;
+      color: black;
+    }
+
+    .register .btn {
+      padding: 10px;
+      background-color: #333;
+      color: white;
+      border: none;
+      border-radius: 5rem;
+      cursor: pointer;
+      width: 100%;
+      font-size: 1.6rem;
+    }
+
+    .register .btn:hover {
+      background-color: var(--pink);
+    }
+
+    .register .options {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 8px 0;
+    }
+
+    .register .options input[type="checkbox"] {
+      margin-right: 5px;
+    }
+
+    .register .already-account {
+      text-align: center;
+      margin-top: 15px;
+      font-size: 1.2em;
+    }
+
+    .register .already-account a {
+      color: #007bff;
+      text-decoration: none;
+      font-size: 1.2em;
+    }
+
+    .register .already-account a:hover {
+      text-decoration: underline;
+    }
+
+    .error {
+      color: red;
+      font-size: 0.9em;
+      margin-top: -6px;
+      margin-bottom: 6px;
+    }
+
+    .password-container {
+      position: relative;
+      width: 100%;
+    }
+
+    .password-container input {
+      width: 100%;
+      padding-right: 40px;
+    }
+
+    .password-container i {
+      position: absolute;
+      top: 50%;
+      right: 12px;
+      transform: translateY(-50%);
+      cursor: pointer;
+      color: #888;
+      font-size: 1.2rem;
+    }
