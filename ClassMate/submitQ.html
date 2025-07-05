@@ -4,14 +4,16 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Submit Materials | University Question Bank</title>
+  <title>Submit Question | University Question Bank</title>
   <link rel="stylesheet" href="PreviousQ.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-</head>
-<style>
-  
+  <style>
     :root {
       --pink: #FF4500;
+    }
+
+    html {
+      scroll-behavior: smooth;
     }
 
     body {
@@ -98,7 +100,7 @@
       padding: 3rem 2.5rem;
       border-radius: 8px;
       box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-      max-width: 1000px; /* Increased width */
+      max-width: 800px;
       margin: 3rem auto;
     }
 
@@ -106,6 +108,7 @@
       font-size: 2rem;
       margin-bottom: 1rem;
       color: #333;
+      text-align: center;
     }
 
     .submit-container form {
@@ -120,8 +123,7 @@
     }
 
     .submit-container input,
-    .submit-container select,
-    .submit-container textarea {
+    .submit-container select {
       padding: 10px;
       border: 1px solid #ccc;
       border-radius: 6px;
@@ -202,8 +204,9 @@
         display: flex;
       }
     }
+  </style>
+</head>
 
-</style>
 <body>
 
   <!-- Navbar -->
@@ -218,8 +221,8 @@
       </button>
       <div class="nav-links">
         <a href="main.html">Home</a>
-        <a href="PreviousQ.html">Find Question</a>
-        
+        <a href="#">Find Material</a>
+        <a href="#">Submit Questions</a>
       </div>
     </div>
   </nav>
@@ -251,7 +254,26 @@
         </select>
       </div>
       <div>
-        <label for="file-upload">Upload Question PDF</label>
+        <label for="semester">Semester</label>
+        <select id="semester" required>
+          <option value="">Select Semester</option>
+          <option value="Summer">Summer</option>
+          <option value="Fall">Fall</option>
+          <option value="Spring">Spring</option>
+        </select>
+      </div>
+      <div>
+        <label for="year">Year</label>
+        <select id="year" required>
+          <option value="">Select Year</option>
+          <option value="2022">2022</option>
+          <option value="2023">2023</option>
+          <option value="2024">2024</option>
+          <option value="2025">2025</option>
+        </select>
+      </div>
+      <div>
+        <label for="file-upload">Upload PDF</label>
         <input type="file" id="file-upload" accept=".pdf" required>
       </div>
       <div>
@@ -308,6 +330,70 @@
       </div>
     </div>
   </footer>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-app.js";
+    import {
+      getDatabase,
+      ref,
+      set
+    } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-database.js";
+    import {
+      getStorage,
+      ref as storageRef,
+      uploadBytes,
+      getDownloadURL
+    } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-storage.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyBr5S5yoBXdroviWV-T9pLaQl-dFFZ3eF8",
+      authDomain: "classmateex.firebaseapp.com",
+      projectId: "classmateex",
+      storageBucket: "classmateex.firebasestorage.app",
+      messagingSenderId: "325155552857",
+      appId: "1:325155552857:web:b654aec07a4a6e2e233b48"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const database = getDatabase(app);
+    const storage = getStorage(app);
+
+    document.getElementById('submit-question-form').addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      const courseCode = document.getElementById('course-code').value;
+      const courseTitle = document.getElementById('course-title').value;
+      const department = document.getElementById('department').value;
+      const semester = document.getElementById('semester').value;
+      const year = document.getElementById('year').value;
+      const fileInput = document.getElementById('file-upload');
+
+      // Handle file upload
+      const file = fileInput.files[0];
+      const fileRef = storageRef(storage, `questions/${file.name}`);
+
+      uploadBytes(fileRef, file).then(() => {
+        return getDownloadURL(fileRef);
+      }).then((downloadURL) => {
+        // Save question data to Firebase Realtime Database
+        return set(ref(database, 'questions/' + Date.now()), {
+          courseCode: courseCode,
+          courseTitle: courseTitle,
+          department: department,
+          semester: semester,
+          year: year,
+          fileURL: downloadURL
+        });
+      }).then(() => {
+        alert('Your question has been submitted successfully!');
+        document.getElementById('submit-question-form').reset();
+      }).catch((error) => {
+        console.error('Error uploading file or saving data:', error);
+        alert('There was an error submitting your question. Please try again.');
+      });
+    });
+  </script>
 </body>
 
 </html>
