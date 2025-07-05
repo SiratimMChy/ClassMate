@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Submit Materials | University Question Bank</title>
+  <link rel="stylesheet" href="PreviousQ.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+</head>
+<style>
+  
+    :root {
+      --pink: #FF4500;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* Navbar */
+    nav {
+      background-color: #fff;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      position: sticky;
+      top: 0;
+      height: 80px;
+      z-index: 100;
+    }
+
+    .navbar-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 2px;
+      flex-wrap: wrap;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-logo img {
+      height: 40px;
+    }
+
+    .nav-logo .heading {
+      font-size: 2rem;
+      margin-left: 10px;
+      color: #333;
+      padding: 0.2rem;
+      border-radius: 10px;
+      white-space: nowrap;
+    }
+
+    .nav-logo .heading span {
+      color: var(--pink);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #555;
+      font-size: 0.95rem;
+      padding: 0.5rem 0.8rem;
+      display: block;
+    }
+
+    .nav-links a:hover {
+      color: #ff0000;
+    }
+
+    .nav-toggle {
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      color: #333;
+      cursor: pointer;
+      display: none;
+    }
+
+    .submit-container {
+      background: white;
+      padding: 3rem 2.5rem;
+      border-radius: 8px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+      max-width: 1000px; /* Increased width */
+      margin: 3rem auto;
+    }
+
+    .submit-container h1 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      color: #333;
+    }
+
+    .submit-container form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .submit-container label {
+      font-weight: 500;
+      color: #333;
+    }
+
+    .submit-container input,
+    .submit-container select,
+    .submit-container textarea {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      width: 100%;
+    }
+
+    .submit-container button {
+      background-color: #333;
+      color: white;
+      padding: 10px 16px;
+      border: none;
+      border-radius: 5rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .submit-container button:hover {
+      background-color: var(--pink);
+    }
+
+    footer {
+      background-color: #1f2937;
+      color: #ccc;
+      padding: 3rem 1rem;
+      width: 100%;
+    }
+
+    .footer-container {
+      max-width: 1200px;
+      margin: auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 2rem;
+    }
+
+    footer h3 {
+      color: white;
+      margin-bottom: 1rem;
+    }
+
+    footer a {
+      color: #ccc;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      color: white;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      margin-top: 2rem;
+      border-top: 1px solid #333;
+      padding-top: 1rem;
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 992px) {
+      .nav-toggle {
+        display: block;
+      }
+
+      .nav-links {
+        flex-direction: column;
+        width: 100%;
+        display: none;
+        background-color: #fff;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        z-index: 99;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        padding: 1rem 2rem;
+      }
+
+      .nav-links.active {
+        display: flex;
+      }
+    }
+
+</style>
+<body>
+
+  <!-- Navbar -->
+  <nav>
+    <div class="navbar-container">
+      <div class="nav-logo">
+        <img src="https://images.seeklogo.com/logo-png/44/1/leading-university-logo-png_seeklogo-445048.png" alt="University Logo">
+        <h1 class="heading">University<span> Question Bank </span></h1>
+      </div>
+      <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('active')">
+        <i class="fas fa-bars"></i>
+      </button>
+      <div class="nav-links">
+        <a href="main.html">Home</a>
+        <a href="PreviousQ.html">Find Question</a>
+        
+      </div>
+    </div>
+  </nav>
+
+  <!-- Submit Question Section -->
+  <div class="submit-container">
+    <h1>Submit Your Question</h1>
+    <form id="submit-question-form">
+      <div>
+        <label for="course-code">Course Code</label>
+        <input type="text" id="course-code" placeholder="e.g. CSE-1111" required>
+      </div>
+      <div>
+        <label for="course-title">Course Title</label>
+        <input type="text" id="course-title" placeholder="e.g. Introduction to Computing" required>
+      </div>
+      <div>
+        <label for="department">Department</label>
+        <select id="department" required>
+          <option value="">Select Department</option>
+          <option value="CSE">Computer Science</option>
+          <option value="EEE">Electrical Engineering</option>
+          <option value="ME">Mechanical Engineering</option>
+          <option value="CE">Civil Engineering</option>
+          <option value="ARCH">Architecture</option>
+          <option value="BBA">Business Administration</option>
+          <option value="ECON">Economics</option>
+          <option value="ENG">English</option>
+        </select>
+      </div>
+      <div>
+        <label for="file-upload">Upload Question PDF</label>
+        <input type="file" id="file-upload" accept=".pdf" required>
+      </div>
+      <div>
+        <button type="submit" id="submit-btn"><i class="fas fa-paper-plane"></i> Submit Question</button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-container">
+      <div>
+        <h3>About ClassMate</h3>
+        <p>ClassMate revolutionizes academic scheduling by automatically extracting personalized routines from complex university spreadsheets. Built for Leading University students, our platform simplifies course management, eliminates scheduling conflicts, and keeps you organized throughout your academic journey.</p>
+      </div>
+      <div>
+        <h3>Contact Information</h3>
+        <address>
+          <div class="contact-item">
+            <i class="fas fa-phone"></i>
+            <span>+880-1763-777626</span>
+          </div>
+          <div class="contact-item">
+            <i class="fas fa-envelope"></i>
+            <span>cse_2132020056@lus.ac.bd</span>
+          </div>
+          <div class="contact-item">
+            <i class="fas fa-map-marker-alt"></i>
+            <span>Sylhet, Bangladesh</span>
+          </div>
+        </address>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-bottom-content">
+        <div class="copyright">
+          <p>&copy; 2025 ClassMate by SRM Technologies. All rights reserved.</p>
+        </div>
+        <div class="social-links">
+          <span>Follow us:</span>
+          <a href="https://www.facebook.com" target="_blank" aria-label="Facebook">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+          <a href="https://www.twitter.com" target="_blank" aria-label="Twitter">
+            <i class="fab fa-twitter"></i>
+          </a>
+          <a href="https://www.instagram.com" target="_blank" aria-label="Instagram">
+            <i class="fab fa-instagram"></i>
+          </a>
+          <a href="https://www.linkedin.com" target="_blank" aria-label="LinkedIn">
+            <i class="fab fa-linkedin-in"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>
