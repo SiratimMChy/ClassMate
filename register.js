@@ -33,7 +33,7 @@ class RegistrationHandler {
         value: formData.fname,
         pattern: /^[a-zA-Z.\s]{2,20}$/,
         errorElement: "efname",
-        errorMessage: "Username must be 2–20 letters (letters, dot, or space only)"
+        errorMessage: "Username must be 2-20 letters (letters, dot, or space only)"
       },
       {
         value: formData.studentId,
@@ -69,7 +69,7 @@ class RegistrationHandler {
         value: formData.pass,
         pattern: /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*()_+?><]).{8,20}$/,
         errorElement: "epass",
-        errorMessage: "Password must be 8–20 chars, include uppercase, lowercase, number & special character"
+        errorMessage: "Password must be 8-20 chars, include uppercase, lowercase, number & special character"
       }
     ];
 
