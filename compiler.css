@@ -145,6 +145,7 @@ header select {
   cursor: pointer;
   border: none;
   transition: 0.2s;
+  min-width: 150px;
   align-items: center;
 }
 
