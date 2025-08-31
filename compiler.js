@@ -1,66 +1,49 @@
-// -------------------- Navbar Toggler --------------------
+// Navbar toggle
 const toggler = document.getElementById('toggler');
 const navbar = document.querySelector('.navbar');
-
 if (toggler && navbar) {
     toggler.addEventListener('change', () => {
         navbar.classList.toggle('active');
     });
 }
 
-// Close mobile menu when a link is clicked
-document.querySelectorAll('.navbar a').forEach(link => {
-    link.addEventListener('click', () => {
-        if (window.innerWidth <= 768) {
-            navbar.classList.remove('active');
-            toggler.checked = false;
-        }
-    });
-});
-
-// -------------------- Language Modes --------------------
+// Language modes for CodeMirror
 const languageModes = {
-    "71": "python",          
-    "54": "text/x-c++src",    
-    "50": "text/x-csrc",   
-    "62": "text/x-java",     
-    "63": "javascript",      
-    "html": "htmlmixed"      
+    "71": "python",
+    "54": "text/x-c++src",
+    "50": "text/x-csrc",
+    "62": "text/x-java",
+    "63": "javascript",
+    "html": "htmlmixed"
 };
 
-// -------------------- Language Templates --------------------
+// Default templates
 const languageTemplates = {
-    "71": `# Write your Python code here\nprint("Hello, World!")`,
-    "54": `#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    // write your code here\n    return 0;\n}`,
-    "50": `#include <stdio.h>\n\nint main() {\n    // write your code here\n    return 0;\n}`,
-    "62": `public class Main {\n    public static void main(String[] args) {\n        // write your code here\n    }\n}`,
-    "63": `// Write your JavaScript code here\nconsole.log("Hello, World!");`,
+    "71": `# Python example\nprint("Hello, World!")`,
+    "54": `#include <bits/stdc++.h>\nusing namespace std;\nint main() {\n    cout << "Hello, World!" << endl;\n    return 0;\n}`,
+    "50": `#include <stdio.h>\nint main() {\n    printf("Hello, World!\\n");\n    return 0;\n}`,
+    "62": `public class Main {\n    public static void main(String[] args) {\n        System.out.println("Hello, World!");\n    }\n}`,
+    "63": `console.log("Hello, World!");`,
     "html": {
-        html: "<!-- Write your HTML here -->\n<!DOCTYPE html>\n<html>\n<head>\n    <title>My Page</title>\n</head>\n<body>\n    <h1>Hello, World!</h1>\n</body>\n</html>",
-        css: "/* Write your CSS here */\nbody { font-family: Arial; background: #f5f5f5; }",
-        js: "// Write your JavaScript here\nconsole.log('Hello from JS!');"
+        html: "<!DOCTYPE html>\n<html>\n<head><title>Page</title></head>\n<body><h1>Hello World</h1></body>\n</html>",
+        css: "body { font-family: Arial; background: #f5f5f5; }",
+        js: "console.log('Hello from JS');"
     }
 };
 
-// -------------------- Editors and Elements --------------------
+// Setup
 let editors = {}, currentLang = "";
-const editorsContainer = document.getElementById("editors");
+const editorsContainer = document.querySelector(".editor-container");
 const ioBox = document.getElementById("io-box");
-const runBtn = document.getElementById("run-btn");
+const runBtn = document.querySelector(".run-btn");
 const iframe = document.getElementById("htmlOutput");
 const languageSelect = document.getElementById("language");
 
-// -------------------- Language Switch --------------------
+// Language selection
 languageSelect.addEventListener("change", function () {
     currentLang = this.value;
-
-    // Hide navbar after selecting language on mobile
-    if (window.innerWidth <= 768) {
-        navbar.classList.remove('active');
-        toggler.checked = false;
-    }
-
     editorsContainer.innerHTML = '<div class="editor-header">Editor</div>';
+    editors = {};
     iframe.style.display = "none";
     ioBox.style.display = "block";
 
@@ -69,27 +52,31 @@ languageSelect.addEventListener("change", function () {
         iframe.style.display = "block";
 
         ['html', 'css', 'js'].forEach(lang => {
-            let ta = document.createElement('textarea');
-            ta.id = lang;
-            ta.value = languageTemplates.html[lang]; 
-            let wrapper = document.createElement('div');
+            const ta = document.createElement('textarea');
+            ta.value = languageTemplates.html[lang];
+            const wrapper = document.createElement('div');
             wrapper.className = 'editor';
             wrapper.appendChild(ta);
             editorsContainer.appendChild(wrapper);
+
             editors[lang] = CodeMirror.fromTextArea(ta, {
                 mode: lang === 'html' ? 'htmlmixed' : lang,
                 theme: 'dracula',
                 lineNumbers: true
             });
+
+            editors[lang].on('change', updateLivePreview);
         });
+
+        updateLivePreview();
     } else {
-        let ta = document.createElement('textarea');
-        ta.id = 'code';
-        ta.value = languageTemplates[currentLang] || '# Write your code here';
-        let wrapper = document.createElement('div');
+        const ta = document.createElement('textarea');
+        ta.value = languageTemplates[currentLang] || '';
+        const wrapper = document.createElement('div');
         wrapper.className = 'editor';
         wrapper.appendChild(ta);
         editorsContainer.appendChild(wrapper);
+
         editors['main'] = CodeMirror.fromTextArea(ta, {
             mode: languageModes[currentLang],
             theme: 'dracula',
@@ -98,22 +85,22 @@ languageSelect.addEventListener("change", function () {
     }
 });
 
-// -------------------- HTML Live Preview --------------------
+// HTML/CSS/JS live preview
 function updateLivePreview() {
-    const html = editors['html'] ? editors['html'].getValue() : '';
+    if (!editors['html']) return;
+    const html = editors['html'].getValue();
     const css = editors['css'] ? `<style>${editors['css'].getValue()}</style>` : '';
     const js = editors['js'] ? `<script>${editors['js'].getValue()}<\/script>` : '';
     iframe.srcdoc = html + css + js;
+    iframe.style.display = "block";
+    ioBox.style.display = "none";
 }
 
-// -------------------- Run Code --------------------
+// Run code using Judge0 API
 runBtn.addEventListener("click", async () => {
-    if (!currentLang) {
-        alert("Please select a language first!");
-        return;
-    }
+    if (!currentLang) return alert("Please select a language!");
 
-    if (currentLang === 'html') {
+    if (currentLang === "html") {
         updateLivePreview();
         return;
     }
@@ -123,21 +110,28 @@ runBtn.addEventListener("click", async () => {
     const langId = parseInt(currentLang);
 
     ioBox.value = "⏳ Running...";
-    iframe.style.display = "none";
-    ioBox.style.display = "block";
 
     try {
-        const res = await fetch("https://ce.judge0.com/submissions/?base64_encoded=false&wait=true", {
+        const res = await fetch("https://judge0-ce.p.rapidapi.com/submissions?base64_encoded=false&wait=true", {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ source_code: code, language_id: langId, stdin: input })
+            headers: {
+                "Content-Type": "application/json",
+                "X-RapidAPI-Key": "73269129e1msh4959d9cca3d9fbcp1f1cdcjsn9b80de22c2d8",
+                "X-RapidAPI-Host": "judge0-ce.p.rapidapi.com"
+            },
+            body: JSON.stringify({
+                source_code: code,
+                language_id: langId,
+                stdin: input
+            })
         });
+
         const result = await res.json();
         if (result.stdout) ioBox.value = result.stdout;
         else if (result.stderr) ioBox.value = "❌ Runtime Error:\n" + result.stderr;
         else if (result.compile_output) ioBox.value = "⚠️ Compile Error:\n" + result.compile_output;
-        else ioBox.value = "⚠️ Unknown error";
+        else ioBox.value = "⚠️ No output or invalid response.";
     } catch (err) {
-        ioBox.value = "🚨 Connection error:\n" + err;
+        ioBox.value = "🚨 Connection error:\n" + err.message;
     }
 });
