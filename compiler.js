@@ -1,4 +1,4 @@
-// Navbar toggle
+// Navbar toggle (hamburger)
 const toggler = document.getElementById('toggler');
 const navbar = document.querySelector('.navbar');
 if (toggler && navbar) {
@@ -6,6 +6,24 @@ if (toggler && navbar) {
         navbar.classList.toggle('active');
     });
 }
+
+// Close dropdown automatically on mobile when a link is clicked
+const dropdownLinks = document.querySelectorAll('.dropdown-menu li a');
+
+dropdownLinks.forEach(link => {
+    link.addEventListener('click', () => {
+        // Only close on small screens
+        if (window.innerWidth <= 865) {
+            toggler.checked = false; // close mobile menu
+        }
+
+        // Optionally, trigger editor language change
+        const lang = link.getAttribute('data-lang');
+        console.log("Selected language:", lang);
+        // changeEditorLanguage(lang); // call your function here
+    });
+});
+
 
 // Language modes for CodeMirror
 const languageModes = {
