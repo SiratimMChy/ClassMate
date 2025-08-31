@@ -237,7 +237,7 @@ header label[for="toggler"] {
     min-height: 200px;
   }
   .run-btn {
-    width: 80%;
+    width: 100%;
     padding: 0.8rem 1.5rem;
     font-size: 1rem;
   }
@@ -255,7 +255,7 @@ header label[for="toggler"] {
     font-size: 0.9rem;
   }
   .run-btn {
-    width: 90%;
+    width: 100%;
     padding: 0.6rem 1rem;
     font-size: 0.95rem;
   }
