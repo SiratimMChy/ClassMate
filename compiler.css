@@ -71,6 +71,7 @@ header select {
   border-radius: 6px;
   border: 1px solid var(--border-color);
   cursor: pointer;
+  max-width: 150px; /* prevent stretching */
 }
 
 /* CONTAINER */
@@ -215,14 +216,14 @@ header label[for="toggler"] {
     top: 60px;
     right: 0;
     width: min(80vw, 260px);
-    height: calc(100dvh - 60px); /* full screen height */
+    height: calc(100dvh - 60px);
     background: white;
     flex-direction: column;
-    padding: 2rem 1rem;
+    padding: 1rem 0.8rem; /* reduced padding */
+    gap: 0.8rem;          /* reduced vertical gap */
     z-index: 999;
     overflow-y: auto;
 
-    /* animation */
     transform: translateX(100%);
     opacity: 0;
     transition: transform 0.3s ease, opacity 0.3s ease;
@@ -235,7 +236,7 @@ header label[for="toggler"] {
 
   .navbar a {
     width: 100%;
-    padding: 0.5rem 0;
+    padding: 0.4rem 0; /* reduced link spacing */
     border-bottom: 1px solid #ddd;
   }
 }
