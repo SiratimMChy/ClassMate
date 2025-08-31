@@ -51,6 +51,7 @@ header span {
   display: flex;
   align-items: center;
   gap: 1.5rem;
+  
 }
 
 .navbar a {
@@ -81,6 +82,7 @@ header select {
   padding: 2rem;
   min-height: calc(100vh - 70px);
   flex-wrap: wrap;
+  transition: padding 0.3s ease, gap 0.3s ease;
 }
 
 /* EDITOR */
@@ -169,34 +171,32 @@ header label[for="toggler"] {
   right: 2rem;
   top: 50%;
   transform: translateY(-50%);
+  z-index: 1100; /* ensure above navbar */
 }
 
 #toggler {
   display: none;
 }
 
+/* RESPONSIVE STYLES */
 
-@media(max-width: 1024px) {
+@media (max-width: 1024px) {
   .container {
     flex-direction: column;
     padding: 1rem;
+    gap: 1rem; /* unified gap */
   }
 
-  .editor-container, .right-panel {
+  .editor-container,
+  .right-panel {
     width: 100%;
   }
 }
 
-
-@media(max-width: 880px) {
+@media (max-width: 880px) {
   .container {
-    flex-direction: column;
-    padding: 8px;
-    gap: 1rem;
-  }
-
-  .editor-container, .right-panel {
-    width: 100%;
+    padding: 0.5rem 0.8rem;
+    gap: 0.8rem;
   }
 
   .editor {
@@ -204,32 +204,39 @@ header label[for="toggler"] {
   }
 }
 
-@media(max-width: 768px) {
+@media (max-width: 768px) {
   header label[for="toggler"] {
     display: block;
   }
 
   .navbar {
     position: fixed;
-    top: 58px;
-    right: -260px;
-    width: 260px;
+    top: 56px;
+    right: -100%;
+    width: 80vw;
+    max-width: 260px;
     height: calc(100vh - 70px);
     background: white;
     flex-direction: column;
-    padding: 2rem 1rem;
-    transition: 0.3s;
+    padding: 2rem 0.5rem;
+    transition: right 0.3s ease;
     z-index: 999;
-    overflow: hidden;
+    overflow-y: hidden; /* allow scrolling if content overflows */
   }
 
   #toggler:checked ~ nav.navbar {
     right: 0;
   }
+
+  /* Show iframe on small screens if needed */
+  iframe {
+    display: block;
+    min-height: 200px;
+    margin-top: 1rem;
+  }
 }
 
-
-@media(max-width: 450px) {
+@media (max-width: 450px) {
   html {
     font-size: 50%;
   }
@@ -245,13 +252,13 @@ header label[for="toggler"] {
   }
 }
 
-
-@media(max-width: 400px) {
+@media (max-width: 400px) {
   body {
     font-size: 13px;
   }
 
-  .editor-container, .right-panel {
+  .editor-container,
+  .right-panel {
     padding: 0.5rem;
   }
 
