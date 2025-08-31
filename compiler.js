@@ -1,11 +1,14 @@
 // -------------------- Navbar Toggler --------------------
 const toggler = document.getElementById('toggler');
 const navbar = document.querySelector('.navbar');
+
 if (toggler && navbar) {
     toggler.addEventListener('change', () => {
         navbar.classList.toggle('active');
     });
 }
+
+// Close mobile menu when a link is clicked
 document.querySelectorAll('.navbar a').forEach(link => {
     link.addEventListener('click', () => {
         if (window.innerWidth <= 768) {
@@ -17,12 +20,12 @@ document.querySelectorAll('.navbar a').forEach(link => {
 
 // -------------------- Language Modes --------------------
 const languageModes = {
-    "71": "python",
-    "54": "text/x-c++src",
-    "50": "text/x-csrc",
-    "62": "text/x-java",
-    "63": "javascript",
-    "html": "htmlmixed"
+    "71": "python",          
+    "54": "text/x-c++src",    
+    "50": "text/x-csrc",   
+    "62": "text/x-java",     
+    "63": "javascript",      
+    "html": "htmlmixed"      
 };
 
 // -------------------- Language Templates --------------------
@@ -40,32 +43,35 @@ const languageTemplates = {
 };
 
 // -------------------- Editors and Elements --------------------
-let editors = {}, currentLang = null; // ✅ No default
+let editors = {}, currentLang = "";
 const editorsContainer = document.getElementById("editors");
 const ioBox = document.getElementById("io-box");
 const runBtn = document.getElementById("run-btn");
 const iframe = document.getElementById("htmlOutput");
+const languageSelect = document.getElementById("language");
 
 // -------------------- Language Switch --------------------
-document.getElementById("language").addEventListener("change", function () {
+languageSelect.addEventListener("change", function () {
     currentLang = this.value;
-    editors = {}; // reset
+
+    // Hide navbar after selecting language on mobile
+    if (window.innerWidth <= 768) {
+        navbar.classList.remove('active');
+        toggler.checked = false;
+    }
+
     editorsContainer.innerHTML = '<div class="editor-header">Editor</div>';
     iframe.style.display = "none";
     ioBox.style.display = "block";
 
-    if (!currentLang) {
-        editorsContainer.innerHTML += "<p style='padding:10px;color:gray'>👉 Please select a language to start coding</p>";
-        return;
-    }
-
     if (currentLang === "html") {
         ioBox.style.display = "none";
         iframe.style.display = "block";
+
         ['html', 'css', 'js'].forEach(lang => {
             let ta = document.createElement('textarea');
             ta.id = lang;
-            ta.value = languageTemplates.html[lang];
+            ta.value = languageTemplates.html[lang]; 
             let wrapper = document.createElement('div');
             wrapper.className = 'editor';
             wrapper.appendChild(ta);
@@ -87,9 +93,7 @@ document.getElementById("language").addEventListener("change", function () {
         editors['main'] = CodeMirror.fromTextArea(ta, {
             mode: languageModes[currentLang],
             theme: 'dracula',
-            lineNumbers: true,
-            autoCloseBrackets: true,
-            matchBrackets: true
+            lineNumbers: true
         });
     }
 });
@@ -105,7 +109,7 @@ function updateLivePreview() {
 // -------------------- Run Code --------------------
 runBtn.addEventListener("click", async () => {
     if (!currentLang) {
-        alert("⚠️ Please select a language first!");
+        alert("Please select a language first!");
         return;
     }
 

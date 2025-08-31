@@ -198,7 +198,7 @@ header label[for="toggler"] {
 
     .navbar {
         position: fixed;
-        top: 70px;
+        top: 60px;
         right: -260px;
         width: 260px;
         height: calc(100vh - 70px);
@@ -208,7 +208,7 @@ header label[for="toggler"] {
         gap: 1.5rem;
         transition: 0.3s;
         z-index: 1050;
-        border-left: 1px solid var(--border-color);
+        overflow: hidden;
     }
 
     #toggler:checked ~ nav.navbar {
