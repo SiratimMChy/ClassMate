@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ClassMate IDE</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/codemirror.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/theme/dracula.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="compiler.css">
+</head>
+
+<body>
+
+    <header>
+        <h2>ClassMate IDE</h2>
+        <input type="checkbox" id="toggler">
+        <label for="toggler" class="fas fa-bars"></label>
+        <nav class="navbar">
+            <a href="index.html">Home</a>
+            <a href="index.html">Services</a>
+            <a href="index.html">Contact</a>
+            <a href="index.html">About Us</a>
+            <select id="language">
+                <option value="" selected disabled>Select Language</option>
+                <option value="71">Python</option>
+                <option value="54">C++</option>
+                <option value="50">C</option>
+                <option value="62">Java</option>
+                <option value="63">JavaScript</option>
+                <option value="html">HTML/CSS/JS</option>
+            </select>
+
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="editor-container" id="editors">
+            <div class="editor-header">Editor</div>
+            <textarea id="code"># Write your code here</textarea>
+        </div>
+
+        <div class="right-panel">
+            <textarea id="io-box" placeholder="Input / Output"></textarea>
+            <button class="run-btn" id="run-btn">Run</button>
+            <iframe id="htmlOutput"></iframe>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/mode/python/python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/mode/clike/clike.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/mode/javascript/javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/mode/htmlmixed/htmlmixed.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/mode/css/css.min.js"></script>
+    <script src="compiler.js"></script>
+</body>
+
+</html>
