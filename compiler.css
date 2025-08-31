@@ -51,7 +51,6 @@ header span {
   display: flex;
   align-items: center;
   gap: 1.5rem;
-  
 }
 
 .navbar a {
@@ -154,12 +153,16 @@ header select {
   transform: translateY(-2px);
 }
 
-iframe {
-  flex: 1;
+/* IFRAME FIX */
+iframe#htmlOutput {
+  display: none;
   border-radius: 8px;
   border: 1px solid var(--border-color);
   background: #fff;
-  display: none;
+}
+iframe#htmlOutput.show {
+  display: block;
+  min-height: 200px;
 }
 
 /* MOBILE MENU TOGGLER */
@@ -171,7 +174,7 @@ header label[for="toggler"] {
   right: 2rem;
   top: 50%;
   transform: translateY(-50%);
-  z-index: 1100; /* ensure above navbar */
+  z-index: 1100;
 }
 
 #toggler {
@@ -179,14 +182,12 @@ header label[for="toggler"] {
 }
 
 /* RESPONSIVE STYLES */
-
 @media (max-width: 1024px) {
   .container {
     flex-direction: column;
     padding: 1rem;
-    gap: 1rem; /* unified gap */
+    gap: 1rem;
   }
-
   .editor-container,
   .right-panel {
     width: 100%;
@@ -198,7 +199,6 @@ header label[for="toggler"] {
     padding: 0.5rem 0.8rem;
     gap: 0.8rem;
   }
-
   .editor {
     min-height: 250px;
   }
@@ -211,28 +211,21 @@ header label[for="toggler"] {
 
   .navbar {
     position: fixed;
-    top: 56px;
-    right: -100%; /* use percentage for smoother scaling */
-    width: 80vw;
-    max-width: 260px;
-    height: calc(100vh - 70px);
+    top: 70px;
+    right: 0;
+    width: min(80vw, 260px);
+    height: calc(100dvh - 70px);
     background: white;
     flex-direction: column;
     padding: 2rem 1rem;
-    transition: right 0.3s ease;
+    transition: transform 0.3s ease;
     z-index: 999;
-    overflow-y: hidden; /* allow scrolling if content overflows */
+    transform: translateX(100%);
+    overflow-y: auto;
   }
 
   #toggler:checked ~ nav.navbar {
-    right: 0;
-  }
-
-  /* Show iframe on small screens if needed */
-  iframe {
-    display: block;
-    min-height: 200px;
-    margin-top: 1rem;
+    transform: translateX(0);
   }
 }
 
@@ -240,11 +233,9 @@ header label[for="toggler"] {
   html {
     font-size: 50%;
   }
-
   .editor {
     min-height: 200px;
   }
-
   .run-btn {
     width: 80%;
     padding: 0.8rem 1.5rem;
@@ -256,16 +247,13 @@ header label[for="toggler"] {
   body {
     font-size: 13px;
   }
-
   .editor-container,
   .right-panel {
     padding: 0.5rem;
   }
-
   #io-box {
     font-size: 0.9rem;
   }
-
   .run-btn {
     width: 90%;
     padding: 0.6rem 1rem;
