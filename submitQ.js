@@ -1,23 +1,45 @@
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
+import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-database.js";
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js";
+
 const cloudName = "dbspyyci2";
 const uploadPreset = "question_upload";
 
-import { initializeApp } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-app.js";
-import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-database.js";
-
 const firebaseConfig = {
-  apiKey: "AIzaSyBr5S5yoBXdroviWV-T9pLaQl-dFFZ3eF8",
-  authDomain: "classmateex.firebaseapp.com",
-  projectId: "classmateex",
-  storageBucket: "classmateex.firebasestorage.app",
-  messagingSenderId: "325155552857",
-  appId: "1:325155552857:web:b654aec07a4a6e2e233b48"
+  apiKey: "AIzaSyBw9ZTVtz20p-Q6su5hVMHP0JrI4xmiL54",
+  authDomain: "classmate-2c272.firebaseapp.com",
+  projectId: "classmate-2c272",
+  storageBucket: "classmate-2c272.firebasestorage.app",
+  messagingSenderId: "259430838635",
+  appId: "1:259430838635:web:a49e703aad79f7fdb81c2e",
+  measurementId: "G-TJ6D20JK8F"
 };
 
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
+const auth = getAuth(app);
 
-document.getElementById("submit-question-form").addEventListener("submit", async (e) => {
+const submitForm = document.getElementById("submit-question-form");
+
+
+onAuthStateChanged(auth, (user) => {
+  if (!user) {
+   
+    alert("You must be logged in to submit a question.");
+    window.location.href = "login.html"; 
+  }
+});
+
+
+submitForm.addEventListener("submit", async (e) => {
   e.preventDefault();
+
+  const user = auth.currentUser;
+  if (!user) {
+    alert("You must be logged in to submit a question.");
+    window.location.href = "login.html"; 
+    return;
+  }
 
   const courseCode = document.getElementById("course-code").value;
   const courseTitle = document.getElementById("course-title").value;
@@ -46,6 +68,8 @@ document.getElementById("submit-question-form").addEventListener("submit", async
     const fileURL = data.secure_url;
 
     await set(ref(database, 'questions/' + Date.now()), {
+      uid: user.uid,         
+      email: user.email,    
       courseCode,
       courseTitle,
       department,
@@ -57,7 +81,7 @@ document.getElementById("submit-question-form").addEventListener("submit", async
     });
 
     alert("Your question has been submitted successfully!");
-    document.getElementById("submit-question-form").reset();
+    submitForm.reset();
   } catch (error) {
     console.error("Error uploading file or saving data:", error);
     alert("There was an error submitting your question. Please try again.");
