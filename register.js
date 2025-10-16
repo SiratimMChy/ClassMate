@@ -18,7 +18,6 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
-// OOP class for registration
 class RegistrationHandler {
   constructor(authInstance) {
     this.auth = authInstance;

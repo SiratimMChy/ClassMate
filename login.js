@@ -1,9 +1,11 @@
-
+// login.js
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
 import {
   getAuth,
   signInWithEmailAndPassword,
   signOut,
+  setPersistence,
+  browserLocalPersistence
 } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js";
 
 const firebaseConfig = {
@@ -21,6 +23,7 @@ class LoginHandler {
     this.app = initializeApp(config);
     this.auth = getAuth(this.app);
 
+    // Validation patterns
     this.emailPattern =
       /^(?:(?:cse|eee|law)_\d{10}@lus\.ac\.bd|[a-z0-9._]+@(gmail|yahoo)\.com)$/;
     this.passPattern =
@@ -44,7 +47,7 @@ class LoginHandler {
 
     if (!this.passPattern.test(password)) {
       document.getElementById("password-error").textContent =
-        "Password must be 8–20 characters and include uppercase, lowercase, digit, and special character.";
+        "Password must be 8-20 characters and include uppercase, lowercase, digit, and special character.";
       valid = false;
     }
 
@@ -57,32 +60,25 @@ class LoginHandler {
     const email = document.getElementById("email").value.trim();
     const password = document.getElementById("ipass").value.trim();
 
-    if (!this.validateInput(email, password)) {
-      return false;
-    }
+    if (!this.validateInput(email, password)) return false;
 
     try {
-      const userCredential = await signInWithEmailAndPassword(
-        this.auth,
-        email,
-        password
-      );
+      // Persist login across browser sessions
+      await setPersistence(this.auth, browserLocalPersistence);
 
+      const userCredential = await signInWithEmailAndPassword(this.auth, email, password);
       const user = userCredential.user;
 
       if (!user.emailVerified) {
-        alert(
-          "Your email is not verified. Please verify your email before logging in."
-        );
+        alert("Your email is not verified. Please verify your email before logging in.");
         await signOut(this.auth);
         return false;
       }
 
-      alert("Login successful!");
-      window.location.href = "index.html";
+      // Successful login
+      window.location.href = "index.html"; // session.js will update navbar
     } catch (error) {
       console.error("Firebase Auth Error:", error.code, error.message);
-
       switch (error.code) {
         case "auth/user-not-found":
           document.getElementById("email-error").textContent =
