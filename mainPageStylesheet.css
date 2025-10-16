@@ -1,5 +1,5 @@
   :root {
-      --pink: #FF4500;
+      --pink: #ff4400;
   }
 
   * {
@@ -616,8 +616,9 @@
       text-decoration: underline;
   }
 
-  .footer .box-container .box p {
+  .footer .box-container .box {
       font-size: 15px;
+      justify-self: center;
   }
 
   .footer .box-container .box img {
@@ -650,7 +651,6 @@
   .footer .credit span {
       color: var(--pink);
   }
-
 
 
 

@@ -67,11 +67,12 @@ header span {
 }
 
 header select {
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 0.6rem;
   border-radius: 6px;
   border: 1px solid var(--border-color);
   cursor: pointer;
-  max-width: 150px; /* prevent stretching */
+  max-width: 150px;
+  /* prevent stretching */
 }
 
 /* CONTAINER */
@@ -162,6 +163,7 @@ iframe#htmlOutput {
   border: 1px solid var(--border-color);
   background: #fff;
 }
+
 iframe#htmlOutput.show {
   display: block;
   min-height: 200px;
@@ -190,6 +192,7 @@ header label[for="toggler"] {
     padding: 1rem;
     gap: 1rem;
   }
+
   .editor-container,
   .right-panel {
     width: 100%;
@@ -201,6 +204,7 @@ header label[for="toggler"] {
     padding: 0.5rem 0.8rem;
     gap: 0.8rem;
   }
+
   .editor {
     min-height: 250px;
   }
@@ -213,30 +217,30 @@ header label[for="toggler"] {
 
   .navbar {
     position: fixed;
-    top: 60px;
+    top: 30px;
     right: 0;
-    width: min(80vw, 260px);
+    width: min(80vw, 220px);
     height: calc(100dvh - 60px);
     background: white;
     flex-direction: column;
-    padding: 1rem 0.8rem; /* reduced padding */
-    gap: 0.8rem;          /* reduced vertical gap */
+    padding: 3rem 0.8rem;
+    gap: 0.8rem;
     z-index: 999;
-    overflow-y: auto;
+    overflow: hidden;
 
     transform: translateX(100%);
     opacity: 0;
     transition: transform 0.3s ease, opacity 0.3s ease;
   }
 
-  #toggler:checked ~ nav.navbar {
+  #toggler:checked~nav.navbar {
     transform: translateX(0);
     opacity: 1;
   }
 
   .navbar a {
     width: 100%;
-    padding: 0.4rem 0; /* reduced link spacing */
+    padding: 0.4rem 0;
     border-bottom: 1px solid #ddd;
   }
 }
@@ -245,9 +249,11 @@ header label[for="toggler"] {
   html {
     font-size: 50%;
   }
+
   .editor {
     min-height: 200px;
   }
+
   .run-btn {
     width: 100%;
     padding: 0.8rem 1.5rem;
@@ -259,13 +265,16 @@ header label[for="toggler"] {
   body {
     font-size: 13px;
   }
+
   .editor-container,
   .right-panel {
     padding: 0.5rem;
   }
+
   #io-box {
     font-size: 0.9rem;
   }
+
   .run-btn {
     width: 100%;
     padding: 0.6rem 1rem;
