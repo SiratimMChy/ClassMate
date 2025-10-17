@@ -5,12 +5,16 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>University Question Bank | Past Exam Question Repository</title>
-  <link rel="stylesheet" href="PreviousQ.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-</head>
-<style>
-   :root {
+  <style>
+    :root {
       --pink: #FF4500;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
 
     html {
@@ -20,11 +24,21 @@
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background-color: #f4f4f4;
-      margin: 0;
-      padding: 0;
       display: flex;
       flex-direction: column;
       align-items: center;
+      overflow-x: hidden;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .container {
+      width: 95%;
+      max-width: 1200px;
+      margin: 0 auto;
     }
 
     /* Navbar */
@@ -32,20 +46,21 @@
       background-color: #fff;
       box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
       width: 100%;
+      height: 80px;
       position: sticky;
       top: 0;
-      height: 80px;
       z-index: 100;
+      padding: 1rem 0;
     }
 
     .navbar-container {
-      max-width: 1200px;
-      margin: 0 auto;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 2px;
       flex-wrap: wrap;
+      width: 95%;
+      max-width: 1200px;
+      margin: auto;
     }
 
     .nav-logo {
@@ -54,15 +69,13 @@
     }
 
     .nav-logo img {
-      height: 40px;
+      height: 50px;
     }
 
     .nav-logo .heading {
-      font-size: 2rem;
+      font-size: 1.8rem;
       margin-left: 10px;
       color: #333;
-      padding: 0.2rem;
-      border-radius: 10px;
       white-space: nowrap;
     }
 
@@ -72,63 +85,63 @@
 
     .nav-links {
       display: flex;
-      gap: 1.5rem;
+      gap: 1rem;
+      flex-wrap: wrap;
     }
 
     .nav-links a {
-      text-decoration: none;
-      color: #555;
-      font-size: 0.95rem;
       padding: 0.5rem 0.8rem;
-      display: block;
+      font-size: 0.95rem;
+      color: #555;
+      transition: 0.3s;
     }
 
     .nav-links a:hover {
-      color: #ff0000;
+      color: var(--pink);
     }
 
     .nav-toggle {
+      display: none;
+      font-size: 1.5rem;
       background: none;
       border: none;
-      font-size: 1.5rem;
-      color: #333;
       cursor: pointer;
-      display: none;
+      color: #333;
     }
 
+    /* Hero & Search */
     .search-container {
+      width: 100%;
       background: linear-gradient(135deg, #1a237e, #283593);
       color: white;
-      padding: 5rem 1rem;
       text-align: center;
-      width: 100%;
+      padding: 4rem 1rem;
     }
 
     .search-container h1 {
-      font-size: 2.5rem;
-      font-weight: 800;
+      font-size: 2.2rem;
       margin-bottom: 0.5rem;
     }
 
     .search-container p {
       max-width: 600px;
-      margin: 0 auto;
-      font-size: 1.1rem;
+      margin: auto;
+      font-size: 1rem;
     }
 
     .search-box {
-      max-width: 1000px;
+      background: #fff;
+      padding: 2rem;
       margin: 2rem auto 0;
-      background-color: white;
-      padding: 2.5rem;
       border-radius: 8px;
       box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+      width: 100%;
     }
 
     .search-form {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1.5rem;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
       align-items: end;
     }
 
@@ -145,35 +158,35 @@
 
     .search-form input,
     .search-form select {
-      width: 100%;
-      padding: 10px;
-      border: 1px solid #ccc;
+      padding: 8px;
       border-radius: 6px;
+      border: 1px solid #ccc;
+      width: 100%;
     }
 
     .search-form button {
-      background-color: #333;
-      color: white;
-      padding: 10px 16px;
+      padding: 10px;
+      border-radius: 50px;
       border: none;
-      border-radius: 5rem;
+      background-color: #333;
+      color: #fff;
       font-weight: bold;
-      display: inline-flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 1rem;
       cursor: pointer;
-      transition: background-color 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: 0.3s;
     }
 
     .search-form button:hover {
       background-color: var(--pink);
     }
 
+    /* Results Section */
     .results-section {
-      max-width: 1200px;
-      margin: 3rem auto;
-      padding: 2rem;
+      width: 100%;
+      margin: 2rem auto;
+      padding: 2rem 0;
     }
 
     .results-header {
@@ -181,93 +194,88 @@
       font-weight: bold;
       margin-bottom: 1rem;
       color: #222;
-    }
-
-    .filters {
-      background-color: #f1f1f1;
-      padding: 1rem;
-      border-radius: 10px;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      gap: 1rem;
-    }
-
-    .filters select,
-    .filters input {
-      padding: 6px 10px;
-      border: 1px solid #ccc;
-      border-radius: 6px;
+      text-align: center;
     }
 
     .placeholder {
       text-align: center;
-      margin-top: 2rem;
       color: #666;
+      padding: 1rem;
     }
 
-    .pagination {
-      display: flex;
-      justify-content: center;
-      margin-top: 2.5rem;
-      gap: 0.5rem;
-    }
-
-    .pagination a {
-      padding: 8px 12px;
-      border: 1px solid #ccc;
-      text-decoration: none;
-      color: #333;
-      background: white;
-      border-radius: 4px;
-    }
-
-    .pagination a:hover {
-      background-color: #e0e7ff;
-    }
-
-    footer {
-      background-color: #1f2937;
-      color: #ccc;
-      padding: 3rem 1rem;
-      width: 100%;
-    }
-
-    .footer-container {
-      max-width: 1200px;
-      margin: auto;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 2rem;
-    }
-
-    footer h3 {
-      color: white;
+    .file-card {
+      background: #fff;
+      padding: 1rem;
       margin-bottom: 1rem;
+      border-radius: 6px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     }
 
-    footer ul {
-      list-style: none;
-      padding: 0;
+    .file-card h3 {
+      margin-bottom: 0.5rem;
+      color: #333;
     }
 
-    footer a {
+    .file-card a {
+      color: var(--pink);
+      font-weight: bold;
+    }
+
+    /* Footer */
+    footer {
+      background: #1f2937;
       color: #ccc;
-      text-decoration: none;
-    }
-
-    footer a:hover {
-      color: white;
+      width: 100%;
+      padding: 1.5rem 1rem;
     }
 
     .footer-bottom {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       text-align: center;
-      margin-top: 2rem;
-      border-top: 1px solid #333;
-      padding-top: 1rem;
+      gap: 1rem;
+    }
+
+    .footer-bottom-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .footer-bottom .copyright p {
+      margin: 0;
       font-size: 0.9rem;
     }
 
+    .social-links {
+      display: flex;
+      align-items: center;
+      gap: .8rem;
+      flex-wrap: wrap;
+    }
+
+    .social-links span {
+      font-weight: bold;
+    }
+
+    .social-links a {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 32px;
+      height: 32px;
+      color: white;
+      border-radius: 50%;
+      transition: 0.3s;
+    }
+
+    .social-links a:hover {
+      color: var(--pink);
+    }
+
+    /* Responsive */
     @media (max-width: 992px) {
       .nav-toggle {
         display: block;
@@ -277,13 +285,6 @@
         flex-direction: column;
         width: 100%;
         display: none;
-        background-color: #fff;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        z-index: 99;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        padding: 1rem 2rem;
       }
 
       .nav-links.active {
@@ -293,11 +294,6 @@
       .search-form {
         grid-template-columns: 1fr;
       }
-
-      .footer-container {
-        grid-template-columns: 1fr;
-        text-align: center;
-      }
     }
 
     @media (max-width: 480px) {
@@ -306,24 +302,32 @@
       }
 
       .search-container p {
-        font-size: 0.95rem;
+        font-size: 0.9rem;
       }
 
       .search-form button {
         width: 100%;
       }
+
+      .footer-bottom-content {
+        gap: 0.5rem;
+      }
+
+      .social-links {
+        justify-content: center;
+      }
     }
-</style>
+  </style>
+</head>
 
 <body>
-
   <!-- Navbar -->
   <nav>
     <div class="navbar-container">
       <div class="nav-logo">
         <img src="https://images.seeklogo.com/logo-png/44/1/leading-university-logo-png_seeklogo-445048.png"
           alt="University Logo">
-        <h1 class="heading">University<span> Question Bank </span></h1>
+        <h1 class="heading">University<span> Question Bank</span></h1>
       </div>
       <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('active')">
         <i class="fas fa-bars"></i>
@@ -339,34 +343,37 @@
   <div class="search-container">
     <h1>Academic Resource Center</h1>
     <p>Access past exam questions organized by course, semester, and year to help with your studies.</p>
-    <div class="search-box">
+    <div class="search-box container">
       <form class="search-form">
         <div>
           <label for="course-code">Course Code</label>
-          <input type="text" id="course-code" placeholder="e.g. CSE-1111" required>
+          <input type="text" id="course-code" placeholder="e.g. CSE-1111">
         </div>
         <div>
           <label for="course-title">Course Title</label>
-          <input type="text" id="course-title" placeholder="e.g. Introduction to Computing" required>
+          <input type="text" id="course-title" placeholder="e.g. Introduction to Computing">
         </div>
         <div>
           <label for="department">Department</label>
-          <select id="department" required>
-            <option value="">Select Department</option>
+          <select id="department">
+            <option value="">All Departments</option>
+            <option value="BBA">Business Administration</option>
             <option value="CSE">Computer Science</option>
+            <option value="ENG">English</option>
             <option value="EEE">Electrical Engineering</option>
-            <option value="ME">Mechanical Engineering</option>
             <option value="CE">Civil Engineering</option>
             <option value="ARCH">Architecture</option>
-            <option value="BBA">Business Administration</option>
-            <option value="ECON">Economics</option>
-            <option value="ENG">English</option>
+            <option value="LAW">Law</option>
+            <option value="ISLAMIC">Islamic Studies</option>
+            <option value="PH">Public Health</option>
+            <option value="THM">Tourism and Hospitality Management</option>
+            <option value="BANGLA">Bangla</option>
           </select>
         </div>
         <div>
           <label for="semester">Semester</label>
-          <select id="semester" required>
-            <option value="">Select Semester</option>
+          <select id="semester">
+            <option value="">All Semesters</option>
             <option value="Summer">Summer</option>
             <option value="Fall">Fall</option>
             <option value="Spring">Spring</option>
@@ -374,15 +381,15 @@
         </div>
         <div>
           <label for="year">Year</label>
-          <select id="year" required>
-            <option value="">Select Year</option>
+          <select id="year">
+            <option value="">All Years</option>
             <option value="2022">2022</option>
             <option value="2023">2023</option>
             <option value="2024">2024</option>
             <option value="2025">2025</option>
           </select>
         </div>
-        <div style="margin-top: 24px;">
+        <div>
           <button type="button" id="search-btn"><i class="fas fa-search"></i> Find Exam Questions</button>
         </div>
       </form>
@@ -390,97 +397,15 @@
   </div>
 
   <!-- Results Section -->
-  <div class="results-section">
+  <div class="results-section container">
     <h2 class="results-header">Exam Question Repository</h2>
-    <div class="filters">
-      <div>
-        <select>
-          <option>All Departments</option>
-          <option>CSE</option>
-          <option>EEE</option>
-          <option>BBA</option>
-          <option>ENG</option>
-        </select>
-        <select>
-          <option>All Semesters</option>
-          <option>Summer</option>
-          <option>Fall</option>
-          <option>Spring</option>
-        </select>
-      </div>
-      <div>
-        <input type="text" placeholder="Search in results...">
-      </div>
-    </div>
     <div class="placeholder" id="result-placeholder">
       <p>No exam questions found matching your criteria. Try adjusting your filters.</p>
-    </div>
-
-    <div class="pagination">
-      <a href="#">Previous</a>
-      <a href="#" style="color: blue;">1</a>
-      <a href="#">2</a>
-      <a href="#">3</a>
-      <a href="#">Next</a>
     </div>
   </div>
 
   <!-- Footer -->
   <footer>
-    <div class="footer-container">
-      <div>
-        <h3>About ClassMate</h3>
-        <p>ClassMate revolutionizes academic scheduling by automatically extracting personalized routines from complex university spreadsheets. Built for Leading University students, our platform simplifies course management, eliminates scheduling conflicts, and keeps you organized throughout your academic journey.</p>
-      </div>
-      <div>
-        <h3>Services</h3>
-        <ul>
-          <li><a href="#">Schedule Builder</a></li>
-          <li><a href="#">Front Page Generator</a></li>
-          <li><a href="#">Previous Questions</a></li>
-          <li><a href="#">Booth Permission</a></li>
-          <li><a href="#">Makeup Exam</a></li>
-          <li><a href="#">Supplementary Exam</a></li>
-        </ul>
-      </div>
-      <div>
-        <h3>Quick Links</h3>
-        <ul>
-          <li><a href="#home">Home</a></li>
-          <li><a href="#services">Services</a></li>
-          <li><a href="#clubs">Clubs</a></li>
-          <li><a href="#contact">Contact</a></li>
-          <li><a href="#about">About Us</a></li>
-          <li><a href="#">Privacy Policy</a></li>
-          <li><a href="#">Terms of Service</a></li>
-        </ul>
-      </div>
-      <div>
-        <h3>Contact Information</h3>
-        <address>
-          <div class="contact-item">
-            <i class="fas fa-phone"></i>
-            <span>+880-1763-777626</span>
-          </div>
-           <div class="contact-item">
-            <i class="fas fa-envelope"></i>
-            <span>cse_2132020056@lus.ac.bd</span>
-          </div>
-           <div class="contact-item">
-            <i class="fas fa-envelope"></i>
-            <span>cse_2132020056@lus.ac.bd</span>
-          </div>
-          <div class="contact-item">
-            <i class="fas fa-envelope"></i>
-            <span>cse_2132020056@lus.ac.bd</span>
-          </div>
-          <div class="contact-item">
-            <i class="fas fa-map-marker-alt"></i>
-            <span>Sylhet, Bangladesh</span>
-          </div>
-        </address>
-      </div>
-    </div>
     <div class="footer-bottom">
       <div class="footer-bottom-content">
         <div class="copyright">
@@ -504,8 +429,11 @@
       </div>
     </div>
   </footer>
-<script src="PreviousQ.js"></script>
 
+  <!-- Firebase + JS -->
+  <script type="module" src="PreviousQ.js"></script>
 </body>
 
 </html>
+
+
