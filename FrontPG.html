@@ -2,13 +2,13 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>University Academic Front Page Generator</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Academic Front Page Generator</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-    <link rel="stylesheet" href="FrontPG.css" />
+    <link rel="stylesheet" href="FrontPG.css">
 </head>
 
 <body>
@@ -16,8 +16,7 @@
     <nav>
         <div class="navbar-container">
             <div class="nav-logo">
-                <img src="https://images.seeklogo.com/logo-png/44/1/leading-university-logo-png_seeklogo-445048.png"
-                    alt="University Logo" />
+                <img src="images/leadingLogo.png" alt="University Logo" />
                 <h1 class="heading">Academic<span> Front Page </span>Generator</h1>
             </div>
             <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('active')">
@@ -25,203 +24,182 @@
             </button>
             <div class="nav-links">
                 <a href="index.html"><i class="fas fa-home"></i> Home</a>
-                <a href="#"><i class="fas fa-file-alt"></i> Templates</a>
             </div>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <div class="hero-section">
-        <h1><i class="fas fa-graduation-cap"></i> Academic Front Page Generator</h1>
-        <p>Create professional assignment cover pages with university branding and formatting standards.</p>
-    </div>
+    <!-- Header -->
+    <header id="home">
+        <div class="container">
+            <h1><i class="fas fa-graduation-cap"></i> Professional Academic Front Page Generator</h1>
+            <p>Create polished assignment cover pages with ease and precision.</p>
+        </div>
+    </header>
 
     <div class="container">
         <div class="form-section">
-            <h2 class="section-title">
-                <i class="fas fa-book"></i>
-                Course Information
-            </h2>
-
+            <!-- Course Information -->
+            <h2><i class="fas fa-book"></i> Course Information</h2>
             <div class="form-grid">
                 <div class="form-group">
-                    <label for="courseDept"><i class="fas fa-building"></i> Course Department</label>
-                    <input type="text" id="courseDept" placeholder="e.g., Computer Science & Engineering" />
-                </div>
-                <div class="form-group">
                     <label for="courseCode"><i class="fas fa-code"></i> Course Code</label>
-                    <input type="text" id="courseCode" placeholder="e.g., CSE-1111" />
+                    <input type="text" id="courseCode" placeholder="e.g., CSE-1111">
                 </div>
                 <div class="form-group full-width">
                     <label for="courseTitle"><i class="fas fa-bookmark"></i> Course Title</label>
-                    <input type="text" id="courseTitle" placeholder="e.g., Introduction to Computer Programming" />
+                    <input type="text" id="courseTitle" placeholder="e.g., Introduction to Programming">
                 </div>
                 <div class="form-group full-width">
                     <label for="topic"><i class="fas fa-clipboard-list"></i> Assignment Topic</label>
-                    <input type="text" id="topic" placeholder="e.g., Final Project Report on Web Development" />
+                    <input type="text" id="topic" placeholder="e.g., Web Development Project">
                 </div>
             </div>
 
-            <h2 class="section-title">
-                <i class="fas fa-chalkboard-teacher"></i>
-                Instructor Information
-            </h2>
-
+            <!-- Instructor Information -->
+            <h2><i class="fas fa-chalkboard-teacher"></i> Instructor Information</h2>
             <div class="form-grid">
                 <div class="form-group">
                     <label for="teacherName"><i class="fas fa-user-tie"></i> Instructor's Name</label>
-                    <input type="text" id="teacherName" placeholder="e.g., Dr. Mohammad Rahman" />
+                    <input type="text" id="teacherName" placeholder="e.g., Dr. Mohammad Rahman">
                 </div>
                 <div class="form-group">
                     <label for="teacherDesignation"><i class="fas fa-medal"></i> Designation</label>
-                    <input type="text" id="teacherDesignation" placeholder="e.g., Associate Professor" />
+                    <input type="text" id="teacherDesignation" placeholder="e.g., Associate Professor">
                 </div>
                 <div class="form-group full-width">
                     <label for="teacherFaculty"><i class="fas fa-university"></i> Faculty/Department</label>
-                    <input type="text" id="teacherFaculty" placeholder="e.g., Faculty of Science & Engineering" />
+                    <input type="text" id="teacherFaculty" list="facultyList" placeholder="e.g., Dept. of CSE">
+                    <datalist id="facultyList">
+                        <option value="Dept. of CSE"></option>
+                        <option value="Dept. of BBA"></option>
+                        <option value="Dept. of English"></option>
+                        <option value="Dept. of EEE"></option>
+                        <option value="Dept. of CE"></option>
+                        <option value="Dept. of Architecture"></option>
+                        <option value="Dept. of Law"></option>
+                        <option value="Dept. of THM"></option>
+                        <option value="Dept. of Islamic Studies"></option>
+                        <option value="Dept. of Public Health"></option>
+                    </datalist>
                 </div>
             </div>
 
-            <h2 class="section-title">
-                <i class="fas fa-user-graduate"></i>
-                Student Information
-            </h2>
-
+            <!-- Student Information -->
+            <h2><i class="fas fa-user-graduate"></i> Student Information</h2>
             <div class="form-grid">
                 <div class="form-group">
                     <label for="studentName"><i class="fas fa-id-card"></i> Student Name</label>
-                    <input type="text" id="studentName" placeholder="e.g., Ahmed Hassan" />
+                    <input type="text" id="studentName" placeholder="e.g., Ahmed Hassan">
                 </div>
                 <div class="form-group">
                     <label for="studentId"><i class="fas fa-hashtag"></i> Student ID</label>
-                    <input type="text" id="studentId" placeholder="e.g., 2021123456" />
-                </div>
-                <div class="form-group">
-                    <label for="studentDept"><i class="fas fa-building"></i> Department</label>
-                    <input type="text" id="studentDept" placeholder="e.g., Computer Science & Engineering" />
+                    <input type="text" id="studentId" placeholder="e.g., 2021123456">
                 </div>
                 <div class="form-group">
                     <label for="batch"><i class="fas fa-calendar-alt"></i> Batch</label>
-                    <input type="text" id="batch" placeholder="e.g., Spring 2021" />
+                    <input type="text" id="batch" placeholder="e.g., Spring 2025">
                 </div>
                 <div class="form-group">
                     <label for="section"><i class="fas fa-users"></i> Section</label>
-                    <input type="text" id="section" placeholder="e.g., A (Optional)" />
+                    <input type="text" id="section" placeholder="e.g., A">
                 </div>
                 <div class="form-group">
                     <label for="submissionDate"><i class="fas fa-calendar-check"></i> Submission Date</label>
-                    <input type="date" id="submissionDate" />
+                    <input type="date" id="submissionDate">
                 </div>
             </div>
 
-            <div class="buttons">
-                <button type="button" class="btn-preview" onclick="updatePreview()">
-                    <i class="fas fa-eye"></i> Preview Front Page
-                </button>
+            <!-- Department Selection -->
+            <div class="form-group full-width">
+                <label for="department"><i class="fas fa-building-columns"></i> Department</label>
+                <input type="text" id="department" list="departmentList" placeholder="e.g., Dept. of CSE">
+                <datalist id="departmentList">
+                    <option value="Dept. of CSE"></option>
+                    <option value="Dept. of BBA"></option>
+                    <option value="Dept. of English"></option>
+                    <option value="Dept. of EEE"></option>
+                    <option value="Dept. of CE"></option>
+                    <option value="Dept. of Architecture"></option>
+                    <option value="Dept. of Law"></option>
+                    <option value="Dept. of THM"></option>
+                    <option value="Dept. of Islamic Studies"></option>
+                    <option value="Dept. of Public Health"></option>
+                </datalist>
+            </div>
 
-                <button type="button" class="btn-pdf" id="pdfBtn" onclick="downloadPDF()">
-                    <i class="fas fa-file-pdf"></i> Download PDF
-                </button>
-                <button type="button" class="btn-clear" onclick="clearForm()">
-                    <i class="fas fa-eraser"></i> Clear Form
-                </button>
+            <!-- Buttons -->
+            <div class="buttons">
+                <button class="btn btn-preview" onclick="updatePreview()"><i class="fas fa-eye"></i> Preview Front
+                    Page</button>
+                <button class="btn btn-pdf" id="pdfBtn" onclick="downloadPDF()"><i class="fas fa-file-pdf"></i> Download
+                    PDF</button>
+                <button class="btn btn-clear" onclick="clearForm()"><i class="fas fa-eraser"></i> Clear Form</button>
             </div>
         </div>
 
+        <!-- Front Page Template -->
         <div class="front-page-template" id="frontPageTemplate">
-            <div class="university-logo">
-                <i class="fas fa-university"></i>
-            </div>
-
-            <div class="template-header">
-                <div class="template-title" id="displayTopic">[Assignment Topic]</div>
-                <div class="template-subtitle">Academic Assignment Submission</div>
-            </div>
-
-            <div class="template-section">
-                <h3>Course Details</h3>
-                <div class="template-item">
-                    <span class="template-label">Course Title:</span>
-                    <span class="template-value" id="displayCourseTitle">[Course Title]</span>
+            <div class="cover-page">
+                <div class="logo"><img src="images/leadingLogo.png" alt="University Logo"></div>
+                <h2 class="dept" id="displayCourseDept">[Department]</h2>
+                <div class="section">
+                    <p><b>Course Code:</b> <span id="displayCourseCode">[Course Code]</span></p>
+                    <p><b>Course Title:</b> <span id="displayCourseTitle">[Course Title]</span></p>
                 </div>
-                <div class="template-item">
-                    <span class="template-label">Course Code:</span>
-                    <span class="template-value" id="displayCourseCode">[Course Code]</span>
+                <h3 class="assignment" id="displayTopic">[Assignment Topic]</h3>
+                <div class="submitted-to">
+                    <h4 style="text-align: center;">Submitted To:</h4>
+                     <div style="border-bottom: 2px solid #000; width: 200px; margin: 0px auto;"></div>
+                    <p><b>Instructor Name:</b> <span id="displayTeacherName">[Instructor Name]</span></p>
+                    <p><b>Designation:</b> <span id="displayTeacherDesignation">[Designation]</span></p>
+                    <p><b>Faculty/Department:</b> <span id="displayTeacherFaculty">[Faculty/Department]</span></p>
                 </div>
-                <div class="template-item">
-                    <span class="template-label">Department:</span>
-                    <span class="template-value" id="displayCourseDept">[Course Department]</span>
+                <div class="submitted-by">
+                    <h4 style="text-align: center;">Submitted By:</h4>
+                   <div style="border-bottom: 2px solid #000; width: 200px; margin: 0px auto;"></div>
+                    <p><b>Student Name:</b> <span id="displayStudentName">[Student Name]</span></p>
+                    <p><b>Student ID:</b> <span id="displayStudentId">[Student ID]</span></p>
+                    <p><b>Batch:</b> <span id="displayBatch">[Batch]</span></p>
+                    <p><b>Section:</b> <span id="displaySection">[Section]</span></p>
+                    <p><b>Department:</b> <span id="displayStudentDept">[Department]</span></p>
                 </div>
-            </div>
-
-            <div class="template-section">
-                <h3>Instructor Information</h3>
-                <div class="template-item">
-                    <span class="template-label">Instructor:</span>
-                    <span class="template-value" id="displayTeacherName">[Instructor Name]</span>
+                <div class="date">
+                    <p><b>Submission Date:</b> <span id="displayDate">[Submission Date]</span></p>
                 </div>
-                <div class="template-item">
-                    <span class="template-label">Designation:</span>
-                    <span class="template-value" id="displayTeacherDesignation">[Designation]</span>
-                </div>
-                <div class="template-item">
-                    <span class="template-label">Faculty:</span>
-                    <span class="template-value" id="displayTeacherFaculty">[Faculty/Department]</span>
-                </div>
-            </div>
-
-            <div class="template-section">
-                <h3>Student Information</h3>
-                <div class="template-item">
-                    <span class="template-label">Student Name:</span>
-                    <span class="template-value" id="displayStudentName">[Student Name]</span>
-                </div>
-                <div class="template-item">
-                    <span class="template-label">Student ID:</span>
-                    <span class="template-value" id="displayStudentId">[Student ID]</span>
-                </div>
-                <div class="template-item">
-                    <span class="template-label">Department:</span>
-                    <span class="template-value" id="displayStudentDept">[Student Department]</span>
-                </div>
-                <div class="template-item">
-                    <span class="template-label">Batch:</span>
-                    <span class="template-value" id="displayBatch">[Batch]</span>
-                </div>
-                <div class="template-item" id="sectionRow">
-                    <span class="template-label">Section:</span>
-                    <span class="template-value" id="displaySection">[Section]</span>
-                </div>
-            </div>
-
-            <div class="template-date">
-                <strong>Submission Date:</strong> <span id="displayDate">[Date]</span>
             </div>
         </div>
     </div>
 
-    <!-- Footer -->
     <footer>
-        <div class="footer-container">
-            <p>&copy; 2024 University Academic Resources. All rights reserved.</p>
+        <p class="credit">Created by <span style="color: orangered;">SRM Technologies</span> | &copy; all rights reserved</p>
+        <div class="social-links">
+            <span>Follow us:</span>
+            <a href="https://www.facebook.com" target="_blank" aria-label="Facebook">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="https://www.twitter.com" target="_blank" aria-label="Twitter">
+                <i class="fab fa-twitter"></i>
+            </a>
+            <a href="https://www.instagram.com" target="_blank" aria-label="Instagram">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://www.linkedin.com" target="_blank" aria-label="LinkedIn">
+                <i class="fab fa-linkedin-in"></i>
+            </a>
         </div>
     </footer>
 
     <script>
-        // Update the front page preview with form inputs
         function updatePreview() {
-            const courseDept = document.getElementById('courseDept').value.trim();
             const courseCode = document.getElementById('courseCode').value.trim();
             const courseTitle = document.getElementById('courseTitle').value.trim();
             const topic = document.getElementById('topic').value.trim();
-
+            const department = document.getElementById('department').value.trim();
             const teacherName = document.getElementById('teacherName').value.trim();
             const teacherDesignation = document.getElementById('teacherDesignation').value.trim();
             const teacherFaculty = document.getElementById('teacherFaculty').value.trim();
-
             const studentName = document.getElementById('studentName').value.trim();
             const studentId = document.getElementById('studentId').value.trim();
-            const studentDept = document.getElementById('studentDept').value.trim();
             const batch = document.getElementById('batch').value.trim();
             const section = document.getElementById('section').value.trim();
             const submissionDate = document.getElementById('submissionDate').value;
@@ -229,103 +207,47 @@
             document.getElementById('displayTopic').textContent = topic || '[Assignment Topic]';
             document.getElementById('displayCourseTitle').textContent = courseTitle || '[Course Title]';
             document.getElementById('displayCourseCode').textContent = courseCode || '[Course Code]';
-            document.getElementById('displayCourseDept').textContent = courseDept || '[Course Department]';
-
+            document.getElementById('displayCourseDept').textContent = department || '[Department]';
             document.getElementById('displayTeacherName').textContent = teacherName || '[Instructor Name]';
             document.getElementById('displayTeacherDesignation').textContent = teacherDesignation || '[Designation]';
             document.getElementById('displayTeacherFaculty').textContent = teacherFaculty || '[Faculty/Department]';
-
             document.getElementById('displayStudentName').textContent = studentName || '[Student Name]';
             document.getElementById('displayStudentId').textContent = studentId || '[Student ID]';
-            document.getElementById('displayStudentDept').textContent = studentDept || '[Student Department]';
             document.getElementById('displayBatch').textContent = batch || '[Batch]';
-
-            const sectionRow = document.getElementById('sectionRow');
-            if (section) {
-                document.getElementById('displaySection').textContent = section;
-                sectionRow.style.display = 'flex';
-            } else {
-                sectionRow.style.display = 'none';
-            }
-
+            document.getElementById('displaySection').textContent = section || '[Section]';
+            document.getElementById('displayStudentDept').textContent = department || '[Department]';
             if (submissionDate) {
                 const dateObj = new Date(submissionDate);
                 const options = { year: 'numeric', month: 'long', day: 'numeric' };
-                document.getElementById('displayDate').textContent = dateObj.toLocaleDateString(undefined, options);
+                document.getElementById('displayDate').textContent = dateObj.toLocaleDateString('en-US', options);
             } else {
-                document.getElementById('displayDate').textContent = '[Date]';
+                document.getElementById('displayDate').textContent = '[Submission Date]';
             }
         }
 
-        // Generate and download PDF of the front page preview
         async function downloadPDF() {
             const pdfBtn = document.getElementById('pdfBtn');
             pdfBtn.disabled = true;
-            pdfBtn.innerHTML = '<span class="loading"></span> Generating PDF...';
-
-            try {
+            pdfBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Generating PDF...';
                 const frontPage = document.getElementById('frontPageTemplate');
-
-                const canvas = await html2canvas(frontPage, {
-                    scale: 2,
-                    useCORS: true,
-                    backgroundColor: '#fff'
-                });
-
+                const canvas = await html2canvas(frontPage, { scale: 2, useCORS: true, backgroundColor: '#fff' });
                 const imgData = canvas.toDataURL('image/png');
-
                 const { jsPDF } = window.jspdf;
-                const pdf = new jsPDF({
-                    unit: 'pt',
-                    format: 'a4',
-                    orientation: 'portrait'
-                });
-
+                const pdf = new jsPDF({ unit: 'pt', format: 'a4', orientation: 'portrait' });
                 const pageWidth = pdf.internal.pageSize.getWidth();
                 const pageHeight = pdf.internal.pageSize.getHeight();
-                const margin = 40;
-                const imgProps = pdf.getImageProperties(imgData);
-                const pdfWidth = pageWidth - margin * 2;
-                const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
-
-                pdf.addImage(imgData, 'PNG', margin, margin, pdfWidth, pdfHeight);
-
-                pdf.save('Academic_Front_Page.pdf');
-            } catch (error) {
-                alert('An error occurred while generating the PDF. Please try again.');
-                console.error(error);
-            } finally {
-                pdfBtn.disabled = false;
-                pdfBtn.innerHTML = '<i class="fas fa-file-pdf"></i> Download PDF';
+                const imgWidth = pageWidth - 40;
+                const imgHeight = (canvas.height * imgWidth) / canvas.width;
+                const yPosition = (pageHeight - imgHeight) / 2;
+                pdf.addImage(imgData, 'PNG', 20, yPosition, imgWidth, imgHeight);
+                const studentName = document.getElementById('studentName').value.trim() || 'Front_Page';
+                const fileName = `${studentName.replace(/\s+/g, '_')}_Front_Page.pdf`;
+                pdf.save(fileName);
             }
-        }
 
-        // Clear all form inputs and reset preview
         function clearForm() {
-            const inputs = document.querySelectorAll('.form-section input');
-            inputs.forEach(input => {
-                input.value = '';
-            });
-
-            document.getElementById('displayTopic').textContent = '[Assignment Topic]';
-            document.getElementById('displayCourseTitle').textContent = '[Course Title]';
-            document.getElementById('displayCourseCode').textContent = '[Course Code]';
-            document.getElementById('displayCourseDept').textContent = '[Course Department]';
-
-            document.getElementById('displayTeacherName').textContent = '[Instructor Name]';
-            document.getElementById('displayTeacherDesignation').textContent = '[Designation]';
-            document.getElementById('displayTeacherFaculty').textContent = '[Faculty/Department]';
-
-            document.getElementById('displayStudentName').textContent = '[Student Name]';
-            document.getElementById('displayStudentId').textContent = '[Student ID]';
-            document.getElementById('displayStudentDept').textContent = '[Student Department]';
-            document.getElementById('displayBatch').textContent = '[Batch]';
-
-            const sectionRow = document.getElementById('sectionRow');
-            sectionRow.style.display = 'flex';
-            document.getElementById('displaySection').textContent = '[Section]';
-
-            document.getElementById('displayDate').textContent = '[Date]';
+            document.querySelectorAll('input, select').forEach(el => el.value = '');
+            updatePreview();
         }
     </script>
 </body>

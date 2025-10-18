@@ -23,7 +23,7 @@ body {
 }
 
 .login .heading {
-    font-size: 2.4rem;
+    font-size: 1.5rem;
     margin-bottom: 15px;
     text-align: center;
     color: #333;
@@ -55,7 +55,7 @@ body {
     border-radius: 5rem;
     cursor: pointer;
     width: 100%;
-    font-size: 1.6rem;
+    font-size: 1.5rem;
 }
 
 .login .btn:hover {
@@ -66,8 +66,8 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 8px 0;
-    font-size: 1.2rem;
+    margin: 8px;
+    font-size: 16px;
 }
 
 .login .options input[type="checkbox"] {
@@ -76,7 +76,7 @@ body {
 
 .login .forgot-password {
     text-align: right;
-    font-size: 1em;
+    font-size: 16px;
     color: #007bff;
 }
 
@@ -92,13 +92,13 @@ body {
 .login .already-account {
     text-align: center;
     margin-top: 15px;
-    font-size: 1.2em;
+    font-size: 16px;
 }
 
 .login .already-account a {
     color: #007bff;
     text-decoration: none;
-    font-size: 1.2em;
+    font-size: 1em;
 }
 
 .login .already-account a:hover {
@@ -119,16 +119,33 @@ body {
 
 .password-container input {
     width: 100%;
-    padding-right: 40px;
-    /* space for eye icon */
+    box-sizing: border-box;
+    /* ensures padding and borders are included in width */
+    padding-right: 42px;
+    /* space for the eye icon */
+    margin: 8px 0;
 }
 
 .password-container i {
     position: absolute;
-    top: 50%;
     right: 12px;
+    top: 50%;
     transform: translateY(-50%);
-    cursor: pointer;
     color: #888;
     font-size: 1.2rem;
+    cursor: pointer;
+}
+
+.email-container {
+    position: relative;
+    width: 100%;
+}
+
+.email-container input {
+    width: 100%;
+    box-sizing: border-box;
+    /* ensures padding and borders are included in width */
+    padding-right: 42px;
+    /* space for the eye icon */
+    margin: 10px 0;
 }
