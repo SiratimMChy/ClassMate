@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Leading University - Makeup Examination Form</title>
+
+ 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+ 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+    <style>
+        /* ------------------ GLOBAL ------------------ */
+        body {
+            font-family: "Times New Roman", serif;
+            background-color: #f4f6fa;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* ------------------ NAVBAR ------------------ */
+        nav {
+            background-color: #ffffff;
+            color: #000000;
+            padding: 10px 0;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+        }
+
+        .navbar-container {
+            width: 90%;
+            margin: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-logo img {
+            height: 45px;
+        }
+
+        .nav-logo .heading {
+            font-size: 20px;
+            margin: 0;
+            color: #000000;
+        }
+
+        .nav-logo .heading span {
+            color: #ff0000;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            color: #000000;
+            text-decoration: none;
+            font-size: 15px;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: orangered;
+        }
+
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                background: #003366;
+                position: absolute;
+                top: 60px;
+                right: 0;
+                width: 200px;
+                text-align: right;
+                padding: 10px 20px;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-toggle {
+                display: block;
+            }
+        }
+        .container {
+            width: 850px;
+            background: #fff;
+            margin: 40px auto;
+            padding: 40px 45px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        header {
+            text-align: center;
+            position: relative;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #000;
+        }
+
+        header img {
+            position: absolute;
+            left: 20px;
+            top: 10px;
+            height: 70px;
+        }
+
+        header h2 {
+            font-size: 24px;
+            margin: 0;
+            text-transform: uppercase;
+        }
+
+        header p {
+            margin: 3px 0;
+            font-size: 15px;
+        }
+
+        header h4 {
+            margin: 8px 0 0;
+            font-size: 16px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        td,
+        th {
+            border: 1px solid #000;
+            padding: 6px;
+            font-size: 14px;
+            vertical-align: middle;
+        }
+
+        input[type="text"],
+        input[type="date"] {
+            width: 100%;
+            border: none;
+            outline: none;
+            font-size: 14px;
+            font-family: "Times New Roman", serif;
+        }
+
+        label {
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .signature-block {
+            margin-top: 25px;
+            font-size: 14px;
+        }
+
+        .signature-row {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            padding-top: 30px;
+            margin-top: 20px;
+            gap: 20px;
+        }
+
+        .signature-row div {
+            width: 45%;
+            margin-bottom: 15px;
+        }
+
+        .notes {
+            font-size: 13px;
+            margin-top: 20px;
+        }
+
+        .divider {
+            border-top: 1px dashed #000;
+            margin: 35px 0;
+        }
+
+        .admit-card-title {
+            text-align: center;
+            text-transform: uppercase;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-decoration: none;
+        }
+
+        .controller-sign {
+            text-align: right;
+            margin-top: 40px;
+            font-size: 14px;
+        }
+
+        .btn {
+            display: block;
+            width: fit-content;
+            margin: 30px auto;
+            padding: 10px 30px;
+            background-color: #3a3a3b;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 15px;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #002e73;
+        }
+
+        footer {
+            text-align: center;
+            background-color: #3f4041;
+            color: white;
+            padding: 20px 0;
+        }
+
+        footer .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            align-items: center;
+        }
+
+        footer .social-links a {
+            color: white;
+            font-size: 1.2em;
+            transition: color 0.3s;
+        }
+
+        footer .social-links a:hover {
+            color: orangered;
+        }
+
+
+        @media print {
+
+            .btn,
+            footer,
+            nav {
+                display: none;
+            }
+
+            body {
+                background: #fff;
+            }
+
+            .container {
+                box-shadow: none;
+                border: none;
+                margin: 0;
+                width: auto;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <div class="navbar-container">
+            <div class="nav-logo">
+                <img src="images/leadingLogo.png" alt="University Logo" />
+                <h1 class="heading"><span>Makeup Examinations </span>Application</h1>
+            </div>
+            <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('active')">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="nav-links">
+                <a href="index.html"><i class="fas fa-home"></i> Home</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container" id="formContent">
+        <header>
+            <img src="images/leadingLogo.png" alt="Leading University Logo" />
+            <h2>Leading University</h2>
+            <p>Ragibnagar, Sylhet</p>
+            <p><strong>Office of the Controller of Examinations</strong></p>
+            <h4>Application for Makeup Examinations</h4>
+        </header>
+
+        <table>
+            <tr>
+                <td><label for="studentId">Student ID:</label></td>
+                <td><input type="text" id="studentId" name="studentId" /></td>
+                <td><label for="studentName">Student Name:</label></td>
+                <td><input type="text" id="studentName" name="studentName" /></td>
+            </tr>
+            <tr>
+                <td><label for="semester">Semester-Year:</label></td>
+                <td><input type="text" id="semester" name="semester" placeholder="Spring/Summer/Fall/20.." /></td>
+                <td><label for="department">Department:</label></td>
+                <td><input type="text" id="department" name="department" placeholder="CSE / English / Law / BBA ..." />
+                </td>
+            </tr>
+            <tr>
+                <td><label for="courseCode">Course Code:</label></td>
+                <td><input type="text" id="courseCode" name="courseCode" /></td>
+                <td><label for="courseTitle">Course Title:</label></td>
+                <td><input type="text" id="courseTitle" name="courseTitle" /></td>
+            </tr>
+            <tr>
+                <td><label for="examDate">Date of Exam Scheduled:</label></td>
+                <td><input type="date" id="examDate" name="examDate" /></td>
+                <td><label for="courseTeacher">Course Teacher:</label></td>
+                <td><input type="text" id="courseTeacher" name="courseTeacher" /></td>
+            </tr>
+            <tr>
+                <td><label for="contact">Contact No. of Student:</label></td>
+                <td><input type="text" id="contact" name="contact" /></td>
+                <td>Examination:</td>
+                <td>
+                    <label><input type="checkbox" id="midterm" name="examType" /> Mid Term</label>
+                    <label><input type="checkbox" id="final" name="examType" /> Semester Final</label>
+                </td>
+            </tr>
+        </table>
+
+        <div class="signature-block">
+            <div class="signature-row">
+                <div>1. Signature of Student with Date</div>
+                <div>2. Clearance of Office of the Controller of Exams</div>
+                <div>3. Signature of Course Teacher</div>
+                <div>4. Signature of Head of the Department</div>
+                <div>5. Clearance of Finance and Accounts</div>
+            </div>
+        </div>
+
+        <div class="notes">
+            <p><strong>Fees of Makeup Examination:</strong></p>
+            <p>i) Mid Term Exam: 1000.00 Tk &nbsp;&nbsp;&nbsp; ii) Final Exam: 1500.00 Tk</p>
+            <p><strong>Note:</strong> Student will not be allowed to sit for both Mid Term and Semester Final Make-up
+                Examination for the same course.</p>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="admit-card-title">Admit Card For Make-up Examination</div>
+
+        <table>
+            <tr>
+                <td><label for="a_studentId">Student ID:</label></td>
+                <td><input type="text" id="a_studentId" name="a_studentId" readonly /></td>
+                <td><label for="a_examDate">Date and Time of Exam:</label></td>
+                <td><input type="text" id="a_examDate" name="a_examDate" readonly /></td>
+            </tr>
+            <tr>
+                <td><label for="a_studentName">Student Name:</label></td>
+                <td><input type="text" id="a_studentName" name="a_studentName" readonly /></td>
+                <td><label for="a_courseTeacher">Course Teacher:</label></td>
+                <td><input type="text" id="a_courseTeacher" name="a_courseTeacher" readonly /></td>
+            </tr>
+            <tr>
+                <td><label for="a_courseCode">Course Code:</label></td>
+                <td><input type="text" id="a_courseCode" name="a_courseCode" readonly /></td>
+                <td><label for="a_courseTitle">Course Title:</label></td>
+                <td><input type="text" id="a_courseTitle" name="a_courseTitle" readonly /></td>
+            </tr>
+        </table>
+
+        <div class="notes">
+            <p>Semester-Year: <input type="text" id="a_semester" name="a_semester"
+                    placeholder="Spring / Summer / Fall / 20.." readonly /></p>
+            <p>
+                Examination:
+                <label><input type="checkbox" id="a_midterm" name="a_examType" disabled /> Mid Term</label>
+                <label><input type="checkbox" id="a_final" name="a_examType" disabled /> Semester Final</label>
+            </p>
+            <p class="controller-sign">Signature of Controller of Examinations</p>
+        </div>
+    </div>
+
+    <button class="btn" id="downloadBtn">⬇️ Download PDF</button>
+    <footer>
+        <div class="footer-bottom">
+            <div class="footer-bottom-content">
+                <div class="copyright">
+                    <p>&copy; 2025 <span style="color: orangered;">Class</span><span style="color: #000;">Mate</span> by
+                        SRM Technologies. All rights reserved.</p>
+                </div>
+                <div class="social-links">
+                    <span>Follow us:</span>
+                    <a href="https://www.facebook.com" target="_blank" aria-label="Facebook">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="https://www.twitter.com" target="_blank" aria-label="Twitter">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="https://www.instagram.com" target="_blank" aria-label="Instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://www.linkedin.com" target="_blank" aria-label="LinkedIn">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script>
+        studentId.oninput = () => a_studentId.value = studentId.value;
+        studentName.oninput = () => a_studentName.value = studentName.value;
+        semester.oninput = () => a_semester.value = semester.value;
+        courseCode.oninput = () => a_courseCode.value = courseCode.value;
+        courseTitle.oninput = () => a_courseTitle.value = courseTitle.value;
+        courseTeacher.oninput = () => a_courseTeacher.value = courseTeacher.value;
+
+        examDate.oninput = () => {
+            if (examDate.value) {
+                let d = new Date(examDate.value);
+                a_examDate.value = d.toLocaleDateString("en-GB");
+            } else a_examDate.value = "";
+        };
+
+   
+        function updateCheck() {
+            a_midterm.checked = midterm.checked;
+            a_final.checked = final.checked;
+            midterm.disabled = final.checked;
+            final.disabled = midterm.checked;
+        }
+        midterm.onchange = final.onchange = updateCheck;
+        updateCheck();
+
+        
+        downloadBtn.onclick = async () => {
+            const { jsPDF } = window.jspdf;
+            const canvas = await html2canvas(formContent, { scale: 2 });
+            const pdf = new jsPDF("p", "pt", "a4");
+            const w = pdf.internal.pageSize.getWidth() - 40;
+            const h = canvas.height * w / canvas.width;
+            pdf.addImage(canvas.toDataURL("image/png"), "PNG", 20, 20, w, h);
+            pdf.save("LeadingUniversity_MakeupExamForm.pdf");
+        };
+    </script>
+
+</body>
+
+</html>

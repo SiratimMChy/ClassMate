@@ -54,12 +54,6 @@ class RegistrationHandler {
         errorMessage: "Batch must be a 2-digit number (e.g., 23)"
       },
       {
-        value: formData.mobile,
-        pattern: /^(\+88)?-?01[3-9]\d{8}$/,
-        errorElement: "emob",
-        errorMessage: "Mobile must be valid Bangladeshi number (e.g., 017XXXXXXXX)"
-      },
-      {
         value: formData.email,
         pattern: /^(?:(?:cse|eee|law|bba|thm|eng|phm|arch)_\d{10}@lus\.ac\.bd|[a-z0-9._]+@(gmail|yahoo)\.com)$/,
         errorElement: "eemail",
@@ -134,6 +128,5 @@ class RegistrationHandler {
   }
 }
 
-// Instantiate and bind
 const registrationHandler = new RegistrationHandler(auth);
 window.form = registrationHandler.handleFormSubmit.bind(registrationHandler);
