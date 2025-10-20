@@ -1,0 +1,214 @@
+:root {
+    --bg-color: #fff;
+    --text-color: #333;
+    --secondary-text: #666;
+    --light-bg: #fefefe;
+    --shadow: rgba(0, 0, 0, 0.1);
+    --border: rgba(0, 0, 0, 0.1);
+    --header-bg: #fff;
+    --footer-bg: #fff;
+    --btn-bg: #333;
+    --btn-hover: #ff4400;
+    --input-bg: #fff;
+    --input-border: rgba(0, 0, 0, 0.1);
+    --dropdown-bg: #f9f9f9;
+    --quote-bg: #eee;
+    --map-border: beige;
+}
+
+/* Dark Mode Variables */
+.dark-mode {
+    --bg-color: #121212;
+    --text-color: #e0e0e0;
+    --secondary-text: #b0b0b0;
+    --light-bg: #1e1e1e;
+    --shadow: rgba(0, 0, 0, 0.3);
+    --border: rgba(255, 255, 255, 0.1);
+    --header-bg: #1a1a1a;
+    --btn-bg: #333;
+    --btn-hover: #ff4400;
+    --input-bg: #2a2a2a;
+    --input-border: rgba(255, 255, 255, 0.2);
+    --dropdown-bg: #2a2a2a;
+    --quote-bg: #333;
+    --map-border: #444;
+}
+
+/* Apply Variables to Body and Key Elements */
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+header {
+    background: var(--header-bg);
+    box-shadow: 0 .5rem 1rem var(--shadow);
+}
+
+header .logo {
+    color: var(--text-color);
+}
+
+header .navbar li a {
+    color: var(--secondary-text);
+}
+
+header .navbar li a .ic {
+    color: var(--text-color) !important;
+}
+
+.dropdown-menu {
+    background: var(--header-bg);
+    box-shadow: 0px 8px 16px var(--shadow);
+}
+
+.dropdown-menu li a {
+    color: var(--text-color);
+}
+
+header .icons a {
+    color: var(--text-color);
+}
+
+header .fa-bars {
+    color: var(--text-color);
+    border: .1rem solid var(--border);
+}
+
+.heading {
+    color: var(--text-color);
+}
+
+.btn {
+    background: var(--btn-bg);
+}
+
+.btn:hover {
+    background: var(--btn-hover);
+}
+
+.services .row .video-container video {
+  box-shadow: 0 0.5rem 1rem var(--shadow);
+}
+
+.services .row .content h3 {
+    color: rgb(0, 0, 0);
+}
+
+.services .row .content p {
+    color: var(--secondary-text);
+}
+
+.clubs-section {
+    background: var(--light-bg);
+}
+
+.clubs-carousel {
+    box-shadow: 0 .5rem 1rem var(--shadow);
+}
+
+.carousel-card img {
+    box-shadow: 0 10px 30px var(--shadow);
+}
+
+.carousel-btn {
+    background: rgba(255, 255, 255, 0.9);
+    border: .1rem solid var(--border);
+    color: var(--text-color);
+    box-shadow: 0 .5rem 1rem var(--shadow);
+}
+
+.carousel-btn:hover {
+    background: var(--pink);
+    color: white;
+}
+
+.contact .row form {
+    background: var(--bg-color);
+    box-shadow: 0 .5rem 1rem var(--shadow);
+    border: .1rem solid var(--border);
+}
+
+.contact .row form .box {
+    color: var(--text-color);
+    border: .1rem solid var(--input-border);
+    background: var(--input-bg);
+}
+
+.contact .row .image iframe {
+    border: 2px var(--map-border);
+    box-shadow: 0 .5rem 1rem var(--shadow);
+}
+
+.about .box-container .box {
+    background: var(--bg-color);
+    box-shadow: 0 .5rem 1.5rem var(--shadow);
+    border: .1rem solid var(--border);
+}
+
+.about .box-container .box .fa-quote-right {
+    color: var(--quote-bg);
+}
+
+.about .box-container .box p {
+    color: var(--secondary-text);
+}
+
+.about .box-container .box .user h3 {
+    color: var(--text-color);
+}
+
+.about .box-container .box .user span {
+    color: var(--secondary-text);
+}
+
+.footer .box-container .box h3 {
+    color: var(--text-color);
+}
+
+.footer .box-container .box a {
+    color: var(--text-color);
+}
+
+.footer .box-container .box span {
+    color: var(--secondary-text);
+}
+
+.footer .credit {
+    color: var(--text-color);
+    border-top: .1rem solid var(--border);
+    background: var(--bg-color)
+}
+
+.footer .credit a {
+    color: var(--text-color);
+}
+
+.footer .credit span {
+    color: var(--pink);
+}
+
+@media(max-width: 865px) {
+    header .navbar {
+        background: var(--header-bg);
+        border-top: .1rem solid var(--border);
+    }
+
+    header .navbar li a {
+        background: var(--bg-color);
+        border: .1rem solid var(--border);
+    }
+}
+
+   .theme-toggle {
+       background: var(--header-bg); 
+       padding: 0.5rem 1rem;
+       cursor: pointer;
+       transition: background 0.3s ease, border-color 0.3s ease; 
+       color: var(--text-color);
+   }
+   .theme-toggle i {
+       font-size: 2rem; 
+   }
+   

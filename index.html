@@ -8,6 +8,7 @@
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
   <link rel="stylesheet" href="mainPageStylesheet.css">
+  <link rel="stylesheet" href="DarkLight.css">
 </head>
 
 <body>
@@ -26,14 +27,6 @@
         <li class="dropdown"><a href="#about">About Us</a></li>
         <li class="dropdown"><a href="compiler.html">Online Compiler</a></li>
 
-        <li class="dropdown"><a href="#">Student Portal</a>
-          <ul class="dropdown-menu">
-            <li><a href="#">Fetch Result</a></li>
-            <li><a href="#">Your Ranking On Campus</a></li>
-            <li><a href="#">Register</a></li>
-          </ul>
-        </li>
-
         <li class="dropdown user-icon" id="user-menu-container">
           <a href="#" class="fas fa-user ic"></a>
           <ul class="dropdown-menu" id="user-dropdown-menu">
@@ -41,6 +34,7 @@
             <li><a href="register.html">Sign Up</a></li>
           </ul>
         </li>
+          <button style="gap: 50px; text-align: right;" id="theme-toggle" class="theme-toggle"><i class="fas fa-moon"></i></button>
       </ul>
     </nav>
 
@@ -312,6 +306,7 @@
   </section>
   <!-- Footer Section End -->
 <script type="module" src="session.js"></script>
+<script src="Index.js"></script>
 </body>
 
 </html>
