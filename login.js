@@ -4,7 +4,8 @@ import {
   signInWithEmailAndPassword,
   signOut,
   setPersistence,
-  browserLocalPersistence
+  browserLocalPersistence,
+  browserSessionPersistence
 } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js";
 
 const firebaseConfig = {
@@ -22,7 +23,6 @@ class LoginHandler {
     this.app = initializeApp(config);
     this.auth = getAuth(this.app);
 
-    // Validation patterns
     this.emailPattern =
       /^(?:(?:cse|eee|law)_\d{10}@lus\.ac\.bd|[a-z0-9._]+@(gmail|yahoo)\.com)$/;
     this.passPattern =
@@ -58,12 +58,12 @@ class LoginHandler {
 
     const email = document.getElementById("email").value.trim();
     const password = document.getElementById("ipass").value.trim();
+    const rememberMe = document.querySelector('input[name="remember_me"]').checked;
 
     if (!this.validateInput(email, password)) return false;
 
     try {
-      // Persist login across browser sessions
-      await setPersistence(this.auth, browserLocalPersistence);
+      await setPersistence(this.auth, rememberMe ? browserLocalPersistence : browserSessionPersistence);
 
       const userCredential = await signInWithEmailAndPassword(this.auth, email, password);
       const user = userCredential.user;
@@ -74,7 +74,15 @@ class LoginHandler {
         return false;
       }
 
-      // Successful login
+      
+      if (rememberMe) {
+        localStorage.setItem("rememberMe", "true");
+        localStorage.setItem("savedEmail", email);
+      } else {
+        localStorage.removeItem("rememberMe");
+        localStorage.removeItem("savedEmail");
+      }
+
       window.location.href = "index.html"; // session.js will update navbar
     } catch (error) {
       console.error("Firebase Auth Error:", error.code, error.message);
@@ -99,3 +107,15 @@ class LoginHandler {
 
 const loginHandler = new LoginHandler(firebaseConfig);
 window.loginUser = loginHandler.login.bind(loginHandler);
+
+document.addEventListener("DOMContentLoaded", () => {
+  const remember = localStorage.getItem("rememberMe");
+  const savedEmail = localStorage.getItem("savedEmail");
+
+  if (remember === "true") {
+    document.querySelector('input[name="remember_me"]').checked = true;
+    if (savedEmail) {
+      document.getElementById("email").value = savedEmail;
+    }
+  }
+});

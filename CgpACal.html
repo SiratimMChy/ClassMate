@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GPA Calculator</title>
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="CgpAstyle.css" />
+
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-logo">
+                <h2>CGPA <span style="color: orangered;">Calculator</span></h2>
+            </div>
+            <ul class="navbar-menu">
+                <li><a href="#home">Home</a></li>
+               <li><a href="compiler.html">Online Compiler</a></li>
+                <li><a href="PreviousQ.html">Question Bank</a></li>
+            </ul>
+            <div class="navbar-toggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+    <div class="main-container">
+        <h1>CGPA Calculator</h1>
+        <p>Calculate Your CGPA easily using this calculator. Add your course Codes, credits,<br> and grades to get your
+            current CGPA.</p>
+
+        <div class="gpacal-interface">
+            <div class="gpa-image">
+                <img src="images/image.png" alt="">
+            </div>
+
+            <div class="gpacal-calculateinterface">
+                <div class="gpa-display">
+                    <p class="dispaly-p">Your Current GPA is:</p>
+                    <p id="calculated-gpa">0.00</p>
+                </div>
+
+                <form id="course-form" class="form-row">
+                    <div class="form-1">
+                        <label for="course-code">Course Code</label>
+                        <input type="text" id="course-code" placeholder="Enter Course Code" required />
+                    </div>
+
+                    <div class="form-1">
+                        <label for="course-credits">Credits</label>
+                        <input type="number" id="course-credits" placeholder="Enter Credits" required />
+                    </div>
+
+                    <div class="form-1">
+                        <label for="course-grade">Grade</label>
+                        <select id="course-grade" required>
+                            <option value="">Select Grade</option>
+                            <option value="4.00">A+</option>
+                            <option value="3.75">A</option>
+                            <option value="3.50">A-</option>
+                            <option value="3.25">B+</option>
+                            <option value="3.00">B</option>
+                            <option value="2.75">B-</option>
+                            <option value="2.50">C+</option>
+                            <option value="2.25">C</option>
+                            <option value="2.00">D</option>
+                            <option value="0.00">F</option>
+                        </select>
+                    </div>
+                </form>
+
+                <button id="btn" type="submit" form="course-form">Add Course</button>
+            </div>
+        </div>
+
+        <div class="course-details">
+            <h2>Course Details</h2>
+
+            <div class="course-details-table">
+                <table class="course-table">
+                    <thead>
+                        <tr>
+                            <th>Course Name</th>
+                            <th>Credits</th>
+                            <th>Grade</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+
+                    <tbody class="course-details-list">
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-bottom">
+            <div class="footer-bottom-content">
+                <div class="copyright">
+                    <p>&copy; 2025 Class Mate by SRM Technologies. All rights reserved.</p>
+                </div>
+                <div class="social-links">
+                    <span>Follow us:</span>
+                    <a href="https://www.facebook.com" target="_blank" aria-label="Facebook"><i
+                            class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.twitter.com" target="_blank" aria-label="Twitter"><i
+                            class="fab fa-twitter"></i></a>
+                    <a href="https://www.instagram.com" target="_blank" aria-label="Instagram"><i
+                            class="fab fa-instagram"></i></a>
+                    <a href="https://www.linkedin.com" target="_blank" aria-label="LinkedIn"><i
+                            class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+    <script src="CgpA.js"></script>
+</body>
+
+</html>
