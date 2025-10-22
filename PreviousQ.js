@@ -110,7 +110,13 @@ function displayQuestions(questions) {
 }
 
 function initializePage() {
-  placeholder.innerHTML = `<p>Loading results...</p>`;
+ placeholder.innerHTML = `
+  <div style="text-align:center; padding:20px;">
+    <div class="spinner"></div>
+    <p style="margin-top:10px; color:#555;">Loading results...</p>
+  </div>
+`;
+
   fetchQuestions((allQuestions) => {
     const sorted = sortQuestions(allQuestions);
     displayQuestions(sorted);
@@ -118,7 +124,12 @@ function initializePage() {
 
 
   searchBtn.addEventListener("click", () => {
-    placeholder.innerHTML = `<p>Loading results...</p>`;
+   placeholder.innerHTML = `
+  <div style="text-align:center; padding:20px;">
+    <div class="spinner"></div>
+    <p style="margin-top:10px; color:#555;">Loading results...</p>
+  </div>
+`;
     fetchQuestions((allQuestions) => {
       const filtered = filterQuestions(allQuestions);
       const sorted = sortQuestions(filtered);
