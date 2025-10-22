@@ -19,7 +19,7 @@ body {
 }
 
 .main-container {
-   background: linear-gradient(135deg, #01a1fd, #0099ff,#00ccff);
+   background: linear-gradient(135deg, #0190fd, #0099ff,#00ccff);
 
     color: white;
     display: flex;
@@ -73,8 +73,7 @@ body {
 }
 
 .gpa-display {
-    font-size: 1.35rem;
-    font-weight: 500;
+    font-weight: 600;
     color: #383c47;
     background-color: #e0f2fe;
     border-radius: 10px;
@@ -84,12 +83,12 @@ body {
 
 .dispaly-p {
     padding-top: 25px;
-    font-weight: 600;
+    font-weight: 700;
 }
 
 .gpa-display #calculated-gpa {
     font-size: 45px;
-    margin-top: 0.5rem;
+    margin-top: 8px;
 }
 
 .form-row {
@@ -228,28 +227,38 @@ footer p {
     align-items: center;
 }
 
-footer .social-links {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    align-items: center;
-}
+    footer .social-links {
+      display: flex;
+      gap: 15px;
+      align-items: center;
+      justify-content: center;
+    }
 
-footer .social-links span {
-    margin-right: 10px;
-    color: white;
-}
+    footer .social-links span {
+      margin-right: 5px;
+      font-size: 0.95em;
+    }
 
-footer .social-links a {
-    color: white;
-    font-size: 1.2em;
-    transition: color 0.3s;
-    text-decoration: none;
-}
+    footer .social-links a {
+      color: white;
+      font-size: 1.2em;
+      transition: all 0.3s;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.1);
+      text-decoration: none;
+    }
 
-footer .social-links a:hover {
-    color: orangered;
-}
+    footer .social-links a:hover {
+      color: orangered;
+      background-color: rgba(255, 69, 0, 0.2);
+      transform: translateY(-3px);
+    }
+
 
 
 @media(max-width: 768px) {

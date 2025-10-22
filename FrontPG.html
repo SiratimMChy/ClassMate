@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-    <link rel="stylesheet" href="FrontPG.css" />
+    <link rel="stylesheet" href="FrontPG.css">
 </head>
 
 <body>
@@ -35,261 +35,261 @@
         </div>
     </header>
 
-    <div class="container">
-        <div class="switch-buttons">
-            <button id="individualBtn" class="active" onclick="showForm('individual')"><i class="fas fa-user"></i>
-                Individual</button>
-            <button id="groupBtn" onclick="showForm('group')"><i class="fas fa-users"></i> Group</button>
-        </div>
+    <main>
+        <div class="container">
+            <div class="switch-buttons">
+                <button id="individualBtn" class="active" onclick="showForm('individual')"><i class="fas fa-user"></i>
+                    Individual</button>
+                <button id="groupBtn" onclick="showForm('group')"><i class="fas fa-users"></i> Group</button>
+            </div>
 
-        <!-- INDIVIDUAL FORM -->
-        <div id="individualForm">
-            <div class="form-section">
-                <h2><i class="fas fa-user-graduate"></i> Individual Assignment</h2>
-                <div class="form-grid">
-                    <div class="form-group full-width">
-                        <label>Department</label>
-                        <input type="text" id="departmentInd" placeholder="Select Department"
-                            list="departmentOptionsList" />
+            <!-- INDIVIDUAL FORM -->
+            <div id="individualForm">
+                <div class="form-section">
+                    <h2><i class="fas fa-user-graduate"></i> Individual Assignment</h2>
+                    <div class="form-grid">
+                        <div class="form-group full-width">
+                            <label>Department</label>
+                            <input type="text" id="departmentInd" placeholder="Select Department"
+                                list="departmentOptionsList" />
+                        </div>
+                        <div class="form-group">
+                            <label>Course Code</label>
+                            <input type="text" id="courseCodeInd" placeholder="Enter Course Code" />
+                        </div>
+                        <div class="form-group">
+                            <label>Course Title</label>
+                            <input type="text" id="courseTitleInd" placeholder="Enter Course Title" />
+                        </div>
+                        <div class="form-group full-width">
+                            <label>Assignment Topic</label>
+                            <input type="text" id="topicInd" placeholder="Enter Assignment Topic" />
+                        </div>
+                        <div class="form-group">
+                            <label>Instructor Name</label>
+                            <input type="text" id="teacherNameInd" placeholder="Enter Instructor Name" />
+                        </div>
+                        <div class="form-group">
+                            <label>Designation</label>
+                            <input type="text" id="teacherDesignationInd" placeholder="Enter Instructor Designation" />
+                        </div>
+                        <div class="form-group">
+                            <label>Faculty/Department</label>
+                            <input type="text" id="teacherFacultyInd" placeholder="Select Faculty/Department"
+                                list="facultyList" />
+                        </div>
+                        <div class="form-group">
+                            <label>Student Name</label>
+                            <input type="text" id="studentNameInd" placeholder="Enter Student Name" />
+                        </div>
+                        <div class="form-group">
+                            <label>Student ID</label>
+                            <input type="text" id="studentIdInd" placeholder="Enter Student ID" />
+                        </div>
+                        <div class="form-group">
+                            <label>Department</label>
+                            <input type="text" id="studentDeptInd" placeholder="Select Student Department"
+                                list="facultyList" />
+                        </div>
+                        <div class="form-group">
+                            <label>Batch</label>
+                            <input type="text" id="batchInd" placeholder="Enter Batch (e.g., 55th)" list="batchList" />
+                        </div>
+                        <div class="form-group">
+                            <label>Section</label>
+                            <input type="text" id="sectionInd" placeholder="Enter Section" list="sectionList" />
+                        </div>
+                        <div class="form-group">
+                            <label>Submission Date</label>
+                            <input type="date" id="submissionDateInd" />
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label>Course Code</label>
-                        <input type="text" id="courseCodeInd" placeholder="Enter Course Code" />
+                    <div class="buttons">
+                        <button class="btn btn-preview" onclick="updatePreview('individual')"><i class="fas fa-eye"></i>
+                            Preview</button>
+                        <button class="btn btn-pdf" onclick="downloadPDF('individual')"><i class="fas fa-file-pdf"></i>
+                            Download PDF</button>
                     </div>
-                    <div class="form-group ">
-                        <label>Course Title</label>
-                        <input type="text" id="courseTitleInd" placeholder="Enter Course Title" />
-                    </div>
-                    <div class="form-group full-width">
-                        <label>Assignment Topic</label>
-                        <input type="text" id="topicInd" placeholder="Enter Assignment Topic" />
-                    </div>
-                    <div class="form-group">
-                        <label>Instructor Name</label>
-                        <input type="text" id="teacherNameInd" placeholder="Enter Instructor Name" />
-                    </div>
-                    <div class="form-group">
-                        <label>Designation</label>
-                        <input type="text" id="teacherDesignationInd" placeholder="Enter Instructor Designation" />
-                    </div>
-                    <div class="form-group">
-                        <label>Faculty/Department</label>
-                        <input type="text" id="teacherFacultyInd" placeholder="Select Faculty/Department"
-                            list="facultyList" />
-                    </div>
-                    <div class="form-group">
-                        <label>Student Name</label>
-                        <input type="text" id="studentNameInd" placeholder="Enter Student Name" />
-                    </div>
-                    <div class="form-group">
-                        <label>Student ID</label>
-                        <input type="text" id="studentIdInd" placeholder="Enter Student ID" />
-                    </div>
-                    <div class="form-group">
-                        <label>Department</label>
-                        <input type="text" id="studentDeptInd" placeholder="Select Student Department"
-                            list="facultyList" />
-                    </div>
-                    <div class="form-group">
-                        <label>Batch</label>
-                        <input type="text" id="batchInd" placeholder="Enter Batch (e.g., 55th)" list="batchList" />
-                    </div>
-                    <div class="form-group">
-                        <label>Section</label>
-                        <input type="text" id="sectionInd" placeholder="Enter Section" list="sectionList" />
-                    </div>
-                    <div class="form-group">
-                        <label>Submission Date</label>
-                        <input type="date" id="submissionDateInd" />
-                    </div>
-                </div>
-                <div class="buttons">
-                    <button class="btn btn-preview" onclick="updatePreview('individual')"><i class="fas fa-eye"></i>
-                        Preview</button>
-                    <button class="btn btn-pdf" onclick="downloadPDF('individual')"><i class="fas fa-file-pdf"></i>
-                        Download PDF</button>
                 </div>
             </div>
-        </div>
 
-        <!-- GROUP FORM  -->
-        <div id="groupForm" class="hidden">
-            <div class="form-section">
-                <h2><i class="fas fa-users"></i> Group Assignment</h2>
-                <div class="form-grid">
-                    <div class="form-group full-width">
-                        <label>Department</label>
-                        <input type="text" id="departmentGrp" placeholder="Select Department"
-                            list="departmentOptionsList" />
-                    </div>
-                    <div class="form-group ">
-                        <label>Course Code</label>
-                        <input type="text" id="courseCodeGrp" placeholder="Enter Course Code" />
-                    </div>
-                    <div class="form-group">
-                        <label>Course Title</label>
-                        <input type="text" id="courseTitleGrp" placeholder="Enter Course Title" />
-                    </div>
-                    <div class="form-group full-width">
-                        <label>Assignment Topic</label>
-                        <input type="text" id="topicGrp" placeholder="Enter Assignment Topic" />
-                    </div>
-                    <div class="form-group">
-                        <label>Instructor Name</label>
-                        <input type="text" id="teacherNameGrp" placeholder="Enter Instructor Name" />
-                    </div>
-                    <div class="form-group">
-                        <label>Designation</label>
-                        <input type="text" id="teacherDesignationGrp" placeholder="Enter Instructor Designation" />
-                    </div>
-                    <div class="form-group">
-                        <label>Faculty/Department</label>
-                        <input type="text" id="teacherFacultyGrp" placeholder="Select Faculty/Department"
-                            list="facultyList" />
-                    </div>
-                </div>
-
-                <div class="form-group full-width">
-                    <label>Group Members</label>
-                    <div id="groupMembersContainer">
-                        <div class="group-member">
-                            <input type="text" placeholder="Student 1 Name" class="groupName" />
-                            <input type="text" placeholder="Student 1 ID" class="groupId" />
-                            <input type="text" placeholder="Student 1 Department" class="groupDept"
-                                list="facultyList" />
+            <!-- GROUP FORM -->
+            <div id="groupForm" class="hidden">
+                <div class="form-section">
+                    <h2><i class="fas fa-users"></i> Group Assignment</h2>
+                    <div class="form-grid">
+                        <div class="form-group full-width">
+                            <label>Department</label>
+                            <input type="text" id="departmentGrp" placeholder="Select Department"
+                                list="departmentOptionsList" />
                         </div>
-                        <div class="group-member">
-                            <input type="text" placeholder="Student 2 Name" class="groupName" />
-                            <input type="text" placeholder="Student 2 ID" class="groupId" />
-                            <input type="text" placeholder="Student 2 Department" class="groupDept"
-                                list="facultyList" />
+                        <div class="form-group">
+                            <label>Course Code</label>
+                            <input type="text" id="courseCodeGrp" placeholder="Enter Course Code" />
                         </div>
-                        <div class="group-member">
-                            <input type="text" placeholder="Student 3 Name" class="groupName" />
-                            <input type="text" placeholder="Student 3 ID" class="groupId" />
-                            <input type="text" placeholder="Student 3 Department" class="groupDept"
+                        <div class="form-group">
+                            <label>Course Title</label>
+                            <input type="text" id="courseTitleGrp" placeholder="Enter Course Title" />
+                        </div>
+                        <div class="form-group full-width">
+                            <label>Assignment Topic</label>
+                            <input type="text" id="topicGrp" placeholder="Enter Assignment Topic" />
+                        </div>
+                        <div class="form-group">
+                            <label>Instructor Name</label>
+                            <input type="text" id="teacherNameGrp" placeholder="Enter Instructor Name" />
+                        </div>
+                        <div class="form-group">
+                            <label>Designation</label>
+                            <input type="text" id="teacherDesignationGrp" placeholder="Enter Instructor Designation" />
+                        </div>
+                        <div class="form-group">
+                            <label>Faculty/Department</label>
+                            <input type="text" id="teacherFacultyGrp" placeholder="Select Faculty/Department"
                                 list="facultyList" />
                         </div>
                     </div>
-                </div>
 
-                <div class="form-grid">
-                    <div class="form-group">
-                        <label>Batch</label>
-                        <input type="text" id="batchGrp" placeholder="Enter Batch (e.g., 55th)" list="batchList" />
+                    <div class="form-group full-width">
+                        <label>Group Members</label>
+                        <div id="groupMembersContainer">
+                            <div class="group-member">
+                                <input type="text" placeholder="Student 1 Name" class="groupName" />
+                                <input type="text" placeholder="Student 1 ID" class="groupId" />
+                                <input type="text" placeholder="Student 1 Department" class="groupDept"
+                                    list="facultyList" />
+                            </div>
+                            <div class="group-member">
+                                <input type="text" placeholder="Student 2 Name" class="groupName" />
+                                <input type="text" placeholder="Student 2 ID" class="groupId" />
+                                <input type="text" placeholder="Student 2 Department" class="groupDept"
+                                    list="facultyList" />
+                            </div>
+                            <div class="group-member">
+                                <input type="text" placeholder="Student 3 Name" class="groupName" />
+                                <input type="text" placeholder="Student 3 ID" class="groupId" />
+                                <input type="text" placeholder="Student 3 Department" class="groupDept"
+                                    list="facultyList" />
+                            </div>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label>Section</label>
-                        <input type="text" id="sectionGrp" placeholder="Enter Section" list="sectionList" />
+
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Batch</label>
+                            <input type="text" id="batchGrp" placeholder="Enter Batch (e.g., 55th)" list="batchList" />
+                        </div>
+                        <div class="form-group">
+                            <label>Section</label>
+                            <input type="text" id="sectionGrp" placeholder="Enter Section" list="sectionList" />
+                        </div>
+                        <div class="form-group">
+                            <label>Submission Date</label>
+                            <input type="date" id="submissionDateGrp" />
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label>Submission Date</label>
-                        <input type="date" id="submissionDateGrp" />
+
+                    <div class="buttons">
+                        <button class="btn btn-preview" onclick="updatePreview('group')"><i class="fas fa-eye"></i>
+                            Preview</button>
+                        <button class="btn btn-pdf" onclick="downloadPDF('group')"><i class="fas fa-file-pdf"></i>
+                            Download PDF</button>
                     </div>
                 </div>
+            </div>
 
-                <div class="buttons">
-                    <button class="btn btn-preview" onclick="updatePreview('group')"><i class="fas fa-eye"></i>
-                        Preview</button>
-                    <button class="btn btn-pdf" onclick="downloadPDF('group')"><i class="fas fa-file-pdf"></i> Download
-                        PDF</button>
+            <!-- DATALISTS -->
+            <datalist id="facultyList">
+                <option value="Dept. of CSE"></option>
+                <option value="Dept. of EEE"></option>
+                <option value="Dept. of Civil Engineering"></option>
+                <option value="Dept. of BBA"></option>
+                <option value="Dept. of English"></option>
+                <option value="Dept. of Architecture"></option>
+                <option value="Dept. of Law"></option>
+                <option value="Dept. of THM"></option>
+                <option value="Dept. of Islamic Studies"></option>
+                <option value="Dept. of Public Health"></option>
+            </datalist>
+
+            <datalist id="departmentOptionsList">
+                <option value="Department of Computer Science & Engineering"></option>
+                <option value="Department of Electrical & Electronic Engineering"></option>
+                <option value="Department of Civil Engineering"></option>
+                <option value="Department of Business Administration"></option>
+                <option value="Department of English"></option>
+                <option value="Department of Architecture"></option>
+                <option value="Department of Law"></option>
+                <option value="Department of Tourism & Hospitality Management"></option>
+                <option value="Department of Islamic Studies"></option>
+                <option value="Department of Public Health"></option>
+            </datalist>
+
+            <datalist id="sectionList">
+                <option value="A"></option>
+                <option value="B"></option>
+                <option value="C"></option>
+                <option value="D"></option>
+                <option value="E"></option>
+                <option value="A+B"></option>
+                <option value="B+C"></option>
+                <option value="C+D"></option>
+            </datalist>
+
+            <datalist id="batchList">
+                <option value="55th"></option>
+                <option value="56th"></option>
+                <option value="57th"></option>
+                <option value="58th"></option>
+                <option value="59th"></option>
+            </datalist>
+
+            <!-- PREVIEW AREA -->
+            <div class="front-page-template" id="frontPageTemplate">
+                <div class="cover-page" id="previewContent">
+                    <div class="logo"><img src="images/leadingLogo.png" alt="University Logo" /></div>
+                    <h2 class="dept" id="displayDept">[Department]</h2>
+                    <div class="section">
+                        <p><b>Course Code:</b> <span id="displayCode">[Course Code]</span></p>
+                        <p><b>Course Title:</b> <span id="displayTitle">[Course Title]</span></p>
+                    </div>
+                    <h3 class="assignment" id="displayTopic">[Assignment Topic]</h3>
+                    <div class="submitted-to">
+                        <h3>Submitted To:</h3>
+                        <div style="border-bottom:2px solid #000;width:200px;"></div>
+                        <p><b>Instructor:</b> <span id="displayTeacher">[Instructor Name]</span></p>
+                        <p><b>Designation:</b> <span id="displayDesignation">[Designation]</span></p>
+                        <p><b>Department:</b> <span id="displayFaculty">[Faculty]</span></p>
+                    </div>
+                    <div class="submitted-by" id="submittedBy">
+                        <h3>Submitted By:</h3>
+                        <div style="border-bottom:2px solid #000;width:200px;"></div>
+                    </div>
+                    <div class="date">
+                        <p><b>Submission Date:</b> <span id="displayDate">[Submission Date]</span></p>
+                    </div>
                 </div>
             </div>
         </div>
-
-        <!-- DATALISTS -->
-        <datalist id="facultyList">
-            <option value="Dept. of CSE"></option>
-            <option value="Dept. of EEE"></option>
-            <option value="Dept. of Civil Engineering"></option>
-            <option value="Dept. of BBA"></option>
-            <option value="Dept. of English"></option>
-            <option value="Dept. of Architecture"></option>
-            <option value="Dept. of Law"></option>
-            <option value="Dept. of THM"></option>
-            <option value="Dept. of Islamic Studies"></option>
-            <option value="Dept. of Public Health"></option>
-        </datalist>
-
-        <datalist id="departmentOptionsList">
-            <option value="Department of Computer Science & Engineering"></option>
-            <option value="Department of Electrical & Electronic Engineering"></option>
-            <option value="Department of Civil Engineering"></option>
-            <option value="Department of Business Administration"></option>
-            <option value="Department of English"></option>
-            <option value="Department of Architecture"></option>
-            <option value="Department of Law"></option>
-            <option value="Department of Tourism & Hospitality Management"></option>
-            <option value="Department of Islamic Studies"></option>
-            <option value="Department of Public Health"></option>
-        </datalist>
-
-        <datalist id="sectionList">
-            <option value="A"></option>
-            <option value="B"></option>
-            <option value="C"></option>
-            <option value="D"></option>
-            <option value="E"></option>
-        </datalist>
-
-        <datalist id="batchList">
-            <option value="55th"></option>
-            <option value="56th"></option>
-            <option value="57th"></option>
-            <option value="58th"></option>
-            <option value="59th"></option>
-        </datalist>
-
-        <!-- PREVIEW AREA -->
-        <div class="front-page-template" id="frontPageTemplate">
-            <div class="cover-page" id="previewContent">
-                <div class="logo"><img src="images/leadingLogo.png" alt="University Logo" /></div>
-                <h2 class="dept" id="displayDept">[Department]</h2>
-                <div class="section">
-                    <p><b>Course Code:</b> <span id="displayCode">[Course Code]</span></p>
-                    <p><b>Course Title:</b> <span id="displayTitle">[Course Title]</span></p>
-                </div>
-                <h3 class="assignment" id="displayTopic">[Assignment Topic]</h3>
-                <div class="submitted-to">
-                    <h4 style="text-align:center;">Submitted To:</h4>
-                    <div style="border-bottom:2px solid #000; width:200px; margin:0 auto;"></div>
-                    <p><b>Instructor:</b> <span id="displayTeacher">[Instructor Name]</span></p>
-                    <p><b>Designation:</b> <span id="displayDesignation">[Designation]</span></p>
-                    <p><b>Faculty/Department:</b> <span id="displayFaculty">[Faculty]</span></p>
-                </div>
-                <div class="submitted-by" id="submittedBy">
-                    <h4 style="text-align:center;">Submitted By:</h4>
-                    <div style="border-bottom:2px solid #000; width:200px; margin:0 auto;"></div>
-                </div>
-                <div class="date">
-                    <p><b>Submission Date:</b> <span id="displayDate">[Submission Date]</span></p>
-                </div>
-            </div>
-        </div>
-    </div>
+    </main>
 
     <!-- Footer -->
     <footer>
         <div class="footer-bottom">
             <div class="footer-bottom-content">
                 <div class="copyright">
-                    <p>&copy; 2025 <span style="color: orangered;">Class</span><span style="color: #000;">Mate</span> by
-                        SRM Technologies. All rights reserved.</p>
+                    <p>&copy; 2025 Class Mate by SRM Technologies. All rights reserved.</p>
                 </div>
                 <div class="social-links">
                     <span>Follow us:</span>
-                    <a href="https://www.facebook.com" target="_blank" aria-label="Facebook">
-                        <i class="fab fa-facebook-f"></i>
-                    </a>
-                    <a href="https://www.twitter.com" target="_blank" aria-label="Twitter">
-                        <i class="fab fa-twitter"></i>
-                    </a>
-                    <a href="https://www.instagram.com" target="_blank" aria-label="Instagram">
-                        <i class="fab fa-instagram"></i>
-                    </a>
-                    <a href="https://www.linkedin.com" target="_blank" aria-label="LinkedIn">
-                        <i class="fab fa-linkedin-in"></i>
-                    </a>
+                    <a href="https://www.facebook.com" target="_blank" aria-label="Facebook"><i
+                            class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.twitter.com" target="_blank" aria-label="Twitter"><i
+                            class="fab fa-twitter"></i></a>
+                    <a href="https://www.instagram.com" target="_blank" aria-label="Instagram"><i
+                            class="fab fa-instagram"></i></a>
+                    <a href="https://www.linkedin.com" target="_blank" aria-label="LinkedIn"><i
+                            class="fab fa-linkedin-in"></i></a>
                 </div>
             </div>
         </div>
@@ -322,8 +322,8 @@
                     date: submissionDateInd.value,
                 };
                 submittedBy.innerHTML = `
-      <h4 style="text-align:center;">Submitted By:</h4>
-      <div style="border-bottom:2px solid #000;width:200px;margin:0 auto;"></div>
+      <h3>Submitted By:</h3>
+      <div style="border-bottom:2px solid #000;width:200px;"></div>
       <p><b>Student Name:</b> ${data.name || "[Name]"}</p>
       <p><b>Student ID:</b> ${data.id || "[ID]"}</p>
       <p><b>Student Department:</b> ${data.deptStudent || "[Department]"}</p>
@@ -353,12 +353,12 @@
         <div class="group-member-preview">
           <p><b>Student Name:</b> ${m.name || "[Name]"}</p>
           <p><b>Student ID:</b> ${m.id || "[ID]"}</p>
-          <p><b>Student Department:</b> ${m.dept || "[Department]"}</p>
+          <p><b>Department:</b> ${m.dept || "[Department]"}</p>
         </div>`;
                 });
                 submittedBy.innerHTML = `
-      <h4 style="text-align:center;">Submitted By (Group):</h4>
-      <div style="border-bottom:2px solid #000;width:200px;margin:0 auto;"></div>
+      <h4>Submitted By (Group):</h4>
+      <div style="border-bottom:2px solid #000;width:200px;"></div>
       ${membersHTML}
       <p><b>Batch:</b> ${data.batch || "[Batch]"}</p>
       <p><b>Section:</b> ${data.section || "[Section]"}</p>`;
@@ -386,9 +386,11 @@
             const imgWidth = pageWidth - 40;
             const imgHeight = (canvas.height * imgWidth) / canvas.width;
             pdf.addImage(imgData, "PNG", 20, 20, imgWidth, imgHeight);
-            pdf.save(type === "group" ? "Group_Assignment_Front_Page.pdf" : "Individual_Front_Page.pdf");
+            pdf.save(type === "group" ? "Group_Assignment_Front_Page.pdf" : "${data.name}_Front_Page.pdf");
         }
     </script>
 </body>
 
 </html>
+
+

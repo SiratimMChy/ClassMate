@@ -24,7 +24,7 @@
       padding: 0;
       display: flex;
       flex-direction: column;
-      align-items: center;
+      min-height: 100vh;
       overflow-x: hidden;
     }
 
@@ -102,6 +102,10 @@
       color: #333;
       cursor: pointer;
       display: none;
+    }
+
+    main {
+      flex: 1 0 auto;
     }
 
     .submit-container {
@@ -189,37 +193,62 @@
       background-color: var(--pink);
     }
 
-    /* ===================== FOOTER ===================== */
+    /* Footer */
     footer {
-      background-color: #1f2937;
-      color: #ccc;
-      padding: 2rem 1rem;
-      /* Reduced from 3rem to 2rem */
+      flex-shrink: 0;
+      background-color: #3f4041;
+      color: white;
+      padding: 20px 0;
+      margin-top: auto;
       width: 100%;
-      text-align: center;
-      box-sizing: border-box;
     }
 
-    footer a {
-      color: #ccc;
+    .footer-bottom-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .copyright p {
+      margin: 0;
+      font-size: 0.95em;
+      text-align: center;
+    }
+
+    footer .social-links {
+      display: flex;
+      gap: 15px;
+      align-items: center;
+      justify-content: center;
+    }
+
+    footer .social-links span {
+      margin-right: 5px;
+      font-size: 0.95em;
+    }
+
+    footer .social-links a {
+      color: white;
+      font-size: 1.2em;
+      transition: all 0.3s;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.1);
       text-decoration: none;
-      margin: 0 0.5rem;
-      transition: color 0.3s ease;
     }
 
-    footer a:hover {
-      color: var(--pink);
-    }
-
-    /* Footer bottom */
-    .footer-bottom {
-      text-align: center;
-      margin-top: 1rem;
-      /* Reduced spacing */
-      border-top: 1px solid #333;
-      padding-top: 0.5rem;
-      /* Reduced padding */
-      font-size: 0.9rem;
+    footer .social-links a:hover {
+      color: orangered;
+      background-color: rgba(255, 69, 0, 0.2);
+      transform: translateY(-3px);
     }
 
 
@@ -294,75 +323,76 @@
         <a href="#">Find Material</a>
         <a href="compiler.html">Online Compiler</a>
         <a href="PreviousQ.html">Previous Questions</a>
-  
       </div>
     </div>
   </nav>
 
   <!-- Submit Question Section -->
-  <div class="submit-container">
-    <h1>Submit Your Question</h1>
-    <form id="submit-question-form">
-      <div>
-        <label for="course-code">Course Code</label>
-        <input type="text" id="course-code" placeholder="e.g. CSE-1111" required>
-      </div>
-      <div>
-        <label for="course-title">Course Title</label>
-        <input type="text" id="course-title" placeholder="e.g. Introduction to Computing" required>
-      </div>
-      <div>
-        <label for="department">Department</label>
-        <select id="department" required>
-          <option value="">Select Department</option>
-          <option value="BBA">Business Administration</option>
-          <option value="CSE">Computer Science</option>
-          <option value="ENG">English</option>
-          <option value="EEE">Electrical Engineering</option>
-          <option value="CE">Civil Engineering</option>
-          <option value="ARCH">Architecture</option>
-          <option value="LAW">Law</option>
-          <option value="ISLAMIC">Islamic Studies</option>
-          <option value="PH">Public Health</option>
-          <option value="THM">Tourism and Hospitality Management</option>
-          <option value="BANGLA">Bangla</option>
-        </select>
-      </div>
-      <div>
-        <label for="semester">Semester</label>
-        <select id="semester" required>
-          <option value="">Select Semester</option>
-          <option value="Summer">Summer</option>
-          <option value="Fall">Fall</option>
-          <option value="Spring">Spring</option>
-        </select>
-      </div>
-      <div>
-        <label for="year">Year</label>
-        <select id="year" required>
-          <option value="">Select Year</option>
-          <option value="2022">2022</option>
-          <option value="2023">2023</option>
-          <option value="2024">2024</option>
-          <option value="2025">2025</option>
-        </select>
-      </div>
-      <div>
-        <label for="file-upload">Upload PDF File</label>
-      <input type="file" id="file-upload" accept=".pdf" required>
-      </div>
-      <div>
-        <button type="submit" id="submit-btn"><i class="fas fa-paper-plane"></i> Submit Question</button>
-      </div>
-    </form>
-  </div>
+  <main>
+    <div class="submit-container">
+      <h1>Submit Your Question</h1>
+      <form id="submit-question-form">
+        <div>
+          <label for="course-code">Course Code</label>
+          <input type="text" id="course-code" placeholder="e.g. CSE-1111" required>
+        </div>
+        <div>
+          <label for="course-title">Course Title</label>
+          <input type="text" id="course-title" placeholder="e.g. Introduction to Computing" required>
+        </div>
+        <div>
+          <label for="department">Department</label>
+          <select id="department" required>
+            <option value="">Select Department</option>
+            <option value="BBA">Business Administration</option>
+            <option value="CSE">Computer Science</option>
+            <option value="ENG">English</option>
+            <option value="EEE">Electrical Engineering</option>
+            <option value="CE">Civil Engineering</option>
+            <option value="ARCH">Architecture</option>
+            <option value="LAW">Law</option>
+            <option value="ISLAMIC">Islamic Studies</option>
+            <option value="PH">Public Health</option>
+            <option value="THM">Tourism and Hospitality Management</option>
+            <option value="BANGLA">Bangla</option>
+          </select>
+        </div>
+        <div>
+          <label for="semester">Semester</label>
+          <select id="semester" required>
+            <option value="">Select Semester</option>
+            <option value="Summer">Summer</option>
+            <option value="Fall">Fall</option>
+            <option value="Spring">Spring</option>
+          </select>
+        </div>
+        <div>
+          <label for="year">Year</label>
+          <select id="year" required>
+            <option value="">Select Year</option>
+            <option value="2022">2022</option>
+            <option value="2023">2023</option>
+            <option value="2024">2024</option>
+            <option value="2025">2025</option>
+          </select>
+        </div>
+        <div>
+          <label for="file-upload">Upload PDF File</label>
+          <input type="file" id="file-upload" accept=".pdf" required>
+        </div>
+        <div>
+          <button type="submit" id="submit-btn"><i class="fas fa-paper-plane"></i> Submit Question</button>
+        </div>
+      </form>
+    </div>
+  </main>
 
   <!-- Footer -->
   <footer>
     <div class="footer-bottom">
       <div class="footer-bottom-content">
         <div class="copyright">
-          <p>&copy; 2025 ClassMate by SRM Technologies. All rights reserved.</p>
+          <p>&copy; 2025 Class Mate by SRM Technologies. All rights reserved.</p>
         </div>
         <div class="social-links">
           <span>Follow us:</span>

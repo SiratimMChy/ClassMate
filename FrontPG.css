@@ -6,6 +6,7 @@
 
 html {
     scroll-behavior: smooth;
+    height: 100%;
 }
 
 body {
@@ -13,6 +14,9 @@ body {
     background-color: #f4f4f4;
     color: #333;
     line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 .container {
@@ -20,7 +24,6 @@ body {
     margin: 0 auto;
     padding: 20px;
 }
-
 
 nav {
     background-color: #fff;
@@ -85,33 +88,6 @@ nav {
     border-radius: 4px;
 }
 
-@media (max-width: 768px) {
-    .nav-toggle {
-        display: block;
-    }
-
-    .nav-links {
-        display: none;
-        flex-direction: column;
-        position: absolute;
-        top: 60px;
-        left: 0;
-        width: 100%;
-        background-color: #fff;
-        padding: 10px 0;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        z-index: 10;
-    }
-
-    .nav-links.active {
-        display: flex;
-    }
-
-    .nav-links a {
-        padding: 15px 20px;
-    }
-}
-
 header {
     background-color: #86888b;
     color: white;
@@ -126,6 +102,10 @@ header h1 {
 header p {
     font-size: 1.2em;
     margin-top: 10px;
+}
+
+main {
+    flex: 1 0 auto;
 }
 
 .form-section {
@@ -171,10 +151,6 @@ header p {
     grid-column: 1 / -1;
 }
 
-.full-half {
-    grid-column: 2 / 4;
-}
-
 .buttons {
     display: flex;
     gap: 15px;
@@ -213,23 +189,13 @@ header p {
     background-color: #c82333;
 }
 
-.btn-clear {
-    background-color: #6c757d;
-    color: white;
-}
-
-.btn-clear:hover {
-    background-color: #5a6268;
-}
-
-
 .front-page-template {
     background: white;
     padding: 40px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     max-width: 800px;
-    margin: 0 auto;
+    margin: 0 auto 30px;
 }
 
 .cover-page {
@@ -243,43 +209,51 @@ header p {
 }
 
 .dept {
-    font-size: 1.5em;
+    font-size: 1.8em;
     margin-bottom: 20px;
     color: #00ff22;
 }
 
-.section p,
+.section p{
+    font-size: 1.1em;
+    text-align: left;
+    margin-left: 60px;
+}
 .submitted-to p,
 .submitted-by p,
 .date p {
     margin: 10px 0;
     font-size: 1.1em;
+    text-align: left;
 }
 
 .assignment {
     font-size: 1.3em;
     margin: 20px 0;
     font-weight: bold;
+    text-align: left;
+    padding-left: 60px;
 }
 
 .submitted-to,
 .submitted-by {
     margin: 20px 0;
     text-align: left;
+    padding-left: 60px;
     max-width: 400px;
-    margin-left: auto;
-    margin-right: auto;
 }
 
 .submitted-to h4,
 .submitted-by h4 {
     margin-bottom: 10px;
     font-size: 1.2em;
+    padding-left: 20px;
 }
 
 .date {
     margin-top: 30px;
     font-size: 1.1em;
+    padding-left: 60px;
 }
 
 .hidden {
@@ -323,33 +297,90 @@ header p {
     font-size: 16px;
 }
 
-/* Footer */
+/* Footer - Always at bottom */
 footer {
-    text-align: center;
+    flex-shrink: 0;
     background-color: #3f4041;
     color: white;
     padding: 20px 0;
+    margin-top: auto;
+    width: 100%;
+}
+
+.footer-bottom-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.copyright p {
+    margin: 0;
+    font-size: 0.95em;
+    text-align: center;
 }
 
 footer .social-links {
     display: flex;
-    justify-content: center;
     gap: 15px;
     align-items: center;
+    justify-content: center;
+}
+
+footer .social-links span {
+    margin-right: 5px;
+    font-size: 0.95em;
 }
 
 footer .social-links a {
     color: white;
     font-size: 1.2em;
-    transition: color 0.3s;
+    transition: all 0.3s;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.1);
+    text-decoration: none;
 }
 
 footer .social-links a:hover {
     color: orangered;
+    background-color: rgba(255, 69, 0, 0.2);
+    transform: translateY(-3px);
 }
 
-
 @media (max-width: 768px) {
+    .nav-toggle {
+        display: block;
+    }
+
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        background-color: #fff;
+        padding: 10px 0;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        z-index: 10;
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+
+    .nav-links a {
+        padding: 15px 20px;
+    }
+
     .form-grid {
         grid-template-columns: 1fr;
     }

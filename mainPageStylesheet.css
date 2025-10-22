@@ -112,7 +112,7 @@
   }
 
   .dropdown-menu li {
-      padding: 8px 12px;
+      padding: 6px 12px;
       list-style: none;
   }
 
@@ -625,9 +625,18 @@
   }
 
   .footer .credit a {
-      color: #333;
-      
-      transition: color 0.3s ease;
+     color: rgb(64, 60, 60);
+     margin-top: 12px;
+      font-size: 1.2em;
+      transition: all 0.3s;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.1);
+      text-decoration: none;
       
   }
 
@@ -640,7 +649,14 @@
       color: var(--pink);
   }
 
-
+.contact-item{
+    padding-bottom: 12px;
+}
+.contact-item i{
+    font-size: 18px;
+    margin-left: 2px;
+    color: #333;
+}
 
   
   @media(max-width:991px) {
@@ -814,3 +830,5 @@
           font-size: 1.4rem;
       }
   }
+
+  
