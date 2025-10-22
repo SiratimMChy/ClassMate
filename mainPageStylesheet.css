@@ -1,5 +1,5 @@
-  :root {
-      --pink: #ff4400;
+ :root {
+      --pink: #FF4500;
   }
 
   * {
@@ -98,12 +98,11 @@
       display: none !important;
       position: absolute;
       background-color: #f9f9f9;
-      min-width: 130px;
+      min-width: 120px;
       box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
       z-index: 1001;
       top: 100%;
-      left: 5px;
-      margin-top: 10px;
+      left: 0;
       border-radius: 0.5rem;
   }
 
@@ -113,16 +112,14 @@
   }
 
   .dropdown-menu li {
-    text-align: left;
-      padding: 6px 12px;
+      padding: 8px 12px;
       list-style: none;
   }
 
   .dropdown-menu li a {
       text-decoration: none;
-      color: black;
       display: block;
-      padding: .5rem;
+      padding: 0.5rem;
   }
 
   .dropdown-menu li a:hover {
@@ -240,81 +237,81 @@
   }
 
   .services .row {
-      display: flex;
-      align-items: center;
-      gap: 2rem;
-      flex-wrap: wrap;
-      padding: 2rem 0;
-      padding-bottom: 3rem;
-  }
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+    padding: 2rem 0;
+    padding-bottom: 3rem;
+}
 
-  .services .row .video-container {
-      flex: 1 1 40rem;
-      position: relative;
-      transition: transform 0.3s ease;
-  }
+.services .row .video-container {
+    flex: 1 1 40rem; 
+    position: relative;
+    transition: transform 0.3s ease; 
+}
 
-  .services .row .video-container:hover {
-      transform: scale(1.05);
-  }
+.services .row .video-container:hover {
+    transform: scale(1.05);
+}
 
-  .services .row .video-container video {
-      width: 100%;
-      border: 1.5rem solid #fff;
-      border-radius: 0.5rem;
-      box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
-      height: 100%;
-      object-fit: cover;
-  }
+.services .row .video-container video {
+    width: 100%;
+    border: 1.5rem solid #fff;
+    border-radius: 0.5rem;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+    height: 100%;
+    object-fit: cover;
+}
 
-  .services .row .video-container h3 {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      font-size: 2.5rem;
-      width: 100%;
-      padding: 1rem 2rem;
-      background: rgba(255, 255, 255, 0.8);
-      text-align: center;
-      mix-blend-mode: screen;
-      transition: background 0.3s ease;
-  }
+.services .row .video-container h3 {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 2.5rem; 
+    width: 100%;
+    padding: 1rem 2rem;
+    background: rgba(255, 255, 255, 0.8); 
+    text-align: center;
+    mix-blend-mode: screen;
+    transition: background 0.3s ease; 
+}
 
-  .services .row .video-container h3:hover {
-      background: rgba(255, 255, 255, 1);
-  }
+.services .row .video-container h3:hover {
+    background: rgba(255, 255, 255, 1); 
+}
 
-  .services .row .content {
-      flex: 1 1 40rem;
-  }
+.services .row .content {
+    flex: 1 1 40rem;
+}
 
-  .services .row .content h3 {
-      font-size: 2.5rem;
-      color: #333;
-  }
+.services .row .content h3 {
+    font-size: 2.5rem; 
+    color: #333;
+}
 
-  .services .row .content p {
-      font-size: 1.5rem;
-      color: #666;
-      padding: 0.5rem 0;
-      padding-top: 1rem;
-      line-height: 1.6;
-  }
+.services .row .content p {
+    font-size: 1.5rem;
+    color: #666; 
+    padding: 0.5rem 0;
+    padding-top: 1rem;
+    line-height: 1.6; 
+}
 
-  /* Responsive adjustments */
-  @media (max-width: 768px) {
-      .services .row .video-container {
-          flex: 1 1 100%;
-      }
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .services .row .video-container {
+        flex: 1 1 100%; 
+    }
 
-      .services .row .video-container h3 {
-          font-size: 2rem;
-      }
+    .services .row .video-container h3 {
+        font-size: 2rem;
+    }
 
-      .services .row .content h3 {
-          font-size: 2rem;
-      }
-  }
+    .services .row .content h3 {
+        font-size: 2rem; 
+    }
+}
 
 
   /* Club Section Styles  */
@@ -513,15 +510,6 @@
       resize: none;
   }
 
-  .contact .row .image iframe {
-      width: 100%;
-      height: 100%;
-      min-height: 42rem;
-      border: none;
-      border-radius: .2rem;
-      box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .1);
-  }
-
   .about .box-container {
       display: flex;
       flex-wrap: wrap;
@@ -617,9 +605,8 @@
       text-decoration: underline;
   }
 
-  .footer .box-container .box {
+  .footer .box-container .box p {
       font-size: 15px;
-      justify-self: center;
   }
 
   .footer .box-container .box img {
@@ -639,14 +626,14 @@
 
   .footer .credit a {
       color: #333;
-
+      
       transition: color 0.3s ease;
-
+      
   }
 
   .footer .credit a:hover {
       color: var(--pink);
-
+     
   }
 
   .footer .credit span {
@@ -655,6 +642,7 @@
 
 
 
+  
   @media(max-width:991px) {
       html {
           font-size: 55%;
@@ -714,7 +702,7 @@
           border-radius: 0.5rem;
       }
 
-
+  
       .dropdown-menu {
           position: static !important;
           box-shadow: none !important;
@@ -826,4 +814,3 @@
           font-size: 1.4rem;
       }
   }
-

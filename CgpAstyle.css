@@ -19,7 +19,8 @@ body {
 }
 
 .main-container {
-    background-color: #2f8dff;
+   background: linear-gradient(135deg, #01a1fd, #0099ff,#00ccff);
+
     color: white;
     display: flex;
     flex-direction: column;
