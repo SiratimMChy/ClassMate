@@ -50,12 +50,30 @@
       <span>Your Ultimate University Companion</span>
       <p>Class Mate is a student-friendly platform designed to simplify university life. From accessing academic
         resources to staying updated on events, Class Mate keeps you connected.</p>
-      <a href="#" class="btn">Learn More</a>
+      <a href="#" class="btn" id="learnMoreBtn">Learn More</a>
     </div>
   </section>
 
   <!-- Home Section End -->
-
+  <!-- Learn More Modal -->
+  <div id="learnMoreModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>About ClassMate</h2>
+        <span class="close">&times;</span>
+      </div>
+      <div class="modal-body">
+        <h3>Your Complete University Solution</h3>
+        <p>ClassMate is a comprehensive student platform designed to simplify your university experience. Generate
+          professional front pages instantly, access previous exam questions, andapply for makeup exams with ease. Our
+          platform enables quick booth and classroom permission requests, features
+          an accurate CGPA calculator, and connects you with over 16 university clubs. Join thousands of students who
+          trust ClassMate to stay organized and focused on what matters most—your education and personal growth.
+          Transform your academic journey today!</p>
+      </div>
+    </div>
+  </div>
+  <!--Learn More Modal End-->
   <!-- Services Section Start -->
   <section class="services" id="services">
     <h1 class="heading">Check our <span>Services</span></h1>
@@ -160,58 +178,95 @@
     showImage(currentIndex);
   </script>
   <!-- Clubs Section End -->
- <!-- Contact Section Start -->
-<section class="contact" id="contact">
-  <h1 class="heading"><span>Contact</span> Us</h1>
-  <div class="row">
-    <form id="contact-form">
-      <input type="text" name="user_name" placeholder="Name" class="box" required>
-      <input type="email" name="user_email" placeholder="Email" class="box" required>
-      <input type="number" name="user_number" placeholder="Number" class="box" required>
-      <textarea name="message" class="box" placeholder="Message" cols="30" rows="10" required></textarea>
-      <input type="submit" value="Send Message" class="btn">
-    </form>
-    <div class="image">
-      <iframe src="https://www.google.com/maps?q=Leading%20University,%20Ragibnagar,%20Sylhet&hl=en&z=15&output=embed"
-        width="620" height="420"
-        style="border: 2px beige; border-radius: 6px;transition: transform 0.3s, box-shadow 0.3s" allowfullscreen=""
-        loading="lazy" referrerpolicy="no-referrer-when-downgrade">
-      </iframe>
+  <!--Modal Script-->
+  <script>
+    // Modal
+    const modal = document.getElementById("learnMoreModal");
+    const btn = document.getElementById("learnMoreBtn");
+    const close = document.querySelector(".close");
+
+    // Open
+    btn?.addEventListener('click', (e) => {
+      e.preventDefault();
+      modal.style.display = "block";
+      document.body.style.overflow = "hidden";
+    });
+
+    // Close
+    close?.addEventListener('click', () => {
+      modal.style.display = "none";
+      document.body.style.overflow = "auto";
+    });
+
+    // Close on outside click
+    modal?.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.style.display = "none";
+        document.body.style.overflow = "auto";
+      }
+    });
+
+    // Close on ESC
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modal?.style.display === "block") {
+        modal.style.display = "none";
+        document.body.style.overflow = "auto";
+      }
+    });
+  </script>
+  <!--Modal Script-->
+  <!-- Contact Section Start -->
+  <section class="contact" id="contact">
+    <h1 class="heading"><span>Contact</span> Us</h1>
+    <div class="row">
+      <form id="contact-form">
+        <input type="text" name="user_name" placeholder="Name" class="box" required>
+        <input type="email" name="user_email" placeholder="Email" class="box" required>
+        <input type="number" name="user_number" placeholder="Number" class="box" required>
+        <textarea name="message" class="box" placeholder="Message" cols="30" rows="10" required></textarea>
+        <input type="submit" value="Send Message" class="btn">
+      </form>
+      <div class="image">
+        <iframe src="https://www.google.com/maps?q=Leading%20University,%20Ragibnagar,%20Sylhet&hl=en&z=15&output=embed"
+          width="620" height="420"
+          style="border: 2px beige; border-radius: 6px;transition: transform 0.3s, box-shadow 0.3s" allowfullscreen=""
+          loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+      </div>
     </div>
-  </div>
-</section>
-<!-- Contact Section End -->
+  </section>
+  <!-- Contact Section End -->
 
-<!-- EmailJS Script -->
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-<script>
-  (function(){
-    emailjs.init("hpIFnib75FuQb89lS");
-  })();
+  <!-- EmailJS Script -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script>
+    (function () {
+      emailjs.init("hpIFnib75FuQb89lS");
+    })();
 
-  document.getElementById("contact-form").addEventListener("submit", function(event) {
-    event.preventDefault();
-    
-    // Show loading state
-    const submitBtn = this.querySelector('input[type="submit"]');
-    const originalValue = submitBtn.value;
-    submitBtn.value = "Sending...";
-    submitBtn.disabled = true;
+    document.getElementById("contact-form").addEventListener("submit", function (event) {
+      event.preventDefault();
 
-    emailjs.sendForm("service_kkj5r5g", "template_g5ckcml", this)
-      .then(function() {
-        alert("✅ Message sent successfully!");
-        document.getElementById("contact-form").reset();
-        submitBtn.value = originalValue;
-        submitBtn.disabled = false;
-      }, function(error) {
-        alert("❌ Failed to send message. Error: " + JSON.stringify(error));
-        console.log("EmailJS Error:", error);
-        submitBtn.value = originalValue;
-        submitBtn.disabled = false;
-      });
-  });
-</script>
+      // Show loading state
+      const submitBtn = this.querySelector('input[type="submit"]');
+      const originalValue = submitBtn.value;
+      submitBtn.value = "Sending...";
+      submitBtn.disabled = true;
+
+      emailjs.sendForm("service_kkj5r5g", "template_g5ckcml", this)
+        .then(function () {
+          alert("✅ Message sent successfully!");
+          document.getElementById("contact-form").reset();
+          submitBtn.value = originalValue;
+          submitBtn.disabled = false;
+        }, function (error) {
+          alert("❌ Failed to send message. Error: " + JSON.stringify(error));
+          console.log("EmailJS Error:", error);
+          submitBtn.value = originalValue;
+          submitBtn.disabled = false;
+        });
+    });
+  </script>
   <!-- About Section Start -->
   <section class="about" id="about">
     <h1 class="heading">About <span>Developers</span></h1>
