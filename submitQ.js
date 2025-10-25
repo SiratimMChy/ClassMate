@@ -1,7 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
-import {getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-database.js";
+import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-database.js";
 import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js";
-
 
 
 const cloudName = "dbspyyci2";
@@ -23,14 +22,17 @@ const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 const auth = getAuth(app);
 
-
 const submitForm = document.getElementById("submit-question-form");
 
+
+let currentUser = null;
 
 onAuthStateChanged(auth, (user) => {
   if (!user) {
     alert("⚠️ You must be logged in to submit a question.");
     window.location.href = "login.html";
+  } else {
+    currentUser = user;
   }
 });
 
@@ -41,17 +43,17 @@ submitForm.addEventListener("submit", async (e) => {
   const submitButton = submitForm.querySelector('button[type="submit"]');
   const originalButtonText = submitButton.textContent;
   submitButton.textContent = "Submitting...";
-  submitButton.disabled = true; // Prevent multiple clicks
+  submitButton.disabled = true;
 
-  const user = auth.currentUser;
+
+  const user = auth.currentUser || currentUser;
   if (!user) {
     alert("Please log in to submit a question.");
-    submitButton.textContent = originalButtonText;
-    submitButton.disabled = false;
+    window.location.href = "login.html";
     return;
   }
 
-
+  
   const courseCode = document.getElementById("course-code").value.trim();
   const courseTitle = document.getElementById("course-title").value.trim();
   const department = document.getElementById("department").value;
@@ -62,29 +64,25 @@ submitForm.addEventListener("submit", async (e) => {
 
   if (!file) {
     alert("Please select a file to upload.");
-    submitButton.textContent = originalButtonText;
-    submitButton.disabled = false;
+    resetButton();
     return;
   }
-
 
   if (file.type !== "application/pdf" && !file.name.endsWith(".pdf")) {
     alert("Only PDF files are allowed. Please upload a .pdf file.");
     fileInput.value = "";
-    submitButton.textContent = originalButtonText;
-    submitButton.disabled = false;
+    resetButton();
     return;
   }
 
-  const uploadURL = `https://api.cloudinary.com/v1_1/${cloudName}/auto/upload`;
 
+  const uploadURL = `https://api.cloudinary.com/v1_1/${cloudName}/auto/upload`;
   const formData = new FormData();
   formData.append("file", file);
   formData.append("upload_preset", uploadPreset);
   formData.append("folder", "questions");
 
   try {
-    // Upload to Cloudinary
     const response = await fetch(uploadURL, { method: "POST", body: formData });
     const data = await response.json();
 
@@ -95,7 +93,7 @@ submitForm.addEventListener("submit", async (e) => {
 
     const fileURL = data.secure_url;
 
-    // Save to Firebase Realtime Database
+  
     const questionId = Date.now();
     await set(ref(database, "questions/" + questionId), {
       uid: user.uid,
@@ -108,7 +106,7 @@ submitForm.addEventListener("submit", async (e) => {
       fileName: file.name,
       fileType: file.type,
       fileURL,
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
     });
 
     alert("✅ Question submitted successfully!");
@@ -117,6 +115,11 @@ submitForm.addEventListener("submit", async (e) => {
     console.error("Upload or save failed:", error);
     alert("❌ Error uploading your question. Please try again.");
   } finally {
+    resetButton();
+  }
+
+  
+  function resetButton() {
     submitButton.textContent = originalButtonText;
     submitButton.disabled = false;
   }

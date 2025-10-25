@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Study Mate</title>
+  <!-- Linking Google Fonts For Icons -->
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
+  <link rel="stylesheet" href="aiChatbot.css">
+</head>
+
+<body>
+
+  <nav class="navbar">
+    <div class="navbar-container">
+      <div class="navbar-logo">
+        <h2>Study <span style="color: orangered;">Mate</span></h2>
+      </div>
+      <ul class="navbar-menu" id="navbarMenu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="compiler.html">Online Compiler</a></li>
+        <li><a href="PreviousQ.html">Question Bank</a></li>
+      </ul>
+      <div class="navbar-toggle" id="navbarToggle">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </div>
+    </div>
+  </nav>
+
+
+  <header class="header">
+    <!-- Header Greetings -->
+    <h1 class="title">Your Academic Assistant</h1>
+    <p class="subtitle">Please let me know how can i help you?</p>
+  </header>
+  <!-- Chat List / Container -->
+  <div class="chat-list"></div>
+  <!-- Typing Area -->
+  <div class="typing-area">
+    <form action="#" class="typing-form">
+      <div class="input-row">
+        <div class="preview-and-validation">
+          <div class="attach-preview" id="attach-preview"></div>
+          <div class="validation-message"></div>
+        </div>
+        <div class="input-field-row">
+          <input type="text" placeholder="Ask me anything" class="typing-input" required />
+          <div class="right-actions">
+            <button id="attach-file-button" type="button" class="action-btn material-symbols-rounded"
+              title="Attach files">attach_file</button>
+            <button id="send-message-button" type="submit" class="action-btn material-symbols-rounded"
+              title="Send">send</button>
+            <button id="delete-chat-button" type="button" class="action-btn material-symbols-rounded"
+              title="Delete">delete</button>
+            <input id="file-input" type="file" accept="image/*,.pdf" multiple style="display:none" />
+          </div>
+        </div>
+      </div>
+    </form>
+    <p class="disclaimer-text">
+      Generated responses may display inaccurate info, including about people, so double-check its responses.
+    </p>
+  </div>
+  <script src="aiChatbot.js"></script>
+</body>
+
+</html>
