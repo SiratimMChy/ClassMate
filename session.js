@@ -1,3 +1,4 @@
+// session.js
 import {
     getAuth,
     onAuthStateChanged,
@@ -20,47 +21,70 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
-
 function updateNavBar(user) {
     const userDropdownMenu = document.getElementById('user-dropdown-menu');
+    const adminOnlyButtons = document.querySelectorAll('.admin-only');
 
-    if (userDropdownMenu) {
-        userDropdownMenu.innerHTML = '';
+    if (!userDropdownMenu) return;
 
-        if (user) {
-         
-            const signOutItem = document.createElement('li');
-            const signOutLink = document.createElement('a');
-            signOutLink.href = "#"; 
-            signOutLink.textContent = "Sign Out";
-            signOutLink.addEventListener('click', async (e) => {
-                e.preventDefault();
-                try {
+    userDropdownMenu.innerHTML = '';
+
+    // Check localStorage first (custom admin)
+    let currentUser = JSON.parse(localStorage.getItem('user'));
+
+    if (currentUser) {
+        const isAdmin = currentUser.role === 'admin';
+
+        // Show/hide Admin button
+        adminOnlyButtons.forEach(btn => {
+            btn.style.display = isAdmin ? 'inline-block' : 'none';
+        });
+
+        // Show Sign Out option
+        const signOutItem = document.createElement('li');
+        const signOutLink = document.createElement('a');
+        signOutLink.href = "#";
+        signOutLink.textContent = "Sign Out";
+        signOutLink.addEventListener('click', async (e) => {
+            e.preventDefault();
+
+            // Remove localStorage session for admin or student
+            localStorage.removeItem('user');
+
+            // Sign out from Firebase if logged in
+            try {
+                if (!isAdmin) {
                     await signOut(auth);
-                    window.location.href = "index.html"; 
-                    alert("Logged out successfully.");
-                } catch (error) {
-                    console.error("Sign Out Error:", error);
-                    alert("Error signing out.");
                 }
-            });
-            signOutItem.appendChild(signOutLink);
-            userDropdownMenu.appendChild(signOutItem);
+                window.location.href = "index.html";
+                alert("Logged out successfully.");
+            } catch (error) {
+                console.error("Sign Out Error:", error);
+                alert("Error signing out.");
+            }
+        });
+        signOutItem.appendChild(signOutLink);
+        userDropdownMenu.appendChild(signOutItem);
 
-        } else {
-            const loginItem = document.createElement('li');
-            loginItem.innerHTML = `<a href="login.html">Login</a>`;
+    } else {
+        // No user logged in
+        adminOnlyButtons.forEach(btn => btn.style.display = 'none');
 
-            const signUpItem = document.createElement('li');
-            signUpItem.innerHTML = `<a href="register.html">Sign Up</a>`;
+        const loginItem = document.createElement('li');
+        loginItem.innerHTML = `<a href="login.html">Login</a>`;
 
-            userDropdownMenu.appendChild(loginItem);
-            userDropdownMenu.appendChild(signUpItem);
-        }
+        const signUpItem = document.createElement('li');
+        signUpItem.innerHTML = `<a href="register.html">Sign Up</a>`;
+
+        userDropdownMenu.appendChild(loginItem);
+        userDropdownMenu.appendChild(signUpItem);
     }
 }
 
-// Monitor the authentication state whenever the page loads
+// Monitor Firebase auth state
 onAuthStateChanged(auth, (user) => {
     updateNavBar(user);
 });
+
+// Also call once for admin from localStorage
+updateNavBar();

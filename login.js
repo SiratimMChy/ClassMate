@@ -62,8 +62,27 @@ class LoginHandler {
 
     if (!this.validateInput(email, password)) return false;
 
+    // ✅ Admin login check (custom admin bypass)
+    if (email === "admin_classmate@gmail.com") {
+      if (password === "Admin@1234") {
+        // Save session for admin
+        const user = { email, role: "admin" };
+        localStorage.setItem("user", JSON.stringify(user));
+        alert("✅ Welcome, Admin!");
+        window.location.href = "admin.html";
+        return false;
+      } else {
+        document.getElementById("password-error").textContent =
+          "Incorrect admin password.";
+        return false;
+      }
+    }
+
     try {
-      await setPersistence(this.auth, rememberMe ? browserLocalPersistence : browserSessionPersistence);
+      await setPersistence(
+        this.auth,
+        rememberMe ? browserLocalPersistence : browserSessionPersistence
+      );
 
       const userCredential = await signInWithEmailAndPassword(this.auth, email, password);
       const user = userCredential.user;
@@ -74,7 +93,9 @@ class LoginHandler {
         return false;
       }
 
-      
+      // Save user session to localStorage
+      localStorage.setItem("user", JSON.stringify({ email, role: "student" }));
+
       if (rememberMe) {
         localStorage.setItem("rememberMe", "true");
         localStorage.setItem("savedEmail", email);
@@ -83,7 +104,8 @@ class LoginHandler {
         localStorage.removeItem("savedEmail");
       }
 
-      window.location.href = "index.html"; // session.js will update navbar
+      alert("✅ Login successful!");
+      window.location.href = "index.html"; // session.js updates navbar
     } catch (error) {
       console.error("Firebase Auth Error:", error.code, error.message);
       switch (error.code) {

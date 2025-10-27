@@ -2,7 +2,6 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/12.4.0/firebas
 import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-database.js";
 import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js";
 
-
 const firebaseConfig = {
   apiKey: "AIzaSyBw9ZTVtz20p-Q6su5hVMHP0JrI4xmiL54",
   authDomain: "classmate-2c272.firebaseapp.com",
@@ -13,23 +12,26 @@ const firebaseConfig = {
   measurementId: "G-TJ6D20JK8F"
 };
 
-
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const database = getDatabase(app);
 
-// DOM Elements
 const searchBtn = document.getElementById("search-btn");
 const placeholder = document.getElementById("result-placeholder");
 
 const semesterOrder = { "Fall": 1, "Summer": 2, "Spring": 3 };
 
-
 document.body.style.display = "none";
 
+// Check if user is admin from localStorage
+function isAdmin() {
+  const localUser = JSON.parse(localStorage.getItem("user"));
+  return localUser?.role === "admin";
+}
 
+// Auth check
 onAuthStateChanged(auth, (user) => {
-  if (!user) {
+  if (!user && !isAdmin()) {
     alert("⚠️ You must be logged in to view previous questions.");
     window.location.href = "login.html";
   } else {
@@ -38,14 +40,19 @@ onAuthStateChanged(auth, (user) => {
   }
 });
 
-
 function fetchQuestions(callback) {
   const questionsRef = ref(database, "questions");
   onValue(
     questionsRef,
     (snapshot) => {
       const data = snapshot.val() || {};
-      const questions = Object.values(data);
+      let questions = Object.values(data).filter(q => q);
+
+      // Regular users see only approved questions
+      if (!isAdmin()) {
+        questions = questions.filter(q => q.approved === true);
+      }
+
       callback(questions);
     },
     (error) => {
@@ -110,26 +117,14 @@ function displayQuestions(questions) {
 }
 
 function initializePage() {
- placeholder.innerHTML = `
-  <div style="text-align:center; padding:20px;">
-    <div class="spinner"></div>
-    <p style="margin-top:10px; color:#555;">Loading results...</p>
-  </div>
-`;
-
+  placeholder.innerHTML = `<p>Loading results...</p>`;
   fetchQuestions((allQuestions) => {
     const sorted = sortQuestions(allQuestions);
     displayQuestions(sorted);
   });
 
-
   searchBtn.addEventListener("click", () => {
-   placeholder.innerHTML = `
-  <div style="text-align:center; padding:20px;">
-    <div class="spinner"></div>
-    <p style="margin-top:10px; color:#555;">Loading results...</p>
-  </div>
-`;
+    placeholder.innerHTML = `<p>Loading results...</p>`;
     fetchQuestions((allQuestions) => {
       const filtered = filterQuestions(allQuestions);
       const sorted = sortQuestions(filtered);

@@ -9,7 +9,6 @@
   <!-- EmailJS SDK -->
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
   <style>
-    /* Reset & base */
     * {
       box-sizing: border-box;
       margin: 0;
@@ -29,11 +28,9 @@
       flex-direction: column;
       min-height: 100vh;
       overflow-x: hidden;
-      padding-top: 60px; /* Height of navbar */
+      padding-top: 60px;
       margin: 0;
     }
-
-    /* Background video & overlay */
 
     video#bgVideo {
       position: fixed;
@@ -52,7 +49,6 @@
       z-index: -2;
     }
 
-    /* Container (frosted glass) */
     .page-wrap {
       width: 90%;
       max-width: 1200px;
@@ -78,7 +74,6 @@
       letter-spacing: .2px;
     }
 
-    /* Logo (TOP) */
     .logo-wrap {
       width: 120px;
       height: 120px;
@@ -98,16 +93,13 @@
       display: block;
     }
 
-    /* Grid form */
     form#clubForm {
       display: grid;
       gap: 16px;
       grid-template-columns: repeat(3, 1fr);
-      /* default 3 columns */
       align-items: start;
     }
 
-    /* Full-width elements that should span columns */
     .span-3 {
       grid-column: 1 / -1;
     }
@@ -141,7 +133,6 @@
       color: #666
     }
 
-    /* Fee display */
     .fee-box {
       display: flex;
       align-items: center;
@@ -153,7 +144,6 @@
       color: #e0f7f6;
     }
 
-    /* Submit */
     .actions {
       display: flex;
       gap: 12px;
@@ -182,12 +172,10 @@
       cursor: not-allowed;
     }
 
-    /* Error styling */
     .input-error {
       outline: 2px solid rgba(255, 80, 80, .9);
     }
 
-    /* Toast */
     .toast {
       position: fixed;
       right: 20px;
@@ -206,10 +194,99 @@
       color: #fff;
     }
 
-    /* Navbar styles */
+    @media(max-width:1100px) {
+      form#clubForm {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .span-2 {
+        grid-column: 1/-1;
+      }
+
+      .header-top h1 {
+        font-size: 1.6rem
+      }
+    }
+
+    @media(max-width:700px) {
+      .page-wrap {
+        padding: 18px;
+        margin: 18px auto
+      }
+
+      form#clubForm {
+        grid-template-columns: 1fr
+      }
+
+      .logo-wrap {
+        width: 96px;
+        height: 96px;
+        border-radius: 48px
+      }
+
+      .header-top h1 {
+        font-size: 1.4rem
+      }
+
+      .actions {
+        justify-content: center
+      }
+    }
+
+    footer {
+      width: 100%;
+      max-height: 180px;
+      text-align: center;
+      background-color: #3f4041;
+      color: white;
+      padding: 20px;
+      margin-top: auto;
+    }
+
+    footer p {
+      text-align: center;
+      color: white;
+      font-weight: 500;
+      margin: 10px 0;
+    }
+
+    .footer-bottom-content {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      align-items: center;
+    }
+
+    footer .social-links {
+      display: flex;
+      gap: 15px;
+      align-items: center;
+      justify-content: center;
+    }
+
+    footer .social-links a {
+      color: white;
+      font-size: 1.2em;
+      transition: all 0.3s;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.1);
+      text-decoration: none;
+    }
+
+    footer .social-links a:hover {
+      color: orangered;
+      background-color: rgba(255, 69, 0, 0.2);
+      transform: translateY(-3px);
+    }
+
     .navbar {
       background-color: #ffffff;
-      color: rgb(0, 0, 0);
+      color: #000;
       padding: 10px 20px;
       position: fixed;
       top: 0;
@@ -244,7 +321,7 @@
     }
 
     .navbar-menu a {
-      color: rgb(0, 0, 0);
+      color: #000;
       text-decoration: none;
       font-size: 16px;
       transition: color 0.3s;
@@ -263,60 +340,12 @@
     .navbar-toggle .bar {
       width: 25px;
       height: 3px;
-      background-color: rgb(0, 0, 0);
+      background-color: #000;
       margin: 3px 0;
       transition: 0.3s;
     }
 
-    /* RESPONSIVE: medium screens 2 columns */
-    @media (max-width: 1100px) {
-      form#clubForm {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .span-3 {
-        grid-column: 1 / -1;
-      }
-
-      /* stays full-width */
-      .span-2 {
-        grid-column: 1 / -1;
-      }
-
-      /* make span-2 collapse to full width on mid */
-      .header-top h1 {
-        font-size: 1.6rem
-      }
-    }
-
-    /* MOBILE: 1 column */
-    @media (max-width: 700px) {
-      .page-wrap {
-        padding: 18px;
-        margin: 18px auto;
-      }
-
-      form#clubForm {
-        grid-template-columns: 1fr;
-      }
-
-      .logo-wrap {
-        width: 96px;
-        height: 96px;
-        border-radius: 48px;
-      }
-
-      .header-top h1 {
-        font-size: 1.4rem
-      }
-
-      .actions {
-        justify-content: center
-      }
-    }
-
-    /* Mobile styles for navbar */
-    @media (max-width: 768px) {
+    @media(max-width:768px) {
       .navbar-menu {
         display: none;
         flex-direction: column;
@@ -341,68 +370,10 @@
         display: flex;
       }
     }
-
-    /* Footer styles */
-    footer {
-      width: 100%;
-      max-height: 180px;
-      text-align: center;
-      background-color: #3f4041;
-      color: white;
-      padding: 20px;
-      margin-top: auto;
-    }
-
-    footer p {
-      text-align: center;
-      color: white;
-      font-weight: 500;
-      margin: 10px 0;
-    }
-
-    .footer-bottom-content {
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-      align-items: center;
-    }
-
-    footer .social-links {
-      display: flex;
-      gap: 15px;
-      align-items: center;
-      justify-content: center;
-    }
-
-    footer .social-links span {
-      margin-right: 5px;
-      font-size: 0.95em;
-    }
-
-    footer .social-links a {
-      color: white;
-      font-size: 1.2em;
-      transition: all 0.3s;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 35px;
-      height: 35px;
-      border-radius: 50%;
-      background-color: rgba(255, 255, 255, 0.1);
-      text-decoration: none;
-    }
-
-    footer .social-links a:hover {
-      color: orangered;
-      background-color: rgba(255, 69, 0, 0.2);
-      transform: translateY(-3px);
-    }
   </style>
 </head>
 
 <body>
-
   <!-- Navbar -->
   <nav class="navbar">
     <div class="navbar-container">
@@ -422,14 +393,10 @@
     </div>
   </nav>
 
-  <!-- Background video-->
-
-<video id="bgVideo" autoplay muted loop playsinline preload="auto">
-  <source src="images/homeVideo.mp4" type="video/mp4">
-</video>
-<div class="overlay"></div>
-
-
+  <!-- Background video -->
+  <video id="bgVideo" autoplay muted loop playsinline preload="auto">
+    <source src="images/homeVideo.mp4" type="video/mp4">
+  </video>
   <div class="overlay"></div>
 
   <main class="page-wrap" role="main" style="margin-top: 2rem;">
@@ -441,7 +408,7 @@
     </div>
 
     <form id="clubForm" novalidate>
-      <!-- Club select (span across columns) -->
+      <!-- Club select -->
       <div class="span-3">
         <label for="clubSelect">Select Club <small style="color:#9be7e6">* required</small></label>
         <select id="clubSelect" required>
@@ -451,7 +418,6 @@
           <option value="LUMUNA">LUMUNA - MUN Association</option>
           <option value="LUDC">LUDC - Debating Club</option>
           <option value="LUCC">LUCC - Cultural Club</option>
-           <option value="LUCC">LUCC - Computer Club</option>
           <option value="LUIEEE">LUIEEE - Electrical & Electronics Club</option>
           <option value="LULC">LULC - Language Club</option>
           <option value="LURS">LURS - Research Society</option>
@@ -533,8 +499,13 @@
       </div>
 
       <div class="form-group">
-        <label for="Bkash">Bkash Treansaction ID</label>
-        <input id="Bkash" type="text" placeholder="TrxID: 10 Digits" />
+        <label for="BkashNumber">Bkash Number</label>
+        <div class="fee-box" id="bkashDisplay">—</div>
+      </div>
+
+      <div class="form-group">
+        <label for="Bkash">Bkash Transaction ID</label>
+        <input id="Bkash" type="text" placeholder="10-digit Transaction ID" maxlength="10" />
       </div>
 
       <!-- Actions: Submit -->
@@ -570,23 +541,22 @@
 
   <script>
     // Initialize EmailJS
-    (function(){
+    (function () {
       emailjs.init("hpIFnib75FuQb89lS");
     })();
 
-    /* club -> file mapping to avoid relying on string manipulation */
+    /* club -> file mapping */
     const clubLogoMap = {
       LUSC: "images/sports_club_logo.jpeg",
       LUPS: "images/photography_club_logo.jpeg",
       LUMUNA: "images/MUN_club_logo.jpeg",
       LUDC: "images/Debating_club_logo.jpeg",
-      LUCC: "images/culturer_club_logo.png",
+      LUCC: "images/LUCC.jpg",
       LUIEEE: "images/IEEE_club_logo.jpeg",
       LULC: "images/language_Club.jpeg",
       LURS: "images/research_club_logo.jpeg",
       LUBC: "images/business_club_logo.png",
-      LUSS: "images/social_service_club_logo.jpeg",
-      LUCC: "images/LUCC.jpg"
+      LUSS: "images/social_service_club_logo.jpeg"
     };
 
     const clubFeeMap = {
@@ -602,35 +572,54 @@
       LUSS: "50 TK"
     };
 
+    const clubBkash = {
+      LUSC: "01727419001",
+      LUPS: "01827419001",
+      LUMUNA: "01927419001",
+      LUDC: "016401711394",
+      LUCC: "01401711394",
+      LUIEEE: "017401711394",
+      LULC: "01763777626",
+      LURS: "01963777626",
+      LUBC: "01663777626",
+      LUSS: "01563777626",
+    };
+
+    // DOM elements
     const topLogo = document.getElementById("topLogo");
     const clubSelect = document.getElementById("clubSelect");
     const feeBox = document.getElementById("feeBox");
     const form = document.getElementById("clubForm");
     const toast = document.getElementById("toast");
     const submitBtn = document.getElementById("submitBtn");
+    const bkashDisplay = document.getElementById("bkashDisplay");
 
     // Default fallback SVG logo
     const defaultLogoSVG = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cdefs%3E%3ClinearGradient id='grad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%2300e0ff;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%2300b3ff;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Ccircle cx='100' cy='100' r='90' fill='url(%23grad)' opacity='0.9'/%3E%3Ctext x='100' y='115' text-anchor='middle' font-size='48' fill='%23fff' font-family='Arial, sans-serif' font-weight='bold'%3ELU%3C/text%3E%3Ctext x='100' y='145' text-anchor='middle' font-size='16' fill='%23fff' font-family='Arial, sans-serif'%3EClubs%3C/text%3E%3C/svg%3E";
 
-    // Handle image load errors - use SVG fallback
+    // Handle logo load errors
     topLogo.addEventListener("error", function () {
       this.src = defaultLogoSVG;
     });
 
+    // Update fee, logo, and Bkash number when club changes
     clubSelect.addEventListener("change", () => {
       const val = clubSelect.value;
-      // logo
+
+      // Logo
       if (val && clubLogoMap[val]) {
         topLogo.src = clubLogoMap[val];
       } else {
         topLogo.src = "images/default.png";
         topLogo.onerror = function () { this.src = defaultLogoSVG; };
       }
-      // fee
-      feeBox.textContent = "Membership fee: " + (clubFeeMap[val] || "—");
-    });
-    
 
+      // Fee
+      feeBox.textContent = "Membership fee: " + (clubFeeMap[val] || "—");
+
+      // Bkash Number
+      bkashDisplay.textContent = clubBkash[val] || "—";
+    });
 
     // Simple validation helper
     function markError(el) {
@@ -638,7 +627,7 @@
       setTimeout(() => el.classList.remove("input-error"), 2200);
     }
 
-    // Show toast message
+    // Show toast
     function showToast(message, isError = false) {
       toast.textContent = message;
       toast.classList.toggle('error', isError);
@@ -646,12 +635,13 @@
       setTimeout(() => toast.style.display = "none", 3000);
     }
 
+    // Form submission
     form.addEventListener("submit", (e) => {
       e.preventDefault();
 
-      // required fields ids
       const requiredIds = ["clubSelect", "department", "batch", "section", "fullname", "studentId", "phone", "email"];
       let ok = true;
+
       for (const id of requiredIds) {
         const el = document.getElementById(id);
         if (!el) continue;
@@ -659,65 +649,52 @@
         if (!value) {
           ok = false;
           markError(el);
-          el.focus();
           alert("Please fill: " + (el.previousElementSibling ? el.previousElementSibling.innerText : id));
+          el.focus();
           break;
         }
-        // phone pattern check
-        if (id === "phone") {
-          const pattern = /^01[0-9]{9}$/;
-          if (!pattern.test(value)) {
-            ok = false;
-            markError(el);
-            alert("Please enter a valid phone number (11 digits starting with 01).");
-            el.focus();
-            break;
-          }
+        if (id === "phone" && !/^01[0-9]{9}$/.test(value)) {
+          ok = false;
+          markError(el);
+          alert("Please enter a valid phone number (11 digits starting with 01).");
+          el.focus();
+          break;
         }
-        // student id basic check (digits)
-        if (id === "studentId") {
-          if (!/^\d+$/.test(value)) {
-            ok = false;
-            markError(el);
-            alert("Student ID should contain only digits.");
-            el.focus();
-            break;
-          }
+        if (id === "studentId" && !/^\d+$/.test(value)) {
+          ok = false;
+          markError(el);
+          alert("Student ID should contain only digits.");
+          el.focus();
+          break;
         }
-        //email basic check
-        if (id === "email") {
-          const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-          if (!emailPattern.test(value)) {
-            ok = false;
-            markError(el);
-            alert("Please enter a valid email address.");
-            el.focus();
-            break;
-          }
+        if (id === "email" && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+          ok = false;
+          markError(el);
+          alert("Please enter a valid email address.");
+          el.focus();
+          break;
         }
-        //BKash Transaction ID
-        if (id == "Bkash") {
-          const bkashValue = document.getElementById("Bkash").value.trim();
-          if (bkashValue && !/^[0-9A-Z]{10}$/.test(bkashValue)) {
-            ok = false;
-            markError(el);
-            alert("Bkash Transaction ID should be 10 characters (digits and letters).");
-            el.focus();
-            break;
-          }
-        }
+      }
+
+      // Transaction ID check
+      const trxIdEl = document.getElementById("Bkash");
+      if (trxIdEl && trxIdEl.value.trim() && !/^[0-9A-Z]{10}$/.test(trxIdEl.value.trim())) {
+        ok = false;
+        markError(trxIdEl);
+        alert("Bkash Transaction ID should be 10 characters (digits and letters).");
+        trxIdEl.focus();
       }
 
       if (!ok) return;
 
-      // Disable submit button
       submitBtn.disabled = true;
       submitBtn.textContent = "Sending...";
 
-      // capture submitted data
+      // Prepare data
       const data = {
         club: clubSelect.value,
         fee: clubFeeMap[clubSelect.value] || null,
+        bkashNumber: bkashDisplay.textContent,
         department: document.getElementById("department").value,
         batch: document.getElementById("batch").value,
         section: document.getElementById("section").value,
@@ -725,10 +702,9 @@
         studentId: document.getElementById("studentId").value.trim(),
         phone: document.getElementById("phone").value.trim(),
         email: document.getElementById("email").value.trim(),
-        note: document.getElementById("Bkash").value.trim()
+        trxId: trxIdEl ? trxIdEl.value.trim() : ''
       };
 
-      // Prepare template parameters for EmailJS - matching your template variables exactly
       const templateParams = {
         student_name: data.fullname,
         student_id: data.studentId,
@@ -739,41 +715,31 @@
         email: data.email,
         phone: data.phone,
         fee: data.fee,
-        Bkash: data.note || 'Not Provided'
+        bkash_number: data.bkashNumber,
+        bkash_trx: data.trxId || 'Not Provided'
       };
 
-      console.log("submit payload:", data);
-      console.log("EmailJS params:", templateParams);
-
-      // Send email using EmailJS
+      // Send email
       emailjs.send('service_s74zlvr', 'template_n0wksf3', templateParams)
-        .then(function(response) {
-          console.log('SUCCESS!', response.status, response.text);
+        .then(function (response) {
           showToast('Form submitted successfully! ✓');
-          
-          // Reset form
           form.reset();
           topLogo.src = "images/default.png";
           topLogo.onerror = function () { this.src = defaultLogoSVG; };
           feeBox.textContent = "Membership fee: —";
-          
-          // Re-enable submit button
+          bkashDisplay.textContent = "—";
           submitBtn.disabled = false;
           submitBtn.textContent = "Submit";
-        }, function(error) {
-          console.error('EmailJS Error Details:', error);
-          console.error('Error Status:', error.status);
-          console.error('Error Text:', error.text);
-          alert('EmailJS Error: ' + error.text + '\nStatus: ' + error.status + '\nPlease check console for details.');
+        }, function (error) {
+          console.error(error);
+          alert('Failed to send email. Check console for details.');
           showToast('Failed to send email. Please try again.', true);
-          
-          // Re-enable submit button
           submitBtn.disabled = false;
           submitBtn.textContent = "Submit";
         });
     });
 
-    // Navbar toggle functionality
+    // Navbar toggle
     const navbarToggle = document.getElementById("navbarToggle");
     const navbarMenu = document.getElementById("navbarMenu");
 
@@ -781,12 +747,12 @@
       navbarMenu.classList.toggle("active");
     });
 
-    // Close menu when clicking outside
     document.addEventListener("click", (e) => {
       if (!navbarToggle.contains(e.target) && !navbarMenu.contains(e.target)) {
         navbarMenu.classList.remove("active");
       }
     });
+
   </script>
 </body>
 

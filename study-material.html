@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Study Materials — ClassMate</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="study-material.css">
+</head>
+<body>
+  <!-- Navbar -->
+  <nav>
+    <div class="navbar-container">
+      <div class="nav-logo">
+        <div class="heading"><span>Study </span>Resources</div>
+      </div>
+      <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('active')">
+        <i class="fas fa-bars"></i>
+      </button>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="PreviousQ.html">Question Bank</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <section class="resource-section">
+      <h2>Study Materials</h2>
+      <p class="notes">Browse and download class PDFs, watch video links, or follow external resources.</p>
+
+      <div class="search-container">
+        <input id="smSearch" type="search" class="search-input" placeholder="Search by title, description, type or filename">
+        <button id="smClear" type="button" class="clear-btn">Clear</button>
+      </div>
+
+      <div id="smMeta" class="resource-meta">Showing all approved resources .</div>
+      <div id="smList" class="resource-list"></div>
+    </section>
+  </div>
+
+  <footer>
+    <div class="footer-bottom">
+      <div class="copyright">
+        <p>&copy; 2025 ClassMate by SRM Technologies. All rights reserved.</p>
+      </div>
+      <div class="social-links">
+        <span>Follow us:</span>
+        <a href="https://www.facebook.com" target="_blank" aria-label="Facebook">
+          <i class="fab fa-facebook-f"></i>
+        </a>
+        <a href="https://www.twitter.com" target="_blank" aria-label="Twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+        <a href="https://www.instagram.com" target="_blank" aria-label="Instagram">
+          <i class="fab fa-instagram"></i>
+        </a>
+        <a href="https://www.linkedin.com" target="_blank" aria-label="LinkedIn">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="study-material.js"></script>
+</body>
+</html>

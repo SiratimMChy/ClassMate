@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Admin Dashboard — ClassMate</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="navbar-container">
+      <div class="navbar-logo">
+        <h2>ClassMate <span style="color:#FF4500">Admin</span></h2>
+      </div>
+      <ul class="navbar-menu" id="navbarMenu">
+        <li><a href="index.html"> Home</a></li>
+        <li><a href="admin.html">Dashboard</a></li>
+        <li><a href="submitQ.html">Submit</a></li>
+      </ul>
+      <div class="navbar-toggle" id="navbarToggle">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </div>
+    </div>
+  </nav>
+
+  <main class="admin-main container">
+    <h2 style="margin-top:1rem">Administrator Dashboard</h2>
+    <p class="notes">Quick access to admin tasks. Click a card to open the corresponding management page.</p>
+
+    <div class="cards">
+      <div class="card">
+        <h3>Question Approvals</h3>
+        <p>Review submitted exam questions, approve approved ones so they appear on the site, or reject unwanted submissions.</p>
+        <div class="card-actions">
+          <a href="admin-approve.html">Open Approvals</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Manage Study Resources</h3>
+        <p>Frontend UI to add and organize study resources (PDFs, links, notes).</p>
+        <div class="card-actions">
+          <a href="admin-resources.html">Open Resources</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="admin-footer">
+    <div class="footer-bottom">
+      <div class="footer-bottom-content">
+        <div class="copyright">
+          <p>&copy; 2025 Class Mate by SRM Technologies. All rights reserved.</p>
+        </div>
+        <div class="social-links">
+          <span>Follow us:</span>
+          <a href="https://www.facebook.com" target="_blank" aria-label="Facebook">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+          <a href="https://www.twitter.com" target="_blank" aria-label="Twitter">
+            <i class="fab fa-twitter"></i>
+          </a>
+          <a href="https://www.instagram.com" target="_blank" aria-label="Instagram">
+            <i class="fab fa-instagram"></i>
+          </a>
+          <a href="https://www.linkedin.com" target="_blank" aria-label="LinkedIn">
+            <i class="fab fa-linkedin-in"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Navbar toggle functionality
+    const navbarToggle = document.getElementById("navbarToggle");
+    const navbarMenu = document.getElementById("navbarMenu");
+
+    navbarToggle.addEventListener("click", () => {
+      navbarMenu.classList.toggle("active");
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener("click", (e) => {
+      if (!navbarToggle.contains(e.target) && !navbarMenu.contains(e.target)) {
+        navbarMenu.classList.remove("active");
+      }
+    });
+  </script>
+</body>
+</html>
