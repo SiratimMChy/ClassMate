@@ -19,7 +19,7 @@ body {
 }
 
 .main-container {
-   background: linear-gradient(135deg, #0190fd, #0099ff,#00ccff);
+    background: linear-gradient(135deg, #585a5c, #3a3535, #2c3132);
 
     color: white;
     display: flex;
@@ -75,7 +75,7 @@ body {
 .gpa-display {
     font-weight: 600;
     color: #383c47;
-    background-color: #e0f2fe;
+    background-color: #d5eeff;
     border-radius: 10px;
     text-align: center;
     margin: 0;
@@ -134,7 +134,7 @@ body {
     border-radius: 8px;
     /*background-color: #ff8f2c;*/
     /*background-color: #3941d4;*/
-    background-color: #FF7518;
+    background-color: #ff6600;
     color: white;
     font-size: 16px;
     cursor: pointer;
@@ -148,7 +148,7 @@ body {
 }
 
 .course-details {
-    background-color: #e0f2fe;
+    background-color: #d5eeff;
     color: black;
     border-radius: 8px;
     padding: 10px;
@@ -227,37 +227,37 @@ footer p {
     align-items: center;
 }
 
-    footer .social-links {
-      display: flex;
-      gap: 15px;
-      align-items: center;
-      justify-content: center;
-    }
+footer .social-links {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    justify-content: center;
+}
 
-    footer .social-links span {
-      margin-right: 5px;
-      font-size: 0.95em;
-    }
+footer .social-links span {
+    margin-right: 5px;
+    font-size: 0.95em;
+}
 
-    footer .social-links a {
-      color: white;
-      font-size: 1.2em;
-      transition: all 0.3s;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 35px;
-      height: 35px;
-      border-radius: 50%;
-      background-color: rgba(255, 255, 255, 0.1);
-      text-decoration: none;
-    }
+footer .social-links a {
+    color: white;
+    font-size: 1.2em;
+    transition: all 0.3s;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.1);
+    text-decoration: none;
+}
 
-    footer .social-links a:hover {
-      color: orangered;
-      background-color: rgba(255, 69, 0, 0.2);
-      transform: translateY(-3px);
-    }
+footer .social-links a:hover {
+    color: rgb(255, 94, 35);
+    background-color: rgba(255, 69, 0, 0.2);
+    transform: translateY(-3px);
+}
 
 
 
@@ -302,7 +302,7 @@ footer p {
     h1 {
         font-size: 1.75rem;
     }
-    
+
 }
 
 /*Mobile Style*/
@@ -390,6 +390,7 @@ footer p {
         font-size: 11px;
     }
 }
+
 .navbar {
     background-color: #ffffff;
     color: rgb(0, 0, 0);
@@ -469,7 +470,7 @@ footer p {
     }
 
     .navbar-menu li {
-        margin: 12px ;
+        margin: 12px;
         text-align: right;
     }
 

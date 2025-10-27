@@ -176,5 +176,32 @@ saveBtn.addEventListener("click", async () => {
     resourceMessage.textContent = "Upload failed. Try again.";
   }
 });
+// ✅ Fixed Navbar Toggle Button Logic
+document.addEventListener('DOMContentLoaded', () => {
+  const mobileToggle = document.getElementById('mobileToggle');
+  const navLinks = document.getElementById('navLinks');
 
-export {};
+  // Toggle menu open/close
+  mobileToggle.addEventListener('click', (e) => {
+    e.stopPropagation();
+    mobileToggle.classList.toggle('active');
+    navLinks.classList.toggle('active');
+  });
+
+  // Close menu when clicking outside
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('.navbar-container')) {
+      mobileToggle.classList.remove('active');
+      navLinks.classList.remove('active');
+    }
+  });
+
+  // Close menu when clicking a link
+  navLinks.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      mobileToggle.classList.remove('active');
+      navLinks.classList.remove('active');
+    });
+  });
+});
+export { };

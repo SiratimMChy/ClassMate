@@ -14,21 +14,31 @@
       <div class="nav-logo">
         <div class="heading">ClassMate <span style="color:var(--pink)">Admin</span></div>
       </div>
-      <div class="nav-links">
+      <div class="nav-links" id="navLinks">
         <a href="index.html">Home</a>
         <a href="admin.html">Dashboard</a>
         <a href="submitQ.html">Submit</a>
       </div>
+      <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
     </div>
   </nav>
 
   
   <main class="admin-main container">
     <section class="notes">
-      <i class="fas fa-info-circle"></i> Only user in the admin UID can access this page. 
+      Only user in the admin UID can access this page. 
       Approve will mark the question as approved so it becomes available when fetching. 
       Reject will remove it.
     </section>
+
+    <h2 class="section-heading">
+      <i class="fas fa-clock"></i>
+      Pending Questions
+    </h2>
 
     <div id="pendingList" class="pending-list">
       <p class="empty">
@@ -44,4 +54,3 @@
   <script type="module" src="admin.js"></script>
 </body>
 </html>
-

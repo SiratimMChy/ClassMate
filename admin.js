@@ -61,7 +61,7 @@ function renderPending(items) {
     header.className = 'pending-header';
 
     const titleArea = document.createElement('div');
-    
+
     const title = document.createElement('h3');
     title.className = 'pending-title';
     title.textContent = (data.courseCode || '—') + ' — ' + (data.courseTitle || 'Untitled');
@@ -174,4 +174,28 @@ signOutBtn?.addEventListener('click', async () => {
     console.error(err);
     alert('Failed to sign out.');
   }
+});
+document.addEventListener('DOMContentLoaded', () => {
+  const mobileToggle = document.getElementById('mobileToggle');
+  const navLinks = document.getElementById('navLinks');
+
+  mobileToggle.addEventListener('click', (e) => {
+    e.stopPropagation();
+    mobileToggle.classList.toggle('active');
+    navLinks.classList.toggle('active');
+  });
+
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('.navbar-container')) {
+      mobileToggle.classList.remove('active');
+      navLinks.classList.remove('active');
+    }
+  });
+
+  navLinks.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      mobileToggle.classList.remove('active');
+      navLinks.classList.remove('active');
+    });
+  });
 });

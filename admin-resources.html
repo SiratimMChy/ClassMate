@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Admin — Manage Study Resources</title>
   <link rel="stylesheet" href="admin-style.css">
+ 
 </head>
+
 <body>
   <!-- Navbar -->
   <nav class="admin-nav">
@@ -13,24 +16,31 @@
       <div class="nav-logo">
         <div class="heading">ClassMate <span style="color:#FF4500">Admin</span></div>
       </div>
-      <div class="nav-links">
+      <div class="nav-links" id="navLinks">
         <a href="index.html">Home</a>
         <a href="admin.html">Dashboard</a>
         <a href="submitQ.html">Submit</a>
       </div>
+      <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
     </div>
   </nav>
 
+  <!-- Rest of your code remains unchanged -->
   <main class="admin-main container">
     <h2>Manage Study Resources </h2>
 
-
     <!-- Frontend form (no backend wiring) -->
-    <section id="add" style="margin-top:1.25rem;background:#fff;padding:1rem;border-radius:8px;box-shadow:0 8px 20px rgba(0,0,0,0.06)">
+    <section id="add"
+      style="margin-top:1.25rem;background:#fff;padding:1rem;border-radius:8px;box-shadow:0 8px 20px rgba(0,0,0,0.06)">
       <h3>Add Study Resource</h3>
       <form id="resourceForm">
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.75rem">
-          <input type="text" id="resTitle" placeholder="Title" required style="padding:8px;border-radius:6px;border:1px solid #ddd">
+          <input type="text" id="resTitle" placeholder="Title" required
+            style="padding:8px;border-radius:6px;border:1px solid #ddd">
           <select id="resType" style="padding:8px;border-radius:6px;border:1px solid #ddd">
             <option value="pdf">soft copy or notes(PDF)</option>
             <option value="video">Video Link (YouTube)</option>
@@ -39,7 +49,8 @@
         </div>
 
         <div style="margin-top:0.75rem">
-          <textarea id="resDesc" rows="3" placeholder="Short description (optional)" style="width:100%;padding:8px;border-radius:6px;border:1px solid #ddd"></textarea>
+          <textarea id="resDesc" rows="3" placeholder="Short description (optional)"
+            style="width:100%;padding:8px;border-radius:6px;border:1px solid #ddd"></textarea>
         </div>
 
         <!-- PDF upload -->
@@ -51,12 +62,16 @@
 
         <!-- Video / Link input -->
         <div id="linkRow" style="margin-top:0.75rem;display:none;">
-          <input type="url" id="resLink" placeholder="https://example.com/your-video-or-link" style="width:100%;padding:8px;border-radius:6px;border:1px solid #ddd">
+          <input type="url" id="resLink" placeholder="https://example.com/your-video-or-link"
+            style="width:100%;padding:8px;border-radius:6px;border:1px solid #ddd">
         </div>
 
         <div style="margin-top:0.75rem;display:flex;gap:0.5rem">
-          <button type="button" id="saveResource" style="background:#1e90ff;color:#fff;border:none;padding:8px 12px;border-radius:6px;cursor:pointer">Save </button>
-          <button type="reset" id="resetForm" style="padding:8px 12px;border-radius:6px;border:1px solid #ddd;">Reset</button>
+          <button type="button" id="saveResource"
+            style="background:#1e90ff;color:#fff;border:none;padding:8px 12px;border-radius:6px;cursor:pointer">Save
+          </button>
+          <button type="reset" id="resetForm"
+            style="padding:8px 12px;border-radius:6px;border:1px solid #ddd;">Reset</button>
         </div>
         <p id="resourceMessage" style="color:#6b7280;margin-top:0.6rem"></p>
       </form>
@@ -65,8 +80,10 @@
     <section id="list" style="margin-top:1rem">
       <h3>Resource List</h3>
       <div style="margin-top:0.6rem;display:flex;gap:0.5rem;align-items:center;">
-        <input id="resourceSearch" type="search" placeholder="Search resources by title, description, type or filename" style="flex:1;padding:8px;border-radius:6px;border:1px solid #ddd">
-        <button id="clearSearch" type="button" style="padding:8px 10px;border-radius:6px;border:1px solid #ddd;background:#fff;cursor:pointer">Clear</button>
+        <input id="resourceSearch" type="search" placeholder="Search resources by title, description, type or filename"
+          style="flex:1;padding:8px;border-radius:6px;border:1px solid #ddd">
+        <button id="clearSearch" type="button"
+          style="padding:8px 10px;border-radius:6px;border:1px solid #ddd;background:#fff;cursor:pointer">Clear</button>
       </div>
       <div style="display:grid;gap:0.6rem;margin-top:0.6rem" id="resourceListHolder">
         <!-- dynamic resource list will be injected here -->
@@ -74,11 +91,13 @@
     </section>
   </main>
 
-   <footer class="admin-footer">
-    <small><i class="fas fa-shield-alt"></i> Admin Console | &copy; 2025 Class Mate by SRM Technologies. All rights reserved.</small>
+  <footer class="admin-footer">
+    <small><i class="fas fa-shield-alt"></i> Admin Console | &copy; 2025 Class Mate by SRM Technologies. All rights
+      reserved.</small>
   </footer>
 
   <script type="module" src="admin-resources.js"></script>
+ 
 </body>
-</html>
 
+</html>
