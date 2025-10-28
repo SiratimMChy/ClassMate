@@ -10,11 +10,8 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" />
   <!-- CSS file link -->
   <link rel="stylesheet" href="mainPageStylesheet.css" />
+  <link rel="stylesheet" href="register.css" />
   <script type="module" src="register.js" defer></script>
-<link rel="stylesheet" href="register.css" />
-  <style>
-    
-  </style>
 </head>
 
 <body>
@@ -30,7 +27,20 @@
       <input type="text" placeholder="Student ID" name="student_id" class="box" id="istudentid" required>
       <div id="estudentid" class="error"></div>
 
-      <input type="text" placeholder="Department" name="department" class="box" id="idept" required>
+      <!-- Department dropdown -->
+      <select name="department" class="box" id="idept" required>
+        <option value="">Select Department</option>
+        <option value="CSE">Computer Science and Engineering (CSE)</option>
+        <option value="EEE">Electrical and Electronic Engineering (EEE)</option>
+        <option value="LAW">Law (LAW)</option>
+        <option value="BBA">Business Administration (BBA)</option>
+        <option value="CE">Civil Engineering (CE)</option>
+        <option value="THM">Tourism and Hospitality Management (THM)</option>
+        <option value="ENG">English (ENG)</option>
+        <option value="MPH">Public Health (MPH)</option>
+        <option value="IST">Information Science and Technology (IST)</option>
+        <option value="ARC">Architecture (ARC)</option>
+      </select>
       <div id="edept" class="error"></div>
 
       <input type="text" placeholder="Batch" name="batch" class="box" id="ibatch" required>
@@ -55,18 +65,18 @@
       <p>Already have an account? <a href="login.html">Login here</a></p>
     </div>
   </section>
- <script>
-  const togglePass = document.getElementById('togglePass');
-  const passwordInput = document.getElementById('ipass');
 
-  togglePass.addEventListener('click', function () {
-    const isHidden = passwordInput.type === 'password';
-    passwordInput.type = isHidden ? 'text' : 'password';
-    this.classList.toggle('fa-eye');
-    this.classList.toggle('fa-eye-slash');
-  });
-</script>
+  <script>
+    const togglePass = document.getElementById('togglePass');
+    const passwordInput = document.getElementById('ipass');
+
+    togglePass.addEventListener('click', function () {
+      const isHidden = passwordInput.type === 'password';
+      passwordInput.type = isHidden ? 'text' : 'password';
+      this.classList.toggle('fa-eye');
+      this.classList.toggle('fa-eye-slash');
+    });
+  </script>
 
 </body>
-
 </html>

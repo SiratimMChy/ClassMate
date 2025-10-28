@@ -31,21 +31,21 @@ class RegistrationHandler {
     const validations = [
       {
         value: formData.fname,
-        pattern: /^[a-zA-Z.\s]{2,20}$/,
+        pattern: /^[a-zA-Z.\s]{3,20}$/,
         errorElement: "efname",
-        errorMessage: "Username must be 2-20 letters (letters, dot, or space only)"
+        errorMessage: "Username must be 3-20 letters (letters, dot, or space only)"
       },
       {
         value: formData.studentId,
-        pattern: /^\d{10}$/,
+        pattern: /^(?:\d{10}|\d{16})$/,
         errorElement: "estudentid",
-        errorMessage: "Student ID must be exactly 10 digits"
+        errorMessage: "Student ID must be either 10 or 16 digits long",
       },
       {
         value: formData.dept,
-        pattern: /^(cse|eee|law)$/i,
+        pattern: /^(cse|eee|law|bba|ce|thm|eng|mph|ist|arc)$/i,
         errorElement: "edept",
-        errorMessage: "Department must be one of: cse, eee, law"
+        errorMessage: "Department must be one of: CSE, EEE, LAW, BBA, CE, THM, ENG, MPH, IST, ARC"
       },
       {
         value: formData.batch,
