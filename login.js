@@ -104,7 +104,7 @@ class LoginHandler {
       }
 
       alert("✅ Login successful!");
-      window.location.href = "index.html"; // session.js updates navbar
+      window.location.href = "index.html"; 
     } catch (error) {
       console.error("Firebase Auth Error:", error.code, error.message);
       switch (error.code) {
