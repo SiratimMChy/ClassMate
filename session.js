@@ -41,7 +41,7 @@ function updateNavBar(user) {
  
         const signOutItem = document.createElement('li');
         const signOutLink = document.createElement('a');
-        signOutLink.href = "#";
+        signOutLink.href = "login.html";
         signOutLink.textContent = "Sign Out";
         signOutLink.addEventListener('click', async (e) => {
             e.preventDefault();
