@@ -62,8 +62,6 @@ languageSelect.addEventListener("change", function () {
     currentLang = this.value;
     editorsContainer.innerHTML = '<div class="editor-header">Editor</div>';
     editors = {};
-    iframe.style.display = "none";
-    ioBox.style.display = "block";
 
     if (currentLang === "html") {
         ioBox.style.display = "none";
@@ -88,6 +86,9 @@ languageSelect.addEventListener("change", function () {
 
         updateLivePreview();
     } else {
+        iframe.style.display = "none";
+        ioBox.style.display = "block";
+
         const ta = document.createElement('textarea');
         ta.value = languageTemplates[currentLang] || '';
         const wrapper = document.createElement('div');
@@ -103,15 +104,13 @@ languageSelect.addEventListener("change", function () {
     }
 });
 
-// HTML/CSS/JS live preview
+
 function updateLivePreview() {
     if (!editors['html']) return;
     const html = editors['html'].getValue();
     const css = editors['css'] ? `<style>${editors['css'].getValue()}</style>` : '';
     const js = editors['js'] ? `<script>${editors['js'].getValue()}<\/script>` : '';
     iframe.srcdoc = html + css + js;
-    iframe.style.display = "block";
-    ioBox.style.display = "none";
 }
 
 // Run code using Judge0 API
@@ -146,10 +145,10 @@ runBtn.addEventListener("click", async () => {
 
         const result = await res.json();
         if (result.stdout) ioBox.value = result.stdout;
-        else if (result.stderr) ioBox.value = "❌ Runtime Error:\n" + result.stderr;
+        else if (result.stderr) ioBox.value = "⚠️ Runtime Error:\n" + result.stderr;
         else if (result.compile_output) ioBox.value = "⚠️ Compile Error:\n" + result.compile_output;
         else ioBox.value = "⚠️ No output or invalid response.";
     } catch (err) {
-        ioBox.value = "🚨 Connection error:\n" + err.message;
+        ioBox.value = "Connection error:\n" + err.message;
     }
 });
