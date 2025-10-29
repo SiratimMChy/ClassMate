@@ -132,8 +132,6 @@ body {
     padding: 12px 20px;
     border: none;
     border-radius: 8px;
-    /*background-color: #ff8f2c;*/
-    /*background-color: #3941d4;*/
     background-color: #ff6600;
     color: white;
     font-size: 16px;
@@ -305,7 +303,6 @@ footer .social-links a:hover {
 
 }
 
-/*Mobile Style*/
 
 @media (max-width: 480px) {
     body {
@@ -373,7 +370,7 @@ footer .social-links a:hover {
 
 }
 
-/*Small Screen*/
+
 
 @media (max-width:360) {
     .main-container {
@@ -452,7 +449,6 @@ footer .social-links a:hover {
     transition: 0.3s;
 }
 
-/* Mobile styles for navbar */
 @media (max-width: 768px) {
     .navbar-menu {
         display: none;

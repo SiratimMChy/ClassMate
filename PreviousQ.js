@@ -23,13 +23,11 @@ const semesterOrder = { "Fall": 1, "Summer": 2, "Spring": 3 };
 
 document.body.style.display = "none";
 
-// Check if user is admin from localStorage
 function isAdmin() {
   const localUser = JSON.parse(localStorage.getItem("user"));
   return localUser?.role === "admin";
 }
 
-// Auth check
 onAuthStateChanged(auth, (user) => {
   if (!user && !isAdmin()) {
     alert("⚠️ You must be logged in to view previous questions.");
@@ -62,7 +60,7 @@ function fetchQuestions(callback) {
   );
 }
 
-// Filter based on user input
+
 function filterQuestions(questions) {
   const courseCode = document.getElementById("course-code").value.trim().toLowerCase();
   const courseTitle = document.getElementById("course-title").value.trim().toLowerCase();
@@ -81,7 +79,7 @@ function filterQuestions(questions) {
   });
 }
 
-// Sort questions (year ascending, then semester order)
+
 function sortQuestions(questions) {
   return questions.sort((a, b) => {
     if (a.year !== b.year) return a.year - b.year;
@@ -89,7 +87,7 @@ function sortQuestions(questions) {
   });
 }
 
-// Display results
+
 function displayQuestions(questions) {
   placeholder.innerHTML = "";
 

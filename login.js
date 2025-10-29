@@ -62,10 +62,9 @@ class LoginHandler {
 
     if (!this.validateInput(email, password)) return false;
 
-    // ✅ Admin login check (custom admin bypass)
     if (email === "admin_classmate@gmail.com") {
       if (password === "Admin@1234") {
-        // Save session for admin
+      
         const user = { email, role: "admin" };
         localStorage.setItem("user", JSON.stringify(user));
         alert("✅ Welcome, Admin!");
@@ -93,7 +92,7 @@ class LoginHandler {
         return false;
       }
 
-      // Save user session to localStorage
+    
       localStorage.setItem("user", JSON.stringify({ email, role: "student" }));
 
       if (rememberMe) {

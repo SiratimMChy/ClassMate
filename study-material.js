@@ -1,7 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
 import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-database.js";
 
-// Firebase config (reuse existing project's config)
 const firebaseConfig = {
   apiKey: "AIzaSyBw9ZTVtz20p-Q6su5hVMHP0JrI4xmiL54",
   authDomain: "classmate-2c272.firebaseapp.com",
@@ -20,7 +19,7 @@ const smClear = document.getElementById('smClear');
 const smList = document.getElementById('smList');
 const smMeta = document.getElementById('smMeta');
 
-let allResources = []; // array of { id, data }
+let allResources = [];
 let timer = null;
 
 function byTitleAsc(a, b) {
@@ -42,7 +41,6 @@ function matches(q, item) {
 function renderList(filterText) {
   const q = (typeof filterText === 'string') ? filterText.trim() : (smSearch ? smSearch.value.trim() : '');
   const filtered = allResources.filter(item => matches(q, item));
-  // already sorted
   smList.innerHTML = '';
   if (!filtered.length) {
     smList.innerHTML = '<div class="resource-card">No resources found.</div>';
@@ -100,7 +98,6 @@ function renderList(filterText) {
   smMeta.textContent = `Showing ${filtered.length} of ${allResources.length} approved resource(s).`;
 }
 
-// Listen to resources and prepare sorted list (approved only)
 const resourcesRef = ref(database, 'resources');
 onValue(resourcesRef, (snap) => {
   const data = snap.val() || {};
@@ -108,17 +105,14 @@ onValue(resourcesRef, (snap) => {
   for (const k of Object.keys(data)) {
     const r = data[k];
     if (!r) continue;
-    // only show approved entries
     if (r.approved !== true) continue;
     arr.push({ id: k, data: r });
   }
-  // sort alphabetically by title
   arr.sort(byTitleAsc);
   allResources = arr;
   renderList();
 });
 
-// Search handlers (debounced)
 if (smSearch) {
   smSearch.addEventListener('input', () => {
     if (timer) clearTimeout(timer);
@@ -132,4 +126,4 @@ if (smClear) {
   });
 }
 
-export {}; // module
+export {};

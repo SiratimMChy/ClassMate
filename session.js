@@ -1,4 +1,3 @@
-// session.js
 import {
     getAuth,
     onAuthStateChanged,
@@ -29,18 +28,17 @@ function updateNavBar(user) {
 
     userDropdownMenu.innerHTML = '';
 
-    // Check localStorage first (custom admin)
     let currentUser = JSON.parse(localStorage.getItem('user'));
 
     if (currentUser) {
         const isAdmin = currentUser.role === 'admin';
 
-        // Show/hide Admin button
+  
         adminOnlyButtons.forEach(btn => {
             btn.style.display = isAdmin ? 'inline-block' : 'none';
         });
 
-        // Show Sign Out option
+ 
         const signOutItem = document.createElement('li');
         const signOutLink = document.createElement('a');
         signOutLink.href = "#";
@@ -48,10 +46,10 @@ function updateNavBar(user) {
         signOutLink.addEventListener('click', async (e) => {
             e.preventDefault();
 
-            // Remove localStorage session for admin or student
+       
             localStorage.removeItem('user');
 
-            // Sign out from Firebase if logged in
+        
             try {
                 if (!isAdmin) {
                     await signOut(auth);
@@ -67,7 +65,6 @@ function updateNavBar(user) {
         userDropdownMenu.appendChild(signOutItem);
 
     } else {
-        // No user logged in
         adminOnlyButtons.forEach(btn => btn.style.display = 'none');
 
         const loginItem = document.createElement('li');
@@ -81,10 +78,8 @@ function updateNavBar(user) {
     }
 }
 
-// Monitor Firebase auth state
 onAuthStateChanged(auth, (user) => {
     updateNavBar(user);
 });
 
-// Also call once for admin from localStorage
 updateNavBar();

@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Join a Club — Class Mate</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <!-- EmailJS SDK -->
+ 
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
   <style>
     * {
@@ -477,7 +477,6 @@
         </select>
       </div>
 
-      <!-- Middle / other columns -->
       <div class="form-group">
         <label for="fullname">Full Name <small style="color:#9be7e6">* </small></label>
         <input id="fullname" type="text" placeholder="Your full name" required />
@@ -508,7 +507,6 @@
         <input id="Bkash" type="text" placeholder="10-digit Transaction ID" maxlength="10" />
       </div>
 
-      <!-- Actions: Submit -->
       <div class="actions span-3" style="justify-content:space-between; align-items:center;">
         <div style="color:#bffaff; font-weight:600">Selected Club Logo shown above</div>
         <div>
@@ -540,12 +538,10 @@
   <div class="toast" id="toast">Form submitted ✓</div>
 
   <script>
-    // Initialize EmailJS
     (function () {
       emailjs.init("hpIFnib75FuQb89lS");
     })();
 
-    /* club -> file mapping */
     const clubLogoMap = {
       LUSC: "images/sports_club_logo.jpeg",
       LUPS: "images/photography_club_logo.jpeg",
@@ -585,7 +581,7 @@
       LUSS: "01563777626",
     };
 
-    // DOM elements
+
     const topLogo = document.getElementById("topLogo");
     const clubSelect = document.getElementById("clubSelect");
     const feeBox = document.getElementById("feeBox");
@@ -594,19 +590,16 @@
     const submitBtn = document.getElementById("submitBtn");
     const bkashDisplay = document.getElementById("bkashDisplay");
 
-    // Default fallback SVG logo
     const defaultLogoSVG = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cdefs%3E%3ClinearGradient id='grad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%2300e0ff;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%2300b3ff;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Ccircle cx='100' cy='100' r='90' fill='url(%23grad)' opacity='0.9'/%3E%3Ctext x='100' y='115' text-anchor='middle' font-size='48' fill='%23fff' font-family='Arial, sans-serif' font-weight='bold'%3ELU%3C/text%3E%3Ctext x='100' y='145' text-anchor='middle' font-size='16' fill='%23fff' font-family='Arial, sans-serif'%3EClubs%3C/text%3E%3C/svg%3E";
 
-    // Handle logo load errors
+   
     topLogo.addEventListener("error", function () {
       this.src = defaultLogoSVG;
     });
 
-    // Update fee, logo, and Bkash number when club changes
     clubSelect.addEventListener("change", () => {
       const val = clubSelect.value;
 
-      // Logo
       if (val && clubLogoMap[val]) {
         topLogo.src = clubLogoMap[val];
       } else {
@@ -614,20 +607,19 @@
         topLogo.onerror = function () { this.src = defaultLogoSVG; };
       }
 
-      // Fee
+   
       feeBox.textContent = "Membership fee: " + (clubFeeMap[val] || "—");
 
-      // Bkash Number
+  
       bkashDisplay.textContent = clubBkash[val] || "—";
     });
 
-    // Simple validation helper
     function markError(el) {
       el.classList.add("input-error");
       setTimeout(() => el.classList.remove("input-error"), 2200);
     }
 
-    // Show toast
+
     function showToast(message, isError = false) {
       toast.textContent = message;
       toast.classList.toggle('error', isError);
@@ -635,7 +627,7 @@
       setTimeout(() => toast.style.display = "none", 3000);
     }
 
-    // Form submission
+
     form.addEventListener("submit", (e) => {
       e.preventDefault();
 
@@ -676,7 +668,6 @@
         }
       }
 
-      // Transaction ID check
       const trxIdEl = document.getElementById("Bkash");
       if (trxIdEl && trxIdEl.value.trim() && !/^[0-9A-Z]{10}$/.test(trxIdEl.value.trim())) {
         ok = false;
@@ -690,7 +681,6 @@
       submitBtn.disabled = true;
       submitBtn.textContent = "Sending...";
 
-      // Prepare data
       const data = {
         club: clubSelect.value,
         fee: clubFeeMap[clubSelect.value] || null,
@@ -719,7 +709,6 @@
         bkash_trx: data.trxId || 'Not Provided'
       };
 
-      // Send email
       emailjs.send('service_s74zlvr', 'template_n0wksf3', templateParams)
         .then(function (response) {
           showToast('Form submitted successfully! ✓');
@@ -739,7 +728,6 @@
         });
     });
 
-    // Navbar toggle
     const navbarToggle = document.getElementById("navbarToggle");
     const navbarMenu = document.getElementById("navbarMenu");
 

@@ -2,7 +2,6 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/12.4.0/firebas
 import { getDatabase, ref, onValue, update, remove } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-database.js";
 import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js";
 
-// Firebase config (must match your project's config)
 const firebaseConfig = {
   apiKey: "AIzaSyBw9ZTVtz20p-Q6su5hVMHP0JrI4xmiL54",
   authDomain: "classmate-2c272.firebaseapp.com",
@@ -17,10 +16,8 @@ const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 const auth = getAuth(app);
 
-// Configure admin UIDs here. Replace with the real admin uid(s) from your auth users.
-const ADMIN_UIDS = [
-  // example: "abc123UIDfromFirebaseAuth"
-];
+
+const ADMIN_UIDS = [];
 
 const pendingListEl = document.getElementById('pendingList');
 const refreshBtn = document.getElementById('refreshBtn');
@@ -28,7 +25,6 @@ const signOutBtn = document.getElementById('signOutBtn');
 
 let currentUser = null;
 
-// -------------------- Local admin check --------------------
 const localAdmin = JSON.parse(localStorage.getItem('user'));
 if (localAdmin && localAdmin.role === 'admin') {
   currentUser = { email: localAdmin.email, role: 'admin', uid: 'localAdmin' };
@@ -38,7 +34,6 @@ if (localAdmin && localAdmin.role === 'admin') {
   });
 }
 
-// -------------------- Functions --------------------
 function renderPending(items) {
   pendingListEl.innerHTML = '';
   const keys = Object.keys(items || {});
@@ -115,9 +110,8 @@ function showAccessDenied() {
   pendingListEl.innerHTML = '<p class="empty">Access denied. You are not an admin.</p>';
 }
 
-// -------------------- Firebase Auth Check --------------------
 onAuthStateChanged(auth, (user) => {
-  if (currentUser) return; // already logged in as local admin
+  if (currentUser) return;
 
   currentUser = user;
   if (!user) {
@@ -134,8 +128,6 @@ onAuthStateChanged(auth, (user) => {
   const questionsRef = ref(database, 'questions');
   onValue(questionsRef, (snapshot) => renderPending(snapshot.val()));
 });
-
-// -------------------- Approve / Reject --------------------
 async function approveQuestion(id) {
   if (!currentUser) return alert('Not signed in.');
   if (!confirm('Approve this question and make it available?')) return;

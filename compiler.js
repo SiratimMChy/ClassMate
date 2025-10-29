@@ -1,4 +1,3 @@
-// Navbar toggle (hamburger)
 const toggler = document.getElementById('toggler');
 const navbar = document.querySelector('.navbar');
 if (toggler && navbar) {
@@ -6,26 +5,22 @@ if (toggler && navbar) {
         navbar.classList.toggle('active');
     });
 }
-
-// Close dropdown automatically on mobile when a link is clicked
 const dropdownLinks = document.querySelectorAll('.dropdown-menu li a');
 
 dropdownLinks.forEach(link => {
     link.addEventListener('click', () => {
-        // Only close on small screens
         if (window.innerWidth <= 865) {
-            toggler.checked = false; // close mobile menu
+            toggler.checked = false; 
         }
 
-        // Optionally, trigger editor language change
+        
         const lang = link.getAttribute('data-lang');
         console.log("Selected language:", lang);
-        // changeEditorLanguage(lang); // call your function here
     });
 });
 
 
-// Language modes for CodeMirror
+
 const languageModes = {
     "71": "python",
     "54": "text/x-c++src",
@@ -35,7 +30,7 @@ const languageModes = {
     "html": "htmlmixed"
 };
 
-// Default templates
+
 const languageTemplates = {
     "71": `# Python example\nprint("Hello, World!")`,
     "54": `#include <bits/stdc++.h>\nusing namespace std;\nint main() {\n    cout << "Hello, World!" << endl;\n    return 0;\n}`,
@@ -49,7 +44,7 @@ const languageTemplates = {
     }
 };
 
-// Setup
+
 let editors = {}, currentLang = "";
 const editorsContainer = document.querySelector(".editor-container");
 const ioBox = document.getElementById("io-box");
@@ -57,7 +52,7 @@ const runBtn = document.querySelector(".run-btn");
 const iframe = document.getElementById("htmlOutput");
 const languageSelect = document.getElementById("language");
 
-// Language selection
+
 languageSelect.addEventListener("change", function () {
     currentLang = this.value;
     editorsContainer.innerHTML = '<div class="editor-header">Editor</div>';
@@ -113,7 +108,6 @@ function updateLivePreview() {
     iframe.srcdoc = html + css + js;
 }
 
-// Run code using Judge0 API
 runBtn.addEventListener("click", async () => {
     if (!currentLang) return alert("Please select a language!");
 

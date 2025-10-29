@@ -14,26 +14,7 @@
   --secondary-color: #E9EEF6;
   --secondary-hover-color: #DBE1EA;
 }
-.light_mode {
-  /* Light mode colors 
-  --text-color: #222;
-  --subheading-color: #A0A0A0;
-  --placeholder-color: #6C6C6C;
-  --primary-color: #FFF;
-  --secondary-color: #E9EEF6;
-  --secondary-hover-color: #DBE1EA;
 
-
-  /* Dark mode colors 
-  --text-color: #E3E3E3;
-  --subheading-color: #828282;
-  --placeholder-color: #A6A6A6;
-  --primary-color: #242424;
-  --secondary-color: #383838;
-  --secondary-hover-color: #444;
-
-  */
-}
 body {
   background: var(--primary-color);
 }
@@ -42,7 +23,7 @@ body {
   max-width: 980px;
 }
 .header {
-  margin-top: calc(70px + 6vh); /* navbar height (60px) + margin + original margin */
+  margin-top: calc(70px + 6vh);
   padding: 1rem;
   overflow-x: hidden;
 }
@@ -138,14 +119,13 @@ body.hide-header .header {
   position: relative;
 }
 
-/* Bot messages - left side */
+
 .message-bubble.bot-message {
   background: var(--secondary-color);
   margin-right: auto;
   border-bottom-left-radius: 0.25rem;
 }
 
-/* User messages - right side */
 .message-bubble.user-message {
   background: #2B5278;
   margin-left: auto;
@@ -178,7 +158,7 @@ body.hide-header .header {
 .chat-list .message.loading .text {
   display: none;
 }
-/* avatar styles removed */
+
 .chat-list .message .icon {
   color: var(--text-color);
   cursor: pointer;
@@ -227,7 +207,7 @@ body.hide-header .header {
   0%, 80%, 100% { transform: scale(0); }
   40% { transform: scale(1); }
 }
-/* avatar and old loading-bar keyframes removed (not used anymore) */
+
 .typing-area {
   position: fixed;
   width: 100%;
@@ -261,7 +241,7 @@ body.hide-header .header {
   width: 100%;
 }
 
-/* Attach preview placed above the input on the left */
+
 .typing-form .input-row .attach-preview {
   display: flex;
   flex-wrap: wrap;
@@ -330,7 +310,7 @@ body.hide-header .header {
   font-size: 1rem;
   color: var(--text-color);
   padding: 0 1.25rem;
-  padding-right: 160px; /* make room for send button inside the field */
+  padding-right: 160px; 
   border-radius: 28px;
   background: var(--secondary-color);
 }
@@ -367,10 +347,10 @@ body.hide-header .header {
 }
 
 .attach-preview {
-  display: none; /* previews are cleared on send; kept hidden by default */
+  display: none; 
 }
 
-/* Attachments inside message bubbles */
+
 .message-bubble .attachments {
   display: flex;
   gap: 0.5rem;
@@ -427,13 +407,13 @@ body.hide-header .header {
   border: none;
   cursor: pointer;
   position: absolute;
-  right: calc(12px + (44px * 2) + 1.2rem); /* move send left to avoid overlap */
+  right: calc(12px + (44px * 2) + 1.2rem); 
   top: 50%;
   transform: translateY(-50%);
   z-index: 2;
 }
 
-/* Remove any focus outline or shadow that may look like a border */
+
 .typing-form #send-message-button,
 .action-btn {
   box-shadow: none !important;
@@ -450,7 +430,6 @@ body.hide-header .header {
   outline: none !important;
 }
 
-/* Ensure button is clickable even if overlapping the input */
 .typing-form #send-message-button {
   pointer-events: auto;
 }
@@ -460,10 +439,10 @@ body.hide-header .header {
   margin-top: 1rem;
   color: var(--placeholder-color);
 }
-/* Responsive media query code for small screen */
+
 @media (max-width: 768px) {
   .header {
-    margin-top: calc(60px + 4vh); /* Adjust margin for mobile */
+    margin-top: calc(60px + 4vh);
   }
   .header :is(.title, .subtitle) {
     font-size: 2rem;
@@ -480,10 +459,10 @@ body.hide-header .header {
   }
   .typing-form .typing-input {
     padding: 1.1rem 3.5rem 1.1rem 1.2rem;
-    padding-right: 120px; /* reduce send area on small screens */
+    padding-right: 120px; 
   }
   .typing-form #send-message-button {
-    right: calc(12px + 44px); /* nudge send into a better place on small screens */
+    right: calc(12px + 44px);
   }
   .typing-area .icon {
     height: 50px;
@@ -506,7 +485,7 @@ body.hide-header .header {
     left: 0;
     width: 100%;
     height: 60px;
-    z-index: 9999; /* Ensure navbar is above all other elements */
+    z-index: 9999;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
@@ -560,7 +539,6 @@ body.hide-header .header {
     transition: 0.3s;
 }
 
-/* Mobile styles for navbar */
 @media (max-width: 768px) {
     .navbar-menu {
         display: none;
