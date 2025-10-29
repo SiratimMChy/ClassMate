@@ -631,7 +631,7 @@
     form.addEventListener("submit", (e) => {
       e.preventDefault();
 
-      const requiredIds = ["clubSelect", "department", "batch", "section", "fullname", "studentId", "phone", "email"];
+      const requiredIds = ["clubSelect", "department", "batch", "section", "fullname", "studentId", "phone", "email","Bkash"];
       let ok = true;
 
       for (const id of requiredIds) {
@@ -652,7 +652,7 @@
           el.focus();
           break;
         }
-        if (id === "studentId" && !/^\d+$/.test(value)) {
+        if (id === "studentId" && !/^\d{10,16}$/.test(value)) {
           ok = false;
           markError(el);
           alert("Student ID should contain only digits.");
@@ -666,6 +666,14 @@
           el.focus();
           break;
         }
+      if (id === "Bkash" && !/^[0-9A-Z]{10}$/.test(value)) {
+        ok = false;
+        markError(el);
+        alert("Bkash Transaction ID should be exactly 10 characters (digits and capital letters).");
+        el.focus();
+        break;
+      }
+
       }
 
       const trxIdEl = document.getElementById("Bkash");
@@ -677,6 +685,7 @@
       }
 
       if (!ok) return;
+
 
       submitBtn.disabled = true;
       submitBtn.textContent = "Sending...";
@@ -692,7 +701,7 @@
         studentId: document.getElementById("studentId").value.trim(),
         phone: document.getElementById("phone").value.trim(),
         email: document.getElementById("email").value.trim(),
-        trxId: trxIdEl ? trxIdEl.value.trim() : ''
+        trxId: document.getElementById("Bkash").value.trim()
       };
 
       const templateParams = {
@@ -706,7 +715,7 @@
         phone: data.phone,
         fee: data.fee,
         bkash_number: data.bkashNumber,
-        bkash_trx: data.trxId || 'Not Provided'
+        bkash_trx: data.trxId
       };
 
       emailjs.send('service_s74zlvr', 'template_n0wksf3', templateParams)
