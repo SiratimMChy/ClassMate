@@ -37,9 +37,9 @@ class RegistrationHandler {
       },
       {
         value: formData.studentId,
-        pattern: /^(?:\d{10}|\d{16})$/,
+        pattern: /^(018[2-5][0-9][1-3]\d{10}|(20|21)[1-3]\d{7})$/,
         errorElement: "estudentid",
-        errorMessage: "Student ID must be either 10 or 16 digits long",
+        errorMessage: "Please enter a valid student ID.",
       },
       {
         value: formData.dept,

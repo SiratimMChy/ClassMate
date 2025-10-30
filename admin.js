@@ -154,7 +154,6 @@ async function rejectQuestion(id) {
   }
 }
 
-// -------------------- Buttons --------------------
 refreshBtn?.addEventListener('click', () => window.location.reload());
 
 signOutBtn?.addEventListener('click', async () => {
