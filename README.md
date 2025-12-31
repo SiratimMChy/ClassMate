@@ -25,7 +25,7 @@ By integrating these functionalities, ClassMate reduces dependency on multiple s
 ## 🌐 Live Project
 
 🔗 **Live Demo:**  
-https://your-live-project-link
+https://siratimmchy.github.io/ClassMate
 
 ---
 
