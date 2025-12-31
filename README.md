@@ -99,8 +99,8 @@ https://siratimmchy.github.io/ClassMate
 - Full Stack Devloper
 
 **Contributors:**  
-- Ruhit Dhar Raz – Full Stack Devloper
-- MD. Majedur Rahman – Frontend Devloper
+- Ruhit Dhar Raz – Full Stack Devloper/30%
+- MD. Majedur Rahman – Frontend Devloper/25%
 
 ---
 
