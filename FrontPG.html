@@ -8,31 +8,43 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-    <link rel="stylesheet" href="FrontPG.css">
+    <link rel="stylesheet" href="css/FrontPG.css">
 </head>
 
 <body>
-    <nav>
-        <div class="navbar-container">
-            <div class="nav-logo">
-                <h1 class="heading">Academic<span> Front Page </span>Generator</h1>
-            </div>
-            <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('active')">
-                <i class="fas fa-bars"></i>
-            </button>
-            <div class="nav-links">
-                <a href="index.html"><i class="fas fa-home"></i> Home</a>
-            </div>
-        </div>
-    </nav>
+  <!-- Navbar -->
+  <header id="fpHeader">
+    <div class="fp-nav-container">
+      <a href="index.html" class="fp-nav-logo">
+        <div class="fp-nav-logo-icon"><i class="fas fa-graduation-cap"></i></div>
+        <span>Class<em>Mate</em></span>
+      </a>
+      <nav class="fp-nav-links">
+        <a href="index.html"       class="fp-nav-link"><i class="fas fa-house"></i> Home</a>
+        <a href="aiChatbot.html"   class="fp-nav-link"><i class="fas fa-robot"></i> AI ChatBot</a>
+        <a href="compiler.html"    class="fp-nav-link"><i class="fas fa-code"></i> Compiler</a>
+        <a href="PreviousQ.html"   class="fp-nav-link"><i class="fas fa-book-open"></i> Question Bank</a>
+        <a href="FrontPG.html"     class="fp-nav-link"><i class="fas fa-file-alt"></i> Front Page</a>
+      </nav>
+      <button class="fp-hamburger" id="fpHamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="fp-drawer" id="fpDrawer">
+      <a href="index.html"       class="fp-drawer-link"><i class="fas fa-house"></i> Home</a>
+      <a href="aiChatbot.html"   class="fp-drawer-link"><i class="fas fa-robot"></i> AI ChatBot</a>
+      <a href="compiler.html"    class="fp-drawer-link"><i class="fas fa-code"></i> Compiler</a>
+      <a href="PreviousQ.html"   class="fp-drawer-link"><i class="fas fa-book-open"></i> Question Bank</a>
+      <a href="FrontPG.html"     class="fp-drawer-link"><i class="fas fa-file-alt"></i> Front Page</a>
+    </div>
+  </header>
 
-    <header id="home">
-        <div class="container">
-            <h1><i class="fas fa-graduation-cap"></i> Professional Academic<span style="color: orangered;"> Front Page
-                </span>Generator</h1>
-            <p>Create polished assignment cover pages with ease and precision.</p>
-        </div>
-    </header>
+  <div id="pageHero">
+    <div class="container">
+      <h1><i class="fas fa-graduation-cap"></i> Academic <span style="color:#FF4500;">Front Page</span> Generator</h1>
+      <p>Create polished assignment cover pages with ease and precision.</p>
+    </div>
+  </div>
 
     <main>
         <div class="container">
@@ -273,25 +285,14 @@
     </main>
 
     <!-- Footer -->
-    <footer>
-        <div class="footer-bottom">
-            <div class="footer-bottom-content">
-                <div class="copyright">
-                    <p>&copy; 2025 Class Mate by SRM Technologies. All rights reserved.</p>
-                </div>
-                <div class="social-links">
-                    <span>Follow us:</span>
-                    <a href="https://www.facebook.com" target="_blank" aria-label="Facebook"><i
-                            class="fab fa-facebook-f"></i></a>
-                    <a href="https://www.twitter.com" target="_blank" aria-label="Twitter"><i
-                            class="fab fa-twitter"></i></a>
-                    <a href="https://www.instagram.com" target="_blank" aria-label="Instagram"><i
-                            class="fab fa-instagram"></i></a>
-                    <a href="https://www.linkedin.com" target="_blank" aria-label="LinkedIn"><i
-                            class="fab fa-linkedin-in"></i></a>
-                </div>
-            </div>
-        </div>
+    <footer class="fp-footer">
+      <p>&copy; 2025 <strong>ClassMate</strong>. All rights reserved. Created by <span>SRM Technologies</span>.</p>
+      <div class="fp-footer-socials">
+        <a href="https://www.facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://www.twitter.com"  target="_blank"><i class="fab fa-twitter"></i></a>
+        <a href="https://www.instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.linkedin.com" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+      </div>
     </footer>
 
     <script>
@@ -388,8 +389,31 @@
             pdf.save(type === "group" ? "Group_Assignment_Front_Page.pdf" : "${data.name}_Front_Page.pdf");
         }
     </script>
+
+    <script>
+      // Navbar
+      const fpHeader   = document.getElementById('fpHeader');
+      const fpHamburger = document.getElementById('fpHamburger');
+      const fpDrawer   = document.getElementById('fpDrawer');
+
+      window.addEventListener('scroll', () => fpHeader.classList.toggle('scrolled', window.scrollY > 10));
+      fpHamburger.addEventListener('click', () => {
+        fpHamburger.classList.toggle('open');
+        fpDrawer.classList.toggle('open');
+      });
+      fpDrawer.querySelectorAll('.fp-drawer-link').forEach(l => l.addEventListener('click', () => {
+        fpHamburger.classList.remove('open');
+        fpDrawer.classList.remove('open');
+      }));
+      document.querySelectorAll('.fp-nav-link').forEach(l => {
+        const linkFile = l.getAttribute('href').split('/').pop().split('?')[0];
+        const currentFile = location.pathname.split('/').pop() || 'index.html';
+        if (linkFile === currentFile) l.classList.add('active');
+      });
+    </script>
 </body>
 
 </html>
+
 
 

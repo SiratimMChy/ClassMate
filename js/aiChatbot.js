@@ -1,43 +1,22 @@
-const typingForm = document.querySelector(".typing-form");
-const chatContainer = document.querySelector(".chat-list");
-const suggestions = document.querySelectorAll(".suggestion");
+import { GROQ_API_KEY, GROQ_API_URL, GROQ_MODEL } from "./firebaseConfig.js";
+
+const typingForm      = document.querySelector(".typing-form");
+const chatContainer   = document.getElementById('chatList');
 const deleteChatButton = document.querySelector("#delete-chat-button");
-const attachButton = document.querySelector('#attach-file-button');
-const fileInput = document.querySelector('#file-input');
-const attachPreview = document.querySelector('#attach-preview');
+const attachButton    = document.querySelector('#attach-file-button');
+const fileInput       = document.querySelector('#file-input');
+const attachPreview   = document.querySelector('#attach-preview');
+const welcomeScreen   = document.getElementById('welcomeScreen');
 let validationMessageEl = null;
-let selectedFiles = []; 
+let selectedFiles = [];
 let currentTypingInterval = null;
 let userMessage = null;
 let isResponseGenerating = false;
 
-const API_KEY = "AIzaSyB5y-Cg4R0iF3qEEJ-VDRn2zhUZORpGYHk"; // <-- change this to your real key
-const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${API_KEY}`;
+const API_KEY   = GROQ_API_KEY;
+const API_URL   = GROQ_API_URL;
 
-const testAPIConnection = async () => {
-  try {
-    const response = await fetch(API_URL, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        contents: [{
-          role: "user",
-          parts: [{ text: "Hello" }]
-        }]
-      })
-    });
-    if (!response.ok) {
-      throw new Error(`API test failed: ${response.status} ${response.statusText}`);
-    }
-    console.log('API connection successful');
-    return true;
-  } catch (error) {
-    console.error('API connection test failed:', error);
-    return false;
-  }
-};
+const testAPIConnection = async () => true; // skip pre-flight, let main request handle errors
 
 const fileToBase64 = (file) => {
   return new Promise((resolve, reject) => {
@@ -54,14 +33,11 @@ const fileToBase64 = (file) => {
 
 const loadDataFromLocalstorage = () => {
   const savedChats = localStorage.getItem("saved-chats");
-  const isLightMode = (localStorage.getItem("themeColor") === "light_mode");
- 
-  document.body.classList.toggle("light_mode", isLightMode);
-
   chatContainer.innerHTML = savedChats || '';
-  document.body.classList.toggle("hide-header", savedChats);
-  chatContainer.scrollTo(0, chatContainer.scrollHeight); 
+  if (savedChats && welcomeScreen) welcomeScreen.classList.add('hidden');
+  chatContainer.scrollTo(0, chatContainer.scrollHeight);
 }
+
 const createMessageElement = (content, ...classes) => {
   const div = document.createElement("div");
   div.classList.add("message", ...classes);
@@ -78,7 +54,6 @@ const showTypingEffect = (text, textElement, incomingMessageDiv) => {
     if (!isResponseGenerating) {
  
       textElement.innerText = buffer;
-      incomingMessageDiv.querySelector(".icon").classList.remove("hide");
       localStorage.setItem("saved-chats", chatContainer.innerHTML);
       return;
     }
@@ -88,7 +63,6 @@ const showTypingEffect = (text, textElement, incomingMessageDiv) => {
       const delay = /[.,!?]/.test(characters[currentIndex - 1]) ? 400 : typingDelay();
 
       textElement.innerText = buffer;
-      incomingMessageDiv.querySelector(".icon").classList.add("hide");
       chatContainer.scrollTo(0, chatContainer.scrollHeight);
 
       currentTypingInterval = setTimeout(typeNextChar, delay);
@@ -99,7 +73,6 @@ const showTypingEffect = (text, textElement, incomingMessageDiv) => {
 
   const finishTyping = () => {
     isResponseGenerating = false;
-    incomingMessageDiv.querySelector(".icon").classList.remove("hide");
     localStorage.setItem("saved-chats", chatContainer.innerHTML);
     updateSendButton();
   };
@@ -113,79 +86,45 @@ const generateAPIResponse = async (incomingMessageDiv) => {
 
   const tryRequest = async () => {
     try {
- 
-      const isAPIAccessible = await testAPIConnection();
-      if (!isAPIAccessible) {
-        throw new Error('Cannot connect to API. Please check your internet connection and API key.');
-      }
-
       const requestBody = {
-        contents: [{
-          role: "user",
-          parts: [{
-            text: userMessage || ''
-          }]
-        }]
-      };
-
-      const imageFiles = selectedFiles.filter(f => f.type.startsWith('image/'));
-      if (imageFiles.length > 0) {
-        for (const file of imageFiles) {
-          try {
-            if (file.size > 4 * 1024 * 1024) { 
-              throw new Error(`Image ${file.name} is too large. Maximum size is 4MB.`);
-            }
-            if (!['image/jpeg', 'image/png', 'image/webp'].includes(file.type)) {
-              throw new Error(`Image ${file.name} format not supported. Use JPEG, PNG, or WEBP.`);
-            }
-            const base64Data = await fileToBase64(file);
-            requestBody.contents[0].parts.push({
-              inline_data: {
-                mime_type: file.type,
-                data: base64Data
-              }
-            });
-          } catch (error) {
-            console.error('Failed to process image:', error);
-            textElement.innerText = `Error processing image: ${error.message}`;
-            return;
+        model: GROQ_MODEL,
+        messages: [
+          {
+            role: "system",
+            content: "You are StudyMate, a helpful academic assistant for university students. Help with studies, exams, assignments, and academic questions."
+          },
+          {
+            role: "user",
+            content: userMessage || ''
           }
-        }
-      }
-
-      console.log('Sending request:', JSON.stringify(requestBody, null, 2));
+        ],
+        max_tokens: 1024,
+        temperature: 0.7
+      };
 
       const response = await fetch(API_URL, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Accept": "application/json"
+          "Authorization": `Bearer ${API_KEY}`
         },
         body: JSON.stringify(requestBody),
       });
 
       const rawText = await response.text();
       let data;
-
       try {
         data = rawText ? JSON.parse(rawText) : null;
       } catch (parseError) {
-        console.error('Failed to parse API response:', rawText);
         throw new Error('Invalid response from AI service');
       }
 
       if (!response.ok) {
         const errorMsg = data?.error?.message || `Error: ${response.status} ${response.statusText}`;
-
-        if (errorMsg.includes('model') && errorMsg.includes('not found')) {
-          throw new Error('This version of the model does not support image analysis. Text-only queries are supported.');
-        }
-
-        const isOverloaded = /overload|overloaded|throttle|rate limit|unavailable/i.test(errorMsg) || [429, 503, 502, 500].includes(response.status);
+        const isOverloaded = /overload|rate limit|unavailable/i.test(errorMsg) || [429, 503, 502, 500].includes(response.status);
         if (isOverloaded && retryCount < maxRetries) {
           retryCount++;
-          const waitMs = Math.pow(2, retryCount) * 1000; // exponential backoff
-          console.warn(`API overloaded, retrying in ${waitMs}ms (attempt ${retryCount}/${maxRetries})`);
+          const waitMs = Math.pow(2, retryCount) * 1000;
           textElement.innerText = `Model is busy — retrying in ${Math.round(waitMs / 1000)}s... (${retryCount}/${maxRetries})`;
           await new Promise(resolve => setTimeout(resolve, waitMs));
           return tryRequest();
@@ -193,12 +132,9 @@ const generateAPIResponse = async (incomingMessageDiv) => {
         throw new Error(errorMsg);
       }
 
-      if (!data?.candidates?.[0]?.content?.parts?.[0]?.text) {
-        console.error('Unexpected API response structure:', data);
-        throw new Error('Invalid response format from AI service');
-      }
+      const apiResponse = data?.choices?.[0]?.message?.content;
+      if (!apiResponse) throw new Error('Invalid response format from AI service');
 
-      const apiResponse = data.candidates[0].content.parts[0].text.replace(/\\(.?)\\*/g, '$1');
       showTypingEffect(apiResponse, textElement, incomingMessageDiv);
     } catch (error) {
      
@@ -216,7 +152,7 @@ const generateAPIResponse = async (incomingMessageDiv) => {
   
       if (retryCount < maxRetries && /network|fetch|NetworkError|timeout/i.test(error.message)) {
         retryCount++;
-        const waitMs = Math.min(1000 * Math.pow(2, retryCount), 8000); // Exponential backoff with 8s max
+        const waitMs = Math.min(1000 * Math.pow(2, retryCount), 8000); 
         console.warn(`Network error, retrying in ${waitMs}ms (attempt ${retryCount}/${maxRetries})`);
         textElement.innerText = `Connection issue — retrying in ${Math.round(waitMs / 1000)}s... (${retryCount}/${maxRetries})`;
         await new Promise(resolve => setTimeout(resolve, waitMs));
@@ -252,10 +188,12 @@ const showLoadingAnimation = () => {
                         <div class="loading-dot"></div>
                         <div class="loading-dot"></div>
                       </div>
-                      <span class="timestamp">${getTimestamp()}</span>
+                      <div class="bubble-footer">
+                        <span class="timestamp">${getTimestamp()}</span>
+                        <button onClick="copyMessage(this)" class="copy-btn" title="Copy"><i class="fas fa-copy"></i></button>
+                      </div>
                     </div>
                   </div>
-                  <span onClick="copyMessage(this)" class="icon material-symbols-rounded">content_copy</span>
                 </div>`;
   const incomingMessageDiv = createMessageElement(html, "incoming", "loading");
   chatContainer.appendChild(incomingMessageDiv);
@@ -263,10 +201,13 @@ const showLoadingAnimation = () => {
   generateAPIResponse(incomingMessageDiv);
 }
 const copyMessage = (copyButton) => {
-  const messageText = copyButton.parentElement.querySelector(".text").innerText;
-  navigator.clipboard.writeText(messageText);
-  copyButton.innerText = "done"; 
-  setTimeout(() => copyButton.innerText = "content_copy", 1000); 
+  const bubble = copyButton.closest('.message-bubble') || copyButton.closest('.message');
+  const messageText = bubble?.querySelector(".text")?.innerText || '';
+  if (!messageText) return;
+  navigator.clipboard.writeText(messageText).then(() => {
+    copyButton.innerHTML = '<i class="fas fa-check"></i>';
+    setTimeout(() => copyButton.innerHTML = '<i class="fas fa-copy"></i>', 1800);
+  });
 }
 
 const renderAttachments = () => {
@@ -315,10 +256,10 @@ if (attachButton && fileInput) {
 const updateSendButton = () => {
   const sendButton = document.querySelector("#send-message-button");
   if (isResponseGenerating) {
-    sendButton.innerHTML = "stop";
+    sendButton.innerHTML = '<i class="fas fa-stop"></i>';
     sendButton.title = "Stop generating";
   } else {
-    sendButton.innerHTML = "send";
+    sendButton.innerHTML = '<i class="fas fa-paper-plane"></i>';
     sendButton.title = "Send message";
   }
 };
@@ -345,7 +286,8 @@ const handleOutgoingChat = () => {
   if (!validationMessageEl) {
     validationMessageEl = document.createElement('span');
     validationMessageEl.className = 'validation-message';
-    typingForm.querySelector('.input-row').appendChild(validationMessageEl);
+    const container = typingForm.querySelector('.input-wrap') || typingForm.querySelector('.input-row') || typingForm;
+    container.appendChild(validationMessageEl);
   }
 
   if (!rawInputValue) {
@@ -396,6 +338,7 @@ const handleOutgoingChat = () => {
   const outgoingMessageDiv = createMessageElement(html, "outgoing");
   outgoingMessageDiv.querySelector(".text").innerText = messageForApi;
   chatContainer.appendChild(outgoingMessageDiv);
+  if (welcomeScreen) welcomeScreen.classList.add('hidden');
 
   attachPreview.querySelectorAll('.thumb').forEach(t => {
     if (t.dataset.url) URL.revokeObjectURL(t.dataset.url);
@@ -403,24 +346,17 @@ const handleOutgoingChat = () => {
   selectedFiles = [];
   if (typeof renderAttachments === 'function') renderAttachments();
 
-  typingForm.reset(); 
-  document.body.classList.add("hide-header");
-  chatContainer.scrollTo(0, chatContainer.scrollHeight); 
-  setTimeout(showLoadingAnimation, 500); 
+  typingForm.reset();
+  chatContainer.scrollTo(0, chatContainer.scrollHeight);
+  setTimeout(showLoadingAnimation, 500);
 }
 
 deleteChatButton.addEventListener("click", () => {
   if (confirm("Are you sure you want to delete all the chats?")) {
     localStorage.removeItem("saved-chats");
     loadDataFromLocalstorage();
+    if (welcomeScreen) welcomeScreen.classList.remove('hidden');
   }
-});
-
-suggestions.forEach(suggestion => {
-  suggestion.addEventListener("click", () => {
-    userMessage = suggestion.querySelector(".text").innerText;
-    handleOutgoingChat();
-  });
 });
 
 typingForm.addEventListener("submit", (e) => {

@@ -1,50 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>University Question Bank | Past Exam Question Repository</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <title>University Question Bank | ClassMate</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-  <link rel="stylesheet" href="PreviousQ.css">
- 
+  <link rel="stylesheet" href="css/PreviousQ.css">
 </head>
-
 <body>
+
   <!-- Navbar -->
-  <nav>
-    <div class="navbar-container">
-      <div class="nav-logo">
-        <img src="https://images.seeklogo.com/logo-png/44/1/leading-university-logo-png_seeklogo-445048.png"
-          alt="University Logo">
-        <h1 class="heading">University<span> Question Bank</span></h1>
+  <nav class="pq-nav">
+    <div class="pq-nav-inner">
+      <a href="index.html" class="pq-logo">
+        <div class="pq-logo-icon"><i class="fas fa-graduation-cap"></i></div>
+        <span>Class<b>Mate</b></span>
+      </a>
+      <div class="pq-nav-links" id="pqNavLinks">
+        <a href="index.html"><i class="fas fa-house"></i> Home</a>
+        <a href="aiChatbot.html"><i class="fas fa-robot"></i> AI ChatBot</a>
+        <a href="CgpACal.html"><i class="fas fa-calculator"></i> CGPA</a>
+        <a href="compiler.html"><i class="fas fa-code"></i> Compiler</a>
+        <a href="submitQ.html"><i class="fas fa-upload"></i> Submit Questions</a>
+        <a href="PreviousQ.html" class="active"><i class="fas fa-book-open"></i> Question Bank</a>
       </div>
-      <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('active')">
+      <button class="pq-nav-toggle" onclick="document.getElementById('pqNavLinks').classList.toggle('open')">
         <i class="fas fa-bars"></i>
       </button>
-      <div class="nav-links">
-        <a href="index.html">Home</a>
-        <a href="submitQ.html">Submit Questions</a>
-      </div>
     </div>
   </nav>
 
-  <!-- Hero & Search -->
-  <div class="search-container">
-    <h1>Academic Resource Center</h1>
-    <p>Access past exam questions organized by course, semester, and year to help with your studies.</p>
-    <div class="search-box container">
-      <form class="search-form">
-        <div>
-          <label for="course-code">Course Code</label>
+  <!-- Hero -->
+  <div class="pq-hero">
+    <div class="pq-hero-inner">
+      <span class="pq-eyebrow"><i class="fas fa-book-open"></i> Academic Resources</span>
+      <h1>University <span>Question Bank</span></h1>
+      <p>Access past exam questions organized by course, department, semester, and year to power your studies.</p>
+    </div>
+  </div>
+
+  <!-- Search Card -->
+  <div class="pq-search-wrap">
+    <div class="pq-search-card">
+      <div class="pq-search-title">
+        <i class="fas fa-filter"></i> Filter Questions
+      </div>
+      <form class="pq-form">
+        <div class="pq-field">
+          <label for="course-code"><i class="fas fa-hashtag"></i> Course Code</label>
           <input type="text" id="course-code" placeholder="e.g. CSE-1111">
         </div>
-        <div>
-          <label for="course-title">Course Title</label>
+        <div class="pq-field">
+          <label for="course-title"><i class="fas fa-book"></i> Course Title</label>
           <input type="text" id="course-title" placeholder="e.g. Introduction to Computing">
         </div>
-        <div>
-          <label for="department">Department</label>
+        <div class="pq-field">
+          <label for="department"><i class="fas fa-building-columns"></i> Department</label>
           <select id="department">
             <option value="">All Departments</option>
             <option value="BBA">Business Administration</option>
@@ -56,12 +67,12 @@
             <option value="LAW">Law</option>
             <option value="ISLAMIC">Islamic Studies</option>
             <option value="PH">Public Health</option>
-            <option value="THM">Tourism and Hospitality Management</option>
+            <option value="THM">Tourism & Hospitality</option>
             <option value="BANGLA">Bangla</option>
           </select>
         </div>
-        <div>
-          <label for="semester">Semester</label>
+        <div class="pq-field">
+          <label for="semester"><i class="fas fa-calendar-alt"></i> Semester</label>
           <select id="semester">
             <option value="">All Semesters</option>
             <option value="Summer">Summer</option>
@@ -69,8 +80,8 @@
             <option value="Spring">Spring</option>
           </select>
         </div>
-        <div>
-          <label for="year">Year</label>
+        <div class="pq-field">
+          <label for="year"><i class="fas fa-clock-rotate-left"></i> Year</label>
           <select id="year">
             <option value="">All Years</option>
             <option value="2022">2022</option>
@@ -79,51 +90,78 @@
             <option value="2025">2025</option>
           </select>
         </div>
-        <div>
-          <button type="button" id="search-btn"><i class="fas fa-search"></i> Find Exam Questions</button>
+        <div class="pq-field pq-field--btn">
+          <button type="button" id="search-btn">
+            <i class="fas fa-search"></i> Find Questions
+          </button>
         </div>
       </form>
     </div>
   </div>
 
-  <!-- Results Section -->
-  <div class="results-section container">
-    <h2 class="results-header">Exam Question Repository</h2>
-    <div class="placeholder" id="result-placeholder">
-      <p>No exam questions found matching your criteria. Try adjusting your filters.</p>
+  <!-- Results -->
+  <div class="pq-results">
+    <div class="pq-results-header">
+      <h2><i class="fas fa-layer-group"></i> Exam Question Repository</h2>
+    </div>
+    <div id="result-placeholder">
+      <div class="pq-empty">
+        <i class="fas fa-folder-open"></i>
+        <p>No questions found. Try adjusting your filters.</p>
+      </div>
     </div>
   </div>
 
   <!-- Footer -->
-  <footer>
-    <div class="footer-bottom">
-      <div class="footer-bottom-content">
-        <div class="copyright">
-          <p>&copy; 2025 ClassMate by SRM Technologies. All rights reserved.</p>
+  <footer class="pq-footer-wrap">
+    <div class="pq-footer-accent"></div>
+    <div class="pq-footer-top">
+      <div class="pq-footer-brand">
+        <div class="pq-footer-logo-wrap">
+          <div class="pq-footer-logo-icon"><i class="fas fa-graduation-cap"></i></div>
+          <h2 class="pq-footer-logo">Class<span>Mate</span></h2>
         </div>
-        <div class="social-links">
-          <span>Follow us:</span>
-          <a href="https://www.facebook.com" target="_blank" aria-label="Facebook">
-            <i class="fab fa-facebook-f"></i>
-          </a>
-          <a href="https://www.twitter.com" target="_blank" aria-label="Twitter">
-            <i class="fab fa-twitter"></i>
-          </a>
-          <a href="https://www.instagram.com" target="_blank" aria-label="Instagram">
-            <i class="fab fa-instagram"></i>
-          </a>
-          <a href="https://www.linkedin.com" target="_blank" aria-label="LinkedIn">
-            <i class="fab fa-linkedin-in"></i>
-          </a>
+        <p>A student-friendly platform that simplifies university life — academic tools, club management, and exam services all in one place.</p>
+        <div class="pq-footer-socials">
+          <a href="https://www.facebook.com" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://www.twitter.com" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+          <a href="https://www.instagram.com" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="https://www.linkedin.com" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+      </div>
+      <div class="pq-footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="study-material.html"><i class="fas fa-chevron-right"></i>Study Materials</a></li>
+          <li><a href="FrontPG.html"><i class="fas fa-chevron-right"></i>Front Page Generator</a></li>
+          <li><a href="PreviousQ.html"><i class="fas fa-chevron-right"></i>Previous Questions</a></li>
+          <li><a href="Permission.html"><i class="fas fa-chevron-right"></i>Venue Permission</a></li>
+          <li><a href="CgpACal.html"><i class="fas fa-chevron-right"></i>CGPA Calculator</a></li>
+        </ul>
+      </div>
+      <div class="pq-footer-col">
+        <h4>Contact</h4>
+        <div class="pq-fii">
+          <div class="pq-fii-icon"><i class="fas fa-phone-alt"></i></div>
+          <span>+880-1763-777626</span>
+        </div>
+        <div class="pq-fii">
+          <div class="pq-fii-icon"><i class="fas fa-envelope"></i></div>
+          <span>cse_2132020056@lus.ac.bd</span>
+        </div>
+        <div class="pq-fii">
+          <div class="pq-fii-icon"><i class="fas fa-map-marker-alt"></i></div>
+          <span>Leading University, Sylhet, Bangladesh</span>
         </div>
       </div>
     </div>
+    <div class="pq-footer-bottom">
+      <p>&copy; 2025 <strong>ClassMate</strong>. All rights reserved. Created by <span>SRM Technologies</span>.</p>
+      <a href="#" class="pq-back-top" aria-label="Back to top"><i class="fas fa-arrow-up"></i></a>
+    </div>
   </footer>
 
-  <!-- Firebase + JS -->
-  <script type="module" src="PreviousQ.js"></script>
+  <script type="module" src="js/PreviousQ.js"></script>
 </body>
-
 </html>
-
 

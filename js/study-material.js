@@ -1,15 +1,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
+import { firebaseConfig } from "./firebaseConfig.js";
 import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-database.js";
 
-const firebaseConfig = {
-  apiKey: "AIzaSyBw9ZTVtz20p-Q6su5hVMHP0JrI4xmiL54",
-  authDomain: "classmate-2c272.firebaseapp.com",
-  projectId: "classmate-2c272",
-  storageBucket: "classmate-2c272.firebasestorage.app",
-  messagingSenderId: "259430838635",
-  appId: "1:259430838635:web:a49e703aad79f7fdb81c2e",
-  measurementId: "G-TJ6D20JK8F"
-};
 
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
@@ -42,60 +34,44 @@ function renderList(filterText) {
   const q = (typeof filterText === 'string') ? filterText.trim() : (smSearch ? smSearch.value.trim() : '');
   const filtered = allResources.filter(item => matches(q, item));
   smList.innerHTML = '';
+
   if (!filtered.length) {
-    smList.innerHTML = '<div class="resource-card">No resources found.</div>';
+    smList.innerHTML = `<div class="sm-empty"><i class="fas fa-folder-open"></i><p>No resources found.</p></div>`;
     smMeta.textContent = 'No results.';
     return;
   }
 
+  const typeIcon = { pdf: 'fa-file-pdf', video: 'fa-play-circle', link: 'fa-link' };
+  const typeClass = { pdf: 'pdf', video: 'video', link: 'link' };
+
   for (const item of filtered) {
     const r = item.data;
+    const t = r.type || 'other';
+    const icon = typeIcon[t] || 'fa-file';
+    const cls  = typeClass[t] || 'other';
+    const url  = r.fileURL || r.link || '';
+
     const card = document.createElement('div');
     card.className = 'resource-card';
-
-    const title = document.createElement('h3');
-    title.textContent = r.title || 'Untitled';
-
-    const meta = document.createElement('div');
-    meta.className = 'meta';
-    meta.textContent = `${r.type || 'resource'}${r.fileName ? ' • ' + r.fileName : ''}`;
-
-    const desc = document.createElement('div');
-    desc.className = 'desc';
-    desc.textContent = r.description || '';
-
-    const actions = document.createElement('div');
-    actions.className = 'resource-actions';
-
-    if (r.fileURL) {
-      const a = document.createElement('a');
-      a.href = r.fileURL;
-      a.target = '_blank';
-      a.rel = 'noopener';
-      a.className = 'resource-link primary';
-      a.innerHTML = '<i class="fas fa-file-pdf"></i> Open File';
-      actions.appendChild(a);
-    }
-
-    if (r.link && !r.fileURL) {
-      const a = document.createElement('a');
-      a.href = r.link;
-      a.target = '_blank';
-      a.rel = 'noopener';
-      a.className = 'resource-link primary';
-      a.innerHTML = '<i class="fas fa-external-link-alt"></i> Open Link';
-      actions.appendChild(a);
-    }
-
-    card.appendChild(title);
-    card.appendChild(meta);
-    if (desc.textContent) card.appendChild(desc);
-    if (actions.childElementCount) card.appendChild(actions);
-
+    card.innerHTML = `
+      <div class="resource-card-icon ${cls}"><i class="fas ${icon}"></i></div>
+      <h3>${r.title || 'Untitled'}</h3>
+      <div class="meta">
+        <span class="resource-tag">${t.toUpperCase()}</span>
+        ${r.fileName ? `<span class="resource-tag">${r.fileName}</span>` : ''}
+      </div>
+      ${r.description ? `<div class="desc">${r.description}</div>` : ''}
+      ${url ? `<div class="resource-actions">
+        <a href="${url}" target="_blank" rel="noopener" class="resource-link primary">
+          <i class="fas ${r.fileURL ? 'fa-download' : 'fa-external-link-alt'}"></i>
+          ${r.fileURL ? 'Open File' : 'Open Link'}
+        </a>
+      </div>` : ''}
+    `;
     smList.appendChild(card);
   }
 
-  smMeta.textContent = `Showing ${filtered.length} of ${allResources.length} approved resource(s).`;
+  smMeta.textContent = `Showing ${filtered.length} of ${allResources.length} resource${allResources.length !== 1 ? 's' : ''}.`;
 }
 
 const resourcesRef = ref(database, 'resources');

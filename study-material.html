@@ -5,63 +5,99 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Study Materials — ClassMate</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="study-material.css">
+  <link rel="stylesheet" href="css/study-material.css">
 </head>
 <body>
+
   <!-- Navbar -->
-  <nav>
-    <div class="navbar-container">
-      <div class="nav-logo">
-        <div class="heading"><span>Study </span>Resources</div>
-      </div>
-      <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('active')">
-        <i class="fas fa-bars"></i>
+  <header id="smHeader">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">
+        <div class="nav-logo-icon"><i class="fas fa-graduation-cap"></i></div>
+        <span>Class<em>Mate</em></span>
+      </a>
+      <nav class="nav-links">
+        <a href="index.html"       class="nav-link"><i class="fas fa-house"></i> Home</a>
+        <a href="aiChatbot.html"   class="nav-link"><i class="fas fa-robot"></i> AI ChatBot</a>
+        <a href="compiler.html"    class="nav-link"><i class="fas fa-code"></i> Compiler</a>
+        <a href="PreviousQ.html"   class="nav-link"><i class="fas fa-book-open"></i> Question Bank</a>
+        <a href="study-material.html" class="nav-link"><i class="fas fa-layer-group"></i> Study Materials</a>
+      </nav>
+      <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
       </button>
-      <div class="nav-links">
-        <a href="index.html">Home</a>
-        <a href="PreviousQ.html">Question Bank</a>
-      </div>
     </div>
-  </nav>
+    <div class="nav-drawer" id="navDrawer">
+      <a href="index.html"       class="drawer-link"><i class="fas fa-house"></i> Home</a>
+      <a href="aiChatbot.html"   class="drawer-link"><i class="fas fa-robot"></i> AI ChatBot</a>
+      <a href="compiler.html"    class="drawer-link"><i class="fas fa-code"></i> Compiler</a>
+      <a href="PreviousQ.html"   class="drawer-link"><i class="fas fa-book-open"></i> Question Bank</a>
+      <a href="study-material.html" class="drawer-link"><i class="fas fa-layer-group"></i> Study Materials</a>
+    </div>
+  </header>
 
-  <div class="container">
-    <section class="resource-section">
-      <h2>Study Materials</h2>
-      <p class="notes">Browse and download class PDFs, watch video links, or follow external resources.</p>
-
-      <div class="search-container">
-        <input id="smSearch" type="search" class="search-input" placeholder="Search by title, description, type or filename">
-        <button id="smClear" type="button" class="clear-btn">Clear</button>
-      </div>
-
-      <div id="smMeta" class="resource-meta">Showing all approved resources .</div>
-      <div id="smList" class="resource-list"></div>
-    </section>
+  <!-- Hero -->
+  <div class="sm-hero">
+    <div class="sm-hero-inner">
+      <span class="sm-eyebrow"><i class="fas fa-layer-group"></i> Resources</span>
+      <h1>Study <span>Materials</span></h1>
+      <p>Browse PDFs, video links, and external resources curated for your courses.</p>
+    </div>
   </div>
 
-  <footer>
-    <div class="footer-bottom">
-      <div class="copyright">
-        <p>&copy; 2025 ClassMate by SRM Technologies. All rights reserved.</p>
+  <!-- Main -->
+  <main class="sm-main">
+
+    <!-- Search bar -->
+    <div class="sm-search-wrap">
+      <div class="sm-search-bar">
+        <i class="fas fa-search"></i>
+        <input id="smSearch" type="search" placeholder="Search by title, type, or description…" />
+        <button id="smClear" type="button" class="sm-clear-btn"><i class="fas fa-times"></i></button>
       </div>
-      <div class="social-links">
-        <span>Follow us:</span>
-        <a href="https://www.facebook.com" target="_blank" aria-label="Facebook">
-          <i class="fab fa-facebook-f"></i>
-        </a>
-        <a href="https://www.twitter.com" target="_blank" aria-label="Twitter">
-          <i class="fab fa-twitter"></i>
-        </a>
-        <a href="https://www.instagram.com" target="_blank" aria-label="Instagram">
-          <i class="fab fa-instagram"></i>
-        </a>
-        <a href="https://www.linkedin.com" target="_blank" aria-label="LinkedIn">
-          <i class="fab fa-linkedin-in"></i>
-        </a>
-      </div>
+      <div id="smMeta" class="sm-meta">Loading resources…</div>
+    </div>
+
+    <!-- Resource grid -->
+    <div id="smList" class="sm-grid"></div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="sm-footer">
+    <p>&copy; 2025 <strong>ClassMate</strong>. All rights reserved. Built with <i class="fas fa-heart"></i> by <span>SRM Technologies</span>.</p>
+    <div class="sm-footer-socials">
+      <a href="https://www.facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a>
+      <a href="https://www.twitter.com"  target="_blank"><i class="fab fa-twitter"></i></a>
+      <a href="https://www.instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+      <a href="https://www.linkedin.com" target="_blank"><i class="fab fa-linkedin-in"></i></a>
     </div>
   </footer>
 
-  <script type="module" src="study-material.js"></script>
+  <script type="module" src="js/study-material.js"></script>
+  <script>
+    const header   = document.getElementById('smHeader');
+    const hamburger = document.getElementById('hamburger');
+    const navDrawer = document.getElementById('navDrawer');
+
+    window.addEventListener('scroll', () => header.classList.toggle('scrolled', window.scrollY > 10));
+
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('open');
+      navDrawer.classList.toggle('open');
+    });
+    navDrawer.querySelectorAll('.drawer-link').forEach(l => l.addEventListener('click', () => {
+      hamburger.classList.remove('open');
+      navDrawer.classList.remove('open');
+    }));
+
+    // Active link
+    document.querySelectorAll('.nav-link').forEach(l => {
+      const linkFile = l.getAttribute('href').split('/').pop().split('?')[0];
+      const currentFile = location.pathname.split('/').pop() || 'index.html';
+      if (linkFile === currentFile) l.classList.add('active');
+    });
+  </script>
 </body>
 </html>
+

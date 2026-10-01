@@ -1,16 +1,8 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
+import { firebaseConfig } from "./firebaseConfig.js";
 import { getDatabase, ref, onValue, update, remove } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-database.js";
 import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js";
 
-const firebaseConfig = {
-  apiKey: "AIzaSyBw9ZTVtz20p-Q6su5hVMHP0JrI4xmiL54",
-  authDomain: "classmate-2c272.firebaseapp.com",
-  projectId: "classmate-2c272",
-  storageBucket: "classmate-2c272.firebasestorage.app",
-  messagingSenderId: "259430838635",
-  appId: "1:259430838635:web:a49e703aad79f7fdb81c2e",
-  measurementId: "G-TJ6D20JK8F"
-};
 
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
@@ -42,8 +34,16 @@ function renderPending(items) {
     return !v || v.approved !== true;
   });
 
+  // Update count badge
+  const countEl = document.getElementById('pendingCount');
+  if (countEl) countEl.textContent = pending.length;
+
   if (pending.length === 0) {
-    pendingListEl.innerHTML = '<p class="empty"><i class="fas fa-check-circle"></i> No pending questions.</p>';
+    pendingListEl.innerHTML = `
+      <div class="empty-state">
+        <i class="fas fa-check-circle" style="color:var(--success)"></i>
+        <p>All caught up — no pending questions.</p>
+      </div>`;
     return;
   }
 
@@ -51,59 +51,32 @@ function renderPending(items) {
     const data = items[id];
     const node = document.createElement('div');
     node.className = 'pending-item';
-
-    const header = document.createElement('div');
-    header.className = 'pending-header';
-
-    const titleArea = document.createElement('div');
-
-    const title = document.createElement('h3');
-    title.className = 'pending-title';
-    title.textContent = (data.courseCode || '—') + ' — ' + (data.courseTitle || 'Untitled');
-    titleArea.appendChild(title);
-
-    const meta = document.createElement('div');
-    meta.className = 'pending-meta';
-    meta.innerHTML = `
-      <div><i class="fas fa-university"></i> ${data.department || '—'} • ${data.semester || '—'} ${data.year || '—'}</div>
-      <div><i class="fas fa-user"></i> ${data.email || data.uid || 'unknown'}</div>
-      <div><i class="fas fa-clock"></i> ${new Date(data.timestamp).toLocaleString()}</div>
-    `;
-    titleArea.appendChild(meta);
-
-    header.appendChild(titleArea);
-
-    if (data.fileURL) {
-      const fileLink = document.createElement('a');
-      fileLink.href = data.fileURL;
-      fileLink.target = '_blank';
-      fileLink.rel = 'noopener';
-      fileLink.className = 'resource-link primary';
-      fileLink.innerHTML = '<i class="fas fa-file-pdf"></i> View PDF';
-      header.appendChild(fileLink);
-    }
-
-    const actions = document.createElement('div');
-    actions.className = 'pending-actions';
-
-    const approveBtn = document.createElement('button');
-    approveBtn.className = 'btn btn-approve';
-    approveBtn.innerHTML = '<i class="fas fa-check"></i> Approve';
-    approveBtn.addEventListener('click', () => approveQuestion(id));
-
-    const rejectBtn = document.createElement('button');
-    rejectBtn.className = 'btn btn-reject';
-    rejectBtn.innerHTML = '<i class="fas fa-times"></i> Reject';
-    rejectBtn.addEventListener('click', () => rejectQuestion(id));
-
-    actions.appendChild(approveBtn);
-    actions.appendChild(rejectBtn);
-
-    node.appendChild(header);
-    node.appendChild(actions);
-
+    node.innerHTML = `
+      <div class="pending-header">
+        <div class="pending-header-left">
+          <h3 class="pending-title">${data.courseCode || '—'} — ${data.courseTitle || 'Untitled'}</h3>
+          <div class="pending-meta">
+            <span><i class="fas fa-university"></i> ${data.department || '—'}</span>
+            <span><i class="fas fa-layer-group"></i> ${data.semester || '—'} ${data.year || ''}</span>
+            <span><i class="fas fa-user"></i> ${data.email || data.uid || 'unknown'}</span>
+            <span><i class="fas fa-clock"></i> ${new Date(data.timestamp).toLocaleString()}</span>
+          </div>
+        </div>
+        <span class="pending-badge"><i class="fas fa-hourglass-half"></i> Pending</span>
+      </div>
+      <div class="pending-actions">
+        ${data.fileURL ? `<a href="${data.fileURL}" target="_blank" rel="noopener" class="btn btn-view"><i class="fas fa-file-pdf"></i> View PDF</a>` : ''}
+        <button class="btn btn-approve" data-id="${id}"><i class="fas fa-check"></i> Approve</button>
+        <button class="btn btn-reject"  data-id="${id}"><i class="fas fa-times"></i> Reject</button>
+      </div>`;
     pendingListEl.appendChild(node);
   }
+
+  // Bind buttons
+  pendingListEl.querySelectorAll('.btn-approve').forEach(btn =>
+    btn.addEventListener('click', () => approveQuestion(btn.dataset.id)));
+  pendingListEl.querySelectorAll('.btn-reject').forEach(btn =>
+    btn.addEventListener('click', () => rejectQuestion(btn.dataset.id)));
 }
 
 function showAccessDenied() {

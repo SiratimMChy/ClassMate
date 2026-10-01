@@ -5,91 +5,471 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Admin Dashboard — ClassMate</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="admin.css">
+  <link rel="stylesheet" href="css/admin.css">
 </head>
 <body>
-  <!-- Navbar -->
-  <nav class="navbar">
-    <div class="navbar-container">
-      <div class="navbar-logo">
-        <h2>ClassMate <span style="color:#FF4500">Admin</span></h2>
-      </div>
-      <ul class="navbar-menu" id="navbarMenu">
-        <li><a href="index.html"> Home</a></li>
-        <li><a href="admin.html">Dashboard</a></li>
-        <li><a href="submitQ.html">Submit</a></li>
-      </ul>
-      <div class="navbar-toggle" id="navbarToggle">
-        <span class="bar"></span>
-        <span class="bar"></span>
-        <span class="bar"></span>
-      </div>
-    </div>
-  </nav>
 
-  <main class="admin-main container">
-    <h2 style="margin-top:1rem">Administrator Dashboard</h2>
-    <p class="notes">Quick access to admin tasks. Click a card to open the corresponding management page.</p>
+  <!-- Sidebar overlay (mobile) -->
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
-    <div class="cards">
-      <div class="card">
-        <h3>Question Approvals</h3>
-        <p>Review submitted exam questions, approve approved ones so they appear on the site, or reject unwanted submissions.</p>
-        <div class="card-actions">
-          <a href="admin-approve.html">Open Approvals</a>
+  <!-- ── Sidebar ─────────────────────────────────────────────────── -->
+  <aside class="sidebar" id="sidebar">
+    <nav class="sidebar-nav">
+
+      <!-- Brand as first nav item -->
+      <div class="nav-brand-item">
+        <div class="brand-icon"><i class="fas fa-graduation-cap"></i></div>
+        <div class="brand-text">
+          <span class="brand-name">ClassMate</span>
+          <span class="brand-role">Admin Panel</span>
         </div>
       </div>
 
-      <div class="card">
-        <h3>Manage Study Resources</h3>
-        <p>Frontend UI to add and organize study resources (PDFs, links, notes).</p>
-        <div class="card-actions">
-          <a href="admin-resources.html">Open Resources</a>
+      <div class="nav-divider"></div>
+
+      <span class="nav-label">Main</span>
+      <a href="admin.html" class="nav-item active">
+        <i class="fas fa-th-large"></i><span>Dashboard</span>
+      </a>
+      <a href="index.html" class="nav-item">
+        <i class="fas fa-home"></i><span>Home</span>
+      </a>
+
+      <span class="nav-label">Management</span>
+      <a href="admin-approve.html" class="nav-item">
+        <i class="fas fa-check-circle"></i><span>Question Approvals</span>
+      </a>
+      <a href="admin-resources.html" class="nav-item">
+        <i class="fas fa-book-open"></i><span>Study Resources</span>
+      </a>
+      <a href="submitQ.html" class="nav-item">
+        <i class="fas fa-upload"></i><span>Submit Question</span>
+      </a>
+    </nav>
+
+    <div class="sidebar-footer-spacer"></div>
+  </aside>
+
+  <!-- ── Topbar ──────────────────────────────────────────────────── -->
+  <div class="topbar">
+    <button class="hamburger-btn" id="sidebarToggle" title="Toggle sidebar">
+      <i class="fas fa-bars"></i>
+    </button>
+    <div class="topbar-title">
+      <h1>Dashboard</h1>
+      <span class="breadcrumb">ClassMate &rsaquo; Admin &rsaquo; Dashboard</span>
+    </div>
+    <div class="topbar-right">
+      <div class="topbar-date" id="topbarDate"></div>
+      <div class="topbar-notification" title="Notifications">
+        <i class="fas fa-bell"></i>
+        <span class="notif-dot"></span>
+      </div>
+      <div class="topbar-badge"><i class="fas fa-shield-alt"></i> Admin</div>
+
+      <!-- Profile Dropdown -->
+      <div class="profile-dropdown" id="profileDropdown">
+        <button class="profile-trigger" id="profileTrigger">
+          <div class="profile-avatar"><i class="fas fa-user-shield"></i></div>
+          <span class="profile-name">Administrator</span>
+          <i class="fas fa-chevron-down profile-chevron"></i>
+        </button>
+        <div class="profile-menu" id="profileMenu">
+          <div class="profile-menu-header">
+            <div class="profile-menu-avatar"><i class="fas fa-user-shield"></i></div>
+            <div class="profile-menu-info">
+              <span class="profile-menu-name">Administrator</span>
+              <span class="profile-menu-email">admin_classmate@gmail.com</span>
+            </div>
+          </div>
+          <div class="profile-menu-divider"></div>
+          <a href="index.html" class="profile-menu-item">
+            <i class="fas fa-home"></i> Go to Home
+          </a>
+          <div class="profile-menu-divider"></div>
+          <a href="login.html" class="profile-menu-item danger">
+            <i class="fas fa-sign-out-alt"></i> Sign Out
+          </a>
         </div>
       </div>
     </div>
+  </div>
+
+  <!-- ── Main Content ────────────────────────────────────────────── -->
+  <main class="main-content" id="mainContent">
+
+    <!-- Page Header -->
+    <div class="page-header">
+      <div class="page-header-text">
+        <h2>Welcome back, Administrator</h2>
+        <p>Here's what's happening on ClassMate today.</p>
+      </div>
+      <div class="page-header-meta">
+        <div class="status-pill">System Online</div>
+      </div>
+    </div>
+
+    <!-- Stats Row -->
+    <div class="stats-row">
+      <div class="stat-card orange">
+        <div class="stat-top">
+          <div class="stat-icon orange"><i class="fas fa-clock"></i></div>
+          <span class="stat-trend neu"><i class="fas fa-minus"></i> —</span>
+        </div>
+        <div class="stat-bottom">
+          <div class="stat-value" id="statPending">—</div>
+          <div class="stat-label">Pending Approvals</div>
+        </div>
+      </div>
+      <div class="stat-card green">
+        <div class="stat-top">
+          <div class="stat-icon green"><i class="fas fa-check-double"></i></div>
+          <span class="stat-trend neu"><i class="fas fa-minus"></i> —</span>
+        </div>
+        <div class="stat-bottom">
+          <div class="stat-value" id="statApproved">—</div>
+          <div class="stat-label">Approved Questions</div>
+        </div>
+      </div>
+      <div class="stat-card blue">
+        <div class="stat-top">
+          <div class="stat-icon blue"><i class="fas fa-book"></i></div>
+          <span class="stat-trend neu"><i class="fas fa-minus"></i> —</span>
+        </div>
+        <div class="stat-bottom">
+          <div class="stat-value" id="statResources">—</div>
+          <div class="stat-label">Study Resources</div>
+        </div>
+      </div>
+      <div class="stat-card purple">
+        <div class="stat-top">
+          <div class="stat-icon purple"><i class="fas fa-bullhorn"></i></div>
+          <span class="stat-trend neu"><i class="fas fa-minus"></i> —</span>
+        </div>
+        <div class="stat-bottom">
+          <div class="stat-value" id="statAnnouncements">—</div>
+          <div class="stat-label">Announcements</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quick Access -->
+    <section class="section">
+      <div class="section-header">
+        <div class="section-header-left">
+          <h2 class="section-title"><i class="fas fa-bolt"></i> Quick Access</h2>
+          <p class="section-sub">Jump directly to any management area.</p>
+        </div>
+      </div>
+      <div class="cards">
+        <div class="card" onclick="location.href='admin-approve.html'">
+          <div class="card-top">
+            <div class="card-icon orange"><i class="fas fa-check-circle"></i></div>
+            <div class="card-arrow"><i class="fas fa-arrow-right"></i></div>
+          </div>
+          <div class="card-body">
+            <h3>Question Approvals</h3>
+            <p>Review submitted exam questions, approve or reject them before they go live for students.</p>
+          </div>
+          <div class="card-footer">
+            <a href="admin-approve.html" class="card-link">Open Approvals <i class="fas fa-arrow-right"></i></a>
+            <span class="card-meta">Manage submissions</span>
+          </div>
+        </div>
+
+        <div class="card" onclick="location.href='admin-resources.html'">
+          <div class="card-top">
+            <div class="card-icon blue"><i class="fas fa-book-open"></i></div>
+            <div class="card-arrow"><i class="fas fa-arrow-right"></i></div>
+          </div>
+          <div class="card-body">
+            <h3>Study Resources</h3>
+            <p>Add, organize, and manage study materials including PDFs, links, and notes for students.</p>
+          </div>
+          <div class="card-footer">
+            <a href="admin-resources.html" class="card-link">Open Resources <i class="fas fa-arrow-right"></i></a>
+            <span class="card-meta">Manage materials</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Post Announcement -->
+    <section class="section post-section">
+      <div class="post-section-head">
+        <div class="section-header-left">
+          <h2 class="section-title"><i class="fas fa-bullhorn"></i> Post Announcement</h2>
+          <p class="section-sub">Write and publish an announcement visible to all students.</p>
+        </div>
+      </div>
+
+      <form class="post-form" id="postForm">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="postTitle">Post Title <span class="required">*</span></label>
+            <input type="text" id="postTitle" placeholder="e.g. Mid-Term Exam Schedule Update" required />
+          </div>
+          <div class="form-group">
+            <label for="postCategory">Category <span class="required">*</span></label>
+            <select id="postCategory" required>
+              <option value="" disabled selected>Select a category</option>
+              <option value="announcement">Announcement</option>
+              <option value="exam">Exam Notice</option>
+              <option value="event">Event</option>
+              <option value="resource">Resource Update</option>
+              <option value="general">General Info</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="postSummary">Short Summary <span class="required">*</span></label>
+          <input type="text" id="postSummary" placeholder="One-line summary shown in the post preview (max 120 characters)" maxlength="120" required />
+          <span class="char-count" id="summaryCount">0 / 120</span>
+        </div>
+
+        <div class="form-group">
+          <label for="postBody">Full Description <span class="required">*</span></label>
+          <textarea id="postBody" rows="7" placeholder="Write the full description or announcement here. Include details, instructions, dates, and any relevant information for students." required></textarea>
+          <span class="char-count" id="bodyCount">0 / 2000</span>
+        </div>
+
+        <div class="form-divider"></div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="postDate">Publish Date <span class="required">*</span></label>
+            <input type="date" id="postDate" required />
+          </div>
+          <div class="form-group">
+            <label for="postExpiry">Expiry Date <span class="optional">(optional)</span></label>
+            <input type="date" id="postExpiry" />
+          </div>
+          <div class="form-group">
+            <label for="postPriority">Priority</label>
+            <select id="postPriority">
+              <option value="normal" selected>Normal</option>
+              <option value="high">High</option>
+              <option value="medium">Medium</option>
+              <option value="low">Low</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group checkbox-group">
+          <label class="checkbox-label">
+            <input type="checkbox" id="pinPost" />
+            <i class="fas fa-thumbtack" style="color:var(--gray-400);font-size:0.8rem;flex-shrink:0"></i>
+            <span>Pin this post to the top of the announcements feed</span>
+          </label>
+          <label class="checkbox-label">
+            <input type="checkbox" id="notifyStudents" checked />
+            <i class="fas fa-bell" style="color:var(--primary);font-size:0.8rem;flex-shrink:0"></i>
+            <span>Notify all students via in-app notification</span>
+          </label>
+        </div>
+
+        <div class="post-form-actions">
+          <button type="button" class="btn btn-preview" id="previewBtn">
+            <i class="fas fa-eye"></i> Preview
+          </button>
+          <button type="button" class="btn btn-draft" id="draftBtn">
+            <i class="fas fa-save"></i> Save Draft
+          </button>
+          <div class="spacer"></div>
+          <button type="submit" class="btn btn-publish">
+            <i class="fas fa-paper-plane"></i> Publish Post
+          </button>
+        </div>
+      </form>
+
+      <!-- Preview Modal -->
+      <div class="post-preview-overlay" id="previewOverlay">
+        <div class="post-preview-modal">
+          <div class="preview-header">
+            <h4><i class="fas fa-eye"></i> Post Preview</h4>
+            <button class="preview-close" id="previewClose"><i class="fas fa-times"></i></button>
+          </div>
+          <div class="preview-body">
+            <div class="preview-tags">
+              <span class="preview-category" id="previewCategory"></span>
+              <span class="preview-priority" id="previewPriority"></span>
+            </div>
+            <h2 class="preview-title" id="previewTitle">—</h2>
+            <p class="preview-summary" id="previewSummary">—</p>
+            <p class="preview-content" id="previewContent">—</p>
+            <div class="preview-meta">
+              <span id="previewDate"></span>
+              <span id="previewExpiry"></span>
+              <span id="previewPin"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
   </main>
 
-  <footer class="admin-footer">
-    <div class="footer-bottom">
-      <div class="footer-bottom-content">
-        <div class="copyright">
-          <p>&copy; 2025 Class Mate by SRM Technologies. All rights reserved.</p>
-        </div>
-        <div class="social-links">
-          <span>Follow us:</span>
-          <a href="https://www.facebook.com" target="_blank" aria-label="Facebook">
-            <i class="fab fa-facebook-f"></i>
-          </a>
-          <a href="https://www.twitter.com" target="_blank" aria-label="Twitter">
-            <i class="fab fa-twitter"></i>
-          </a>
-          <a href="https://www.instagram.com" target="_blank" aria-label="Instagram">
-            <i class="fab fa-instagram"></i>
-          </a>
-          <a href="https://www.linkedin.com" target="_blank" aria-label="LinkedIn">
-            <i class="fab fa-linkedin-in"></i>
-          </a>
-        </div>
-      </div>
-    </div>
-  </footer>
+  <!-- Toast -->
+  <div class="toast" id="toast"></div>
 
   <script>
-    // Navbar toggle functionality
-    const navbarToggle = document.getElementById("navbarToggle");
-    const navbarMenu = document.getElementById("navbarMenu");
+    // ── Sidebar toggle ──────────────────────────────────────────────
+    const sidebarToggle  = document.getElementById('sidebarToggle');
+    const sidebar        = document.getElementById('sidebar');
+    const sidebarOverlay = document.getElementById('sidebarOverlay');
+    const isMobile       = () => window.innerWidth <= 900;
 
-    navbarToggle.addEventListener("click", () => {
-      navbarMenu.classList.toggle("active");
-    });
+    function openMobileSidebar() {
+      sidebar.classList.add('mobile-open');
+      sidebarOverlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeMobileSidebar() {
+      sidebar.classList.remove('mobile-open');
+      sidebarOverlay.classList.remove('active');
+      document.body.style.overflow = '';
+    }
 
-    // Close menu when clicking outside
-    document.addEventListener("click", (e) => {
-      if (!navbarToggle.contains(e.target) && !navbarMenu.contains(e.target)) {
-        navbarMenu.classList.remove("active");
+    sidebarToggle.addEventListener('click', () => {
+      if (isMobile()) {
+        sidebar.classList.contains('mobile-open') ? closeMobileSidebar() : openMobileSidebar();
+      } else {
+        sidebar.classList.toggle('collapsed');
       }
     });
+
+    sidebarOverlay.addEventListener('click', closeMobileSidebar);
+
+    // ── Profile dropdown ────────────────────────────────────────────
+    const profileTrigger = document.getElementById('profileTrigger');
+    const profileMenu    = document.getElementById('profileMenu');
+    const profileDropdown = document.getElementById('profileDropdown');
+
+    profileTrigger.addEventListener('click', e => {
+      e.stopPropagation();
+      profileDropdown.classList.toggle('open');
+    });
+    document.addEventListener('click', e => {
+      if (!profileDropdown.contains(e.target)) {
+        profileDropdown.classList.remove('open');
+      }
+    });
+
+    // ── Topbar date ─────────────────────────────────────────────────
+    document.getElementById('topbarDate').textContent = new Date().toLocaleDateString('en-US', {
+      weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
+    });
+
+    // ── Default publish date ────────────────────────────────────────
+    const today = new Date().toISOString().split('T')[0];
+    document.getElementById('postDate').value = today;
+
+    // ── Char counters ───────────────────────────────────────────────
+    const summaryInput = document.getElementById('postSummary');
+    const bodyInput    = document.getElementById('postBody');
+    const summaryCount = document.getElementById('summaryCount');
+    const bodyCount    = document.getElementById('bodyCount');
+
+    summaryInput.addEventListener('input', () => {
+      summaryCount.textContent = `${summaryInput.value.length} / 120`;
+    });
+    bodyInput.addEventListener('input', () => {
+      const len = bodyInput.value.length;
+      bodyCount.textContent = `${len} / 2000`;
+      if (len > 2000) bodyInput.value = bodyInput.value.slice(0, 2000);
+    });
+
+    // ── Toast ───────────────────────────────────────────────────────
+    function showToast(msg, type = 'success') {
+      const toast = document.getElementById('toast');
+      const icon  = type === 'success' ? '✓' : '✕';
+      toast.innerHTML = `<span>${icon}</span> ${msg}`;
+      toast.className = `toast toast-${type} show`;
+      setTimeout(() => toast.classList.remove('show'), 3500);
+    }
+
+    // ── Preview ─────────────────────────────────────────────────────
+    const categoryLabels = {
+      announcement: 'Announcement', exam: 'Exam Notice',
+      event: 'Event', resource: 'Resource Update', general: 'General Info'
+    };
+    const priorityLabels = { high: 'High', medium: 'Medium', low: 'Low', normal: '' };
+
+    document.getElementById('previewBtn').addEventListener('click', () => {
+      document.getElementById('previewTitle').textContent    = document.getElementById('postTitle').value.trim()    || 'No title';
+      document.getElementById('previewSummary').textContent  = document.getElementById('postSummary').value.trim()  || 'No summary';
+      document.getElementById('previewContent').textContent  = document.getElementById('postBody').value.trim()     || 'No content';
+      document.getElementById('previewCategory').textContent = categoryLabels[document.getElementById('postCategory').value] || '';
+      document.getElementById('previewPriority').textContent = priorityLabels[document.getElementById('postPriority').value] || '';
+      const date   = document.getElementById('postDate').value;
+      const expiry = document.getElementById('postExpiry').value;
+      document.getElementById('previewDate').textContent   = date   ? `📅 Publish: ${date}`  : '';
+      document.getElementById('previewExpiry').textContent = expiry ? `⏳ Expires: ${expiry}` : '';
+      document.getElementById('previewPin').textContent    = document.getElementById('pinPost').checked ? '📌 Pinned' : '';
+      document.getElementById('previewOverlay').classList.add('active');
+    });
+
+    document.getElementById('previewClose').addEventListener('click', () =>
+      document.getElementById('previewOverlay').classList.remove('active'));
+    document.getElementById('previewOverlay').addEventListener('click', e => {
+      if (e.target === e.currentTarget) e.currentTarget.classList.remove('active');
+    });
+
+    // ── Save Draft ──────────────────────────────────────────────────
+    document.getElementById('draftBtn').addEventListener('click', () => {
+      const title = document.getElementById('postTitle').value.trim();
+      if (!title) { showToast('Please enter a title before saving as draft.', 'error'); return; }
+      const draft = {
+        title,
+        category: document.getElementById('postCategory').value,
+        summary:  document.getElementById('postSummary').value,
+        body:     document.getElementById('postBody').value,
+        date:     document.getElementById('postDate').value,
+        expiry:   document.getElementById('postExpiry').value,
+        priority: document.getElementById('postPriority').value,
+        pinned:   document.getElementById('pinPost').checked,
+        notify:   document.getElementById('notifyStudents').checked,
+        savedAt:  new Date().toISOString()
+      };
+      localStorage.setItem('adminPostDraft', JSON.stringify(draft));
+      showToast('Draft saved successfully.', 'success');
+    });
+
+    // ── Publish ─────────────────────────────────────────────────────
+    document.getElementById('postForm').addEventListener('submit', e => {
+      e.preventDefault();
+      const expiry  = document.getElementById('postExpiry').value;
+      const pubDate = document.getElementById('postDate').value;
+      if (expiry && expiry < pubDate) {
+        showToast('Expiry date cannot be before the publish date.', 'error'); return;
+      }
+      showToast('Post published successfully!', 'success');
+      e.target.reset();
+      document.getElementById('postDate').value = today;
+      summaryCount.textContent = '0 / 120';
+      bodyCount.textContent    = '0 / 2000';
+    });
+
+    // ── Restore Draft ───────────────────────────────────────────────
+    const saved = localStorage.getItem('adminPostDraft');
+    if (saved) {
+      try {
+        const d = JSON.parse(saved);
+        document.getElementById('postTitle').value        = d.title    || '';
+        document.getElementById('postCategory').value     = d.category || '';
+        document.getElementById('postSummary').value      = d.summary  || '';
+        document.getElementById('postBody').value         = d.body     || '';
+        document.getElementById('postDate').value         = d.date     || today;
+        document.getElementById('postExpiry').value       = d.expiry   || '';
+        document.getElementById('postPriority').value     = d.priority || 'normal';
+        document.getElementById('pinPost').checked        = d.pinned   || false;
+        document.getElementById('notifyStudents').checked = d.notify !== false;
+        summaryCount.textContent = `${(d.summary || '').length} / 120`;
+        bodyCount.textContent    = `${(d.body    || '').length} / 2000`;
+      } catch (_) {}
+    }
   </script>
 </body>
 </html>
+

@@ -1,127 +1,231 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GPA Calculator</title>
-    <script src="https://unpkg.com/scrollreveal"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-    <link rel="stylesheet" href="CgpAstyle.css" />
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CGPA Calculator — ClassMate</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="css/CgpAstyle.css" />
 </head>
-
 <body>
-    <nav class="navbar">
-        <div class="navbar-container">
-            <div class="navbar-logo">
-                <h2>CGPA <span style="color: orangered;">Calculator</span></h2>
-            </div>
-            <ul class="navbar-menu">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="compiler.html">Online Compiler</a></li>
-                <li><a href="PreviousQ.html">Question Bank</a></li>
-            </ul>
-            <div class="navbar-toggle">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-            </div>
+
+  <!-- ══════════ NAVBAR ══════════ -->
+  <header id="mainHeader">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">
+        <div class="nav-logo-icon"><i class="fas fa-calculator"></i></div>
+        <span>CGPA<em>Calc</em></span>
+      </a>
+      <nav class="nav-links">
+        <a href="index.html"     class="nav-link"><i class="fas fa-house"></i> Home</a>
+        <a href="aiChatbot.html" class="nav-link"><i class="fas fa-robot"></i> AI ChatBot</a>
+        <a href="compiler.html"  class="nav-link"><i class="fas fa-code"></i> Compiler</a>
+        <a href="CgpACal.html"   class="nav-link"><i class="fas fa-calculator"></i> CGPA</a>
+        <a href="PreviousQ.html" class="nav-link"><i class="fas fa-book-open"></i> Question Bank</a>
+      </nav>
+      <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="nav-drawer" id="navDrawer">
+      <a href="index.html"     class="drawer-link"><i class="fas fa-house"></i> Home</a>
+      <a href="aiChatbot.html" class="drawer-link"><i class="fas fa-robot"></i> AI ChatBot</a>
+      <a href="compiler.html"  class="drawer-link"><i class="fas fa-code"></i> Online Compiler</a>
+      <a href="CgpACal.html"   class="drawer-link"><i class="fas fa-calculator"></i> CGPA Calculator</a>
+      <a href="PreviousQ.html" class="drawer-link"><i class="fas fa-book-open"></i> Question Bank</a>
+    </div>
+    </div>
+  </header>
+
+  <!-- ══════════ HERO ══════════ -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-badge"><i class="fas fa-star"></i> Academic Tool</div>
+      <h1>CGPA <span>Calculator</span></h1>
+      <p>Enter your course codes, credit hours, and grades to instantly calculate your cumulative GPA.</p>
+    </div>
+    <div class="hero-blob"></div>
+    <div class="hero-blob hero-blob-2"></div>
+  </section>
+
+  <!-- ══════════ MAIN ══════════ -->
+  <main class="page-main">
+
+    <!-- Top row: GPA display + Add course form -->
+    <div class="top-grid">
+
+      <!-- GPA Display Card -->
+      <div class="card gpa-card">
+        <div class="gpa-ring-wrap">
+          <svg class="gpa-ring" viewBox="0 0 120 120">
+            <circle class="ring-bg"    cx="60" cy="60" r="50"/>
+            <circle class="ring-fill"  cx="60" cy="60" r="50" id="ringFill"/>
+          </svg>
+          <div class="gpa-ring-inner">
+            <span class="gpa-label">Your GPA</span>
+            <span class="gpa-value" id="calculated-gpa">0.00</span>
+            <span class="gpa-max">out of 4.00</span>
+          </div>
         </div>
-    </nav>
-    <div class="main-container">
-        <h1>CGPA Calculator</h1>
-        <p>Easily calculate your CGPA Just enter your course Codes, credits,and grades to get your current CGPA.</p>
+        <div class="gpa-stats">
+          <div class="stat-item">
+            <span class="stat-num" id="stat-courses">0</span>
+            <span class="stat-label">Courses</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat-item">
+            <span class="stat-num" id="stat-credits">0</span>
+            <span class="stat-label">Credits</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat-item">
+            <span class="stat-num" id="stat-grade">—</span>
+            <span class="stat-label">Standing</span>
+          </div>
+        </div>
+      </div>
 
-        <div class="gpacal-interface">
-            <div class="gpa-image">
-                <img src="images/image.png" alt="">
-            </div>
-
-            <div class="gpacal-calculateinterface">
-                <div class="gpa-display">
-                    <p class="dispaly-p">Your Current GPA is:</p>
-                    <p id="calculated-gpa">0.00</p>
-                </div>
-
-                <form id="course-form" class="form-row">
-                    <div class="form-1">
-                        <label for="course-code">Course Code</label>
-                        <input type="text" id="course-code" placeholder="Enter Course Code" required />
-                    </div>
-
-                    <div class="form-1">
-                        <label for="course-credits">Credits</label>
-                        <input type="number" id="course-credits" placeholder="Enter Credits" required />
-                    </div>
-
-                    <div class="form-1">
-                        <label for="course-grade">Grade</label>
-                        <select id="course-grade" required>
-                            <option value="">Select Grade</option>
-                            <option value="4.00">A+</option>
-                            <option value="3.75">A</option>
-                            <option value="3.50">A-</option>
-                            <option value="3.25">B+</option>
-                            <option value="3.00">B</option>
-                            <option value="2.75">B-</option>
-                            <option value="2.50">C+</option>
-                            <option value="2.25">C</option>
-                            <option value="2.00">D</option>
-                            <option value="0.00">F</option>
-                        </select>
-                    </div>
-                </form>
-
-                <button id="btn" type="submit" form="course-form">Add Course</button>
-            </div>
+      <!-- Add Course Card -->
+      <div class="card form-card">
+        <div class="card-header">
+          <i class="fas fa-plus-circle"></i>
+          <h2>Add a Course</h2>
         </div>
 
-        <div class="course-details">
-            <h2>Course Details</h2>
+        <form id="course-form">
+          <div class="field-group">
+            <label for="course-code"><i class="fas fa-book"></i> Course Code</label>
+            <input type="text" id="course-code" placeholder="e.g. CSE-1101" required />
+          </div>
 
-            <div class="course-details-table">
-                <table class="course-table">
-                    <thead>
-                        <tr>
-                            <th>Course Name</th>
-                            <th>Credits</th>
-                            <th>Grade</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-
-                    <tbody class="course-details-list">
-
-                    </tbody>
-                </table>
+          <div class="field-row">
+            <div class="field-group">
+              <label for="course-credits"><i class="fas fa-layer-group"></i> Credit Hours</label>
+              <input type="number" id="course-credits" placeholder="e.g. 3" min="1" max="6" required />
             </div>
+            <div class="field-group">
+              <label for="course-grade"><i class="fas fa-star-half-stroke"></i> Grade</label>
+              <select id="course-grade" required>
+                <option value="">Select Grade</option>
+                <option value="4.00">A+ &nbsp;(4.00)</option>
+                <option value="3.75">A &nbsp;&nbsp;(3.75)</option>
+                <option value="3.50">A- &nbsp;(3.50)</option>
+                <option value="3.25">B+ &nbsp;(3.25)</option>
+                <option value="3.00">B &nbsp;&nbsp;(3.00)</option>
+                <option value="2.75">B- &nbsp;(2.75)</option>
+                <option value="2.50">C+ &nbsp;(2.50)</option>
+                <option value="2.25">C &nbsp;&nbsp;(2.25)</option>
+                <option value="2.00">D &nbsp;&nbsp;(2.00)</option>
+                <option value="0.00">F &nbsp;&nbsp;(0.00)</option>
+              </select>
+            </div>
+          </div>
+
+          <button type="submit" id="btn">
+            <i class="fas fa-plus"></i> Add Course
+          </button>
+        </form>
+
+        <!-- Grade scale reference -->
+        <div class="grade-scale">
+          <p class="scale-title">Grade Scale Reference</p>
+          <div class="scale-pills">
+            <span class="pill a-plus">A+ 4.00</span>
+            <span class="pill a">A 3.75</span>
+            <span class="pill a-minus">A- 3.50</span>
+            <span class="pill b-plus">B+ 3.25</span>
+            <span class="pill b">B 3.00</span>
+            <span class="pill c">C 2.25</span>
+            <span class="pill d">D 2.00</span>
+            <span class="pill f">F 0.00</span>
+          </div>
         </div>
+      </div>
     </div>
 
-    <footer>
-        <div class="footer-bottom">
-            <div class="footer-bottom-content">
-                <div class="copyright">
-                    <p>&copy; 2025 Class Mate by SRM Technologies. All rights reserved.</p>
-                </div>
-                <div class="social-links">
-                    <span>Follow us:</span>
-                    <a href="https://www.facebook.com" target="_blank" aria-label="Facebook"><i
-                            class="fab fa-facebook-f"></i></a>
-                    <a href="https://www.twitter.com" target="_blank" aria-label="Twitter"><i
-                            class="fab fa-twitter"></i></a>
-                    <a href="https://www.instagram.com" target="_blank" aria-label="Instagram"><i
-                            class="fab fa-instagram"></i></a>
-                    <a href="https://www.linkedin.com" target="_blank" aria-label="LinkedIn"><i
-                            class="fab fa-linkedin-in"></i></a>
-                </div>
-            </div>
+    <!-- Course Table Card -->
+    <div class="card table-card">
+      <div class="card-header">
+        <div class="card-header-left">
+          <i class="fas fa-table-list"></i>
+          <h2>Course Details</h2>
         </div>
-    </footer>
+        <button class="clear-btn" id="clearAll" title="Clear all courses">
+          <i class="fas fa-trash"></i> Clear All
+        </button>
+      </div>
 
+      <div class="table-wrap">
+        <table class="course-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Course Code</th>
+              <th>Credits</th>
+              <th>Grade</th>
+              <th>Points</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody class="course-details-list" id="courseTableBody">
+            <tr class="empty-row" id="emptyRow">
+              <td colspan="6">
+                <div class="empty-state">
+                  <i class="fas fa-inbox"></i>
+                  <p>No courses added yet. Add your first course above.</p>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
 
-    <script src="CgpA.js"></script>
+  </main>
+
+  <!-- ══════════ FOOTER ══════════ -->
+  <footer>
+    <div class="footer-inner">
+      <p>&copy; 2025 <strong>ClassMate</strong>. All rights reserved. Built with <i class="fas fa-heart" style="color:#FF4500"></i> by <span style="color:#FF4500;font-weight:600">SRM Technologies</span>.</p>
+      <div class="social-links">
+        <a href="https://www.facebook.com" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://www.twitter.com"  target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+        <a href="https://www.instagram.com" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.linkedin.com" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/CgpA.js"></script>
+  <script>
+    // ── Navbar ──
+    const header    = document.getElementById('mainHeader');
+    const hamburger = document.getElementById('hamburger');
+    const navDrawer = document.getElementById('navDrawer');
+    window.addEventListener('scroll', () => header.classList.toggle('scrolled', window.scrollY > 10));
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('open');
+      navDrawer.classList.toggle('open');
+    });
+    navDrawer.querySelectorAll('.drawer-link').forEach(l => l.addEventListener('click', () => {
+      hamburger.classList.remove('open'); navDrawer.classList.remove('open');
+    }));
+    document.querySelectorAll('.nav-link').forEach(l => {
+      const linkFile = l.getAttribute('href').split('/').pop().split('?')[0];
+      const currentFile = location.pathname.split('/').pop() || 'index.html';
+      if (linkFile === currentFile) l.classList.add('active');
+    });
+
+    // ── Clear all ──
+    document.getElementById('clearAll').addEventListener('click', () => {
+      if (courses.length === 0) return;
+      if (confirm('Remove all courses?')) {
+        courses = [];
+        showCourses();
+        calculateGPA();
+      }
+    });
+  </script>
 </body>
-
 </html>
+

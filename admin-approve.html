@@ -3,54 +3,160 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Admin — Approve Submitted Questions</title>
+  <title>Pending Questions — ClassMate Admin</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="admin-style.css">
+  <link rel="stylesheet" href="css/admin-style.css">
 </head>
 <body>
-  <!-- Navbar -->
-  <nav class="admin-nav">
-    <div class="navbar-container">
-      <div class="nav-logo">
-        <div class="heading">ClassMate <span style="color:var(--pink)">Admin</span></div>
+
+  <!-- Sidebar overlay -->
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar">
+    <nav class="sidebar-nav">
+      <div class="nav-brand-item">
+        <div class="brand-icon"><i class="fas fa-graduation-cap"></i></div>
+        <div class="brand-text">
+          <span class="brand-name">ClassMate</span>
+          <span class="brand-role">Admin Panel</span>
+        </div>
       </div>
-      <div class="nav-links" id="navLinks">
-        <a href="index.html">Home</a>
-        <a href="admin.html">Dashboard</a>
-        <a href="submitQ.html">Submit</a>
+      <div class="nav-divider"></div>
+      <span class="nav-label">Main</span>
+      <a href="admin.html" class="nav-item"><i class="fas fa-th-large"></i><span>Dashboard</span></a>
+      <a href="index.html" class="nav-item"><i class="fas fa-home"></i><span>Home</span></a>
+      <span class="nav-label">Management</span>
+      <a href="admin-approve.html" class="nav-item active"><i class="fas fa-check-circle"></i><span>Question Approvals</span></a>
+      <a href="admin-resources.html" class="nav-item"><i class="fas fa-book-open"></i><span>Study Resources</span></a>
+      <a href="submitQ.html" class="nav-item"><i class="fas fa-upload"></i><span>Submit Question</span></a>
+    </nav>
+    <div class="sidebar-footer-spacer"></div>
+  </aside>
+
+  <!-- Topbar -->
+  <div class="topbar">
+    <button class="hamburger-btn" id="sidebarToggle" title="Toggle sidebar">
+      <i class="fas fa-bars"></i>
+    </button>
+    <div class="topbar-title">
+      <h1>Question Approvals</h1>
+      <span class="breadcrumb">ClassMate &rsaquo; Admin &rsaquo; Approvals</span>
+    </div>
+    <div class="topbar-right">
+      <div class="topbar-date" id="topbarDate"></div>
+      <div class="topbar-badge"><i class="fas fa-shield-alt"></i> Admin</div>
+      <div class="profile-dropdown" id="profileDropdown">
+        <button class="profile-trigger" id="profileTrigger">
+          <div class="profile-avatar"><i class="fas fa-user-shield"></i></div>
+          <span class="profile-name">Administrator</span>
+          <i class="fas fa-chevron-down profile-chevron"></i>
+        </button>
+        <div class="profile-menu" id="profileMenu">
+          <div class="profile-menu-header">
+            <div class="profile-menu-avatar"><i class="fas fa-user-shield"></i></div>
+            <div class="profile-menu-info">
+              <span class="profile-menu-name">Administrator</span>
+              <span class="profile-menu-email">admin_classmate@gmail.com</span>
+            </div>
+          </div>
+          <div class="profile-menu-divider"></div>
+          <a href="index.html" class="profile-menu-item"><i class="fas fa-home"></i> Go to Home</a>
+          <div class="profile-menu-divider"></div>
+          <a href="login.html" class="profile-menu-item danger"><i class="fas fa-sign-out-alt"></i> Sign Out</a>
+        </div>
       </div>
-      <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
     </div>
-  </nav>
+  </div>
 
-  
-  <main class="admin-main container">
-    <section class="notes">
-      Only user in the admin UID can access this page. 
-      Approve will mark the question as approved so it becomes available when fetching. 
-      Reject will remove it.
-    </section>
+  <!-- Main -->
+  <main class="main-content">
 
-    <h2 class="section-heading">
-      <i class="fas fa-clock"></i>
-      Pending Questions
-    </h2>
-
-    <div id="pendingList" class="pending-list">
-      <p class="empty">
-        <i class="fas fa-spinner fa-spin"></i> Loading pending questions...
-      </p>
+    <div class="page-header">
+      <div class="page-header-text">
+        <h2>Pending Questions</h2>
+        <p>Review and approve or reject submitted exam questions.</p>
+      </div>
+      <div class="page-header-meta">
+        <div class="status-pill">Live</div>
+      </div>
     </div>
+
+    <!-- Info banner -->
+    <div class="info-banner">
+      <i class="fas fa-info-circle"></i>
+      <span>Approved questions become visible to all students. Rejected questions are permanently removed.</span>
+    </div>
+
+    <!-- Pending list -->
+    <div class="section">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title"><i class="fas fa-clock"></i> Pending Submissions</h2>
+          <p class="section-sub">Questions awaiting your review.</p>
+        </div>
+        <span class="count-badge" id="pendingCount">—</span>
+      </div>
+      <div id="pendingList" class="pending-list">
+        <div class="empty-state">
+          <i class="fas fa-spinner fa-spin"></i>
+          <p>Loading pending questions…</p>
+        </div>
+      </div>
+    </div>
+
   </main>
 
-  <footer class="admin-footer">
-    <small><i class="fas fa-shield-alt"></i> Admin Console | &copy; 2025 Class Mate by SRM Technologies. All rights reserved.</small>
-  </footer>
+  <div class="toast" id="toast"></div>
 
-  <script type="module" src="admin.js"></script>
+  <script>
+    // Sidebar
+    const sidebar        = document.getElementById('sidebar');
+    const sidebarToggle  = document.getElementById('sidebarToggle');
+    const sidebarOverlay = document.getElementById('sidebarOverlay');
+    const isMobile       = () => window.innerWidth <= 900;
+
+    sidebarToggle.addEventListener('click', () => {
+      if (isMobile()) {
+        const open = sidebar.classList.contains('mobile-open');
+        sidebar.classList.toggle('mobile-open', !open);
+        sidebarOverlay.classList.toggle('active', !open);
+        document.body.style.overflow = open ? '' : 'hidden';
+      } else {
+        sidebar.classList.toggle('collapsed');
+      }
+    });
+    sidebarOverlay.addEventListener('click', () => {
+      sidebar.classList.remove('mobile-open');
+      sidebarOverlay.classList.remove('active');
+      document.body.style.overflow = '';
+    });
+
+    // Topbar date
+    document.getElementById('topbarDate').textContent = new Date().toLocaleDateString('en-US', {
+      weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
+    });
+
+    // Profile dropdown
+    const profileTrigger  = document.getElementById('profileTrigger');
+    const profileDropdown = document.getElementById('profileDropdown');
+    profileTrigger.addEventListener('click', e => { e.stopPropagation(); profileDropdown.classList.toggle('open'); });
+    document.addEventListener('click', e => { if (!profileDropdown.contains(e.target)) profileDropdown.classList.remove('open'); });
+
+    // Toast
+    function showToast(msg, type = 'success') {
+      const t = document.getElementById('toast');
+      t.innerHTML = `<i class="fas fa-${type === 'success' ? 'check' : 'times'}-circle"></i> ${msg}`;
+      t.className = `toast toast-${type} show`;
+      setTimeout(() => t.classList.remove('show'), 3500);
+    }
+
+    // Collapsed nav icons
+    document.querySelectorAll('.sidebar.collapsed .nav-item').forEach(el => {
+      el.style.justifyContent = 'center';
+    });
+  </script>
+  <script type="module" src="js/admin.js"></script>
 </body>
 </html>
+

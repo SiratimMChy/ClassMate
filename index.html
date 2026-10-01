@@ -7,43 +7,71 @@
   <title>ClassMate</title>
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
-  <link rel="stylesheet" href="mainPageStylesheet.css">
+  <link rel="stylesheet" href="css/mainPageStylesheet.css">
 </head>
 
 <body>
 
-  <header>
-    <a href="#" class="logo">Class <span>Mate</span></a>
-    <input type="checkbox" id="toggler">
-    <label for="toggler" class="fas fa-bars"></label>
-    <nav class="navbar">
-      <ul>
-        <li class="dropdown"><a href="#home">Home</a></li>
-        <li class="dropdown"><a href="aiChatbot.html">Ai ChatBot</a></li>
-        <li class="dropdown"><a href="CgpACal.html">CGPA Calculator</a></li>
-        <li class="dropdown"><a href="#contact">Contact</a></li>
-        <li class="dropdown"><a href="#about">About Us</a></li>
-        <li class="dropdown"><a href="compiler.html">Online Compiler</a></li>
+  <!-- ══════════════ NAVBAR ══════════════ -->
+  <header id="mainHeader">
+    <div class="nav-container">
 
-      
-        <li class="dropdown admin-only" style="display:none;">
-          <a href="admin.html">Admin Dashboard</a>
-        </li>
+      <!-- Logo -->
+      <a href="#home" class="nav-logo">
+        <div class="nav-logo-icon"><i class="fas fa-graduation-cap"></i></div>
+        <span>Class<em>Mate</em></span>
+      </a>
 
+      <!-- Desktop links -->
+      <nav class="nav-links" id="navLinks">
+        <a href="#home"          class="nav-link"><i class="fas fa-house"></i> Home</a>
+        <a href="aiChatbot.html" class="nav-link"><i class="fas fa-robot"></i> AI ChatBot</a>
+        <a href="CgpACal.html"   class="nav-link"><i class="fas fa-calculator"></i> CGPA</a>
+        <a href="compiler.html"  class="nav-link"><i class="fas fa-code"></i> Compiler</a>
+        <a href="#contact"       class="nav-link"><i class="fas fa-envelope"></i> Contact</a>
+        <a href="#about"         class="nav-link"><i class="fas fa-users"></i> About</a>
+        <a href="admin.html"     class="nav-link admin-only" style="display:none;">
+          <i class="fas fa-shield-halved"></i> Admin
+        </a>
+      </nav>
 
-        <li class="dropdown user-icon" id="user-menu-container">
-          <a href="#" class="fas fa-user ic"></a>
-          <ul class="dropdown-menu" id="user-dropdown-menu">
-            <li><a href="login.html">Login</a></li>
-            <li><a href="register.html">Sign Up</a></li>
-          </ul>
-        </li>
-      </ul>
-    </nav>
+      <!-- Right actions -->
+      <div class="nav-actions">
+        <!-- User dropdown (logged in) / Auth buttons (logged out) -->
+        <div class="nav-user" id="userMenu">
+          <button class="nav-user-btn" id="userBtn" aria-label="Account" style="display:none">
+            <i class="fas fa-user-circle"></i>
+            <i class="fas fa-chevron-down nav-chevron"></i>
+          </button>
+          <div class="nav-dropdown" id="userDropdown">
+            <div id="user-dropdown-menu"></div>
+          </div>
+        </div>
 
+        <!-- Hamburger -->
+        <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
 
+    <!-- Mobile drawer -->
+    <div class="nav-drawer" id="navDrawer">
+      <a href="#home"          class="drawer-link"><i class="fas fa-house"></i> Home</a>
+      <a href="aiChatbot.html" class="drawer-link"><i class="fas fa-robot"></i> AI ChatBot</a>
+      <a href="CgpACal.html"   class="drawer-link"><i class="fas fa-calculator"></i> CGPA Calculator</a>
+      <a href="compiler.html"  class="drawer-link"><i class="fas fa-code"></i> Online Compiler</a>
+      <a href="#contact"       class="drawer-link"><i class="fas fa-envelope"></i> Contact</a>
+      <a href="#about"         class="drawer-link"><i class="fas fa-users"></i> About Us</a>
+      <a href="admin.html"     class="drawer-link admin-only" style="display:none;">
+        <i class="fas fa-shield-halved"></i> Admin Dashboard
+      </a>
+      <div class="drawer-divider"></div>
+      <a href="login.html"    class="drawer-link"><i class="fas fa-right-to-bracket"></i> Login</a>
+      <a href="register.html" class="drawer-link drawer-signup"><i class="fas fa-user-plus"></i> Sign Up</a>
+    </div>
   </header>
-  <!-- Header Section End -->
+  <!-- ══════════════ NAVBAR END ══════════════ -->
 
   <!-- Home Section Start -->
   <section class="home" id="home">
@@ -82,56 +110,117 @@
   <!--Learn More Modal End-->
   <!-- Services Section Start -->
   <section class="services" id="services">
-    <h1 class="heading">Check our <span>Services</span></h1>
-    <div class="row">
-      <div class="video-container">
-        <video src="images/5637948-uhd_3840_2160_24fps.mp4" loop autoplay muted></video>
-        <h3><a href="FrontPG.html">Generate Font Page</a></h3>
-      </div>
-      <div class="video-container">
-        <video src="images/Question.mp4" loop autoplay muted></video>
-        <h3><a href="submitQ.html">Submit Questions</a></h3>
-      </div>
+    <div class="services-header">
+      <span class="services-eyebrow"><i class="fas fa-th-large"></i> What We Offer</span>
+      <h2 class="services-title">Check our <span>Services</span></h2>
+      <p class="services-subtitle">Everything you need for your university journey — all in one place.</p>
     </div>
 
-    <div class="row">
-      <div class="video-container">
-        <video src="images/application.mp4" loop autoplay muted></video>
-        <h3><a href="PreviousQ.html">Find Previous Questions</a></h3>
-      </div>
-      <div class="video-container">
-        <video src="images/Makeup_exam.mp4" loop autoplay muted></video>
-        <h3><a href="MakeupExam.html">Apply for Makeup Exam</a></h3>
-      </div>
-    </div>
+    <div class="services-grid">
 
-    <div class="row">
-      <div class="video-container">
-        <video src="images/boothPermission.mp4" loop autoplay muted></video>
-        <h3><a href="Permission.html">Venue Permission</a></h3>
-      </div>
-      <div class="video-container">
-        <video src="images/Study.mp4" loop autoplay muted></video>
-        <h3><a href="study-material.html">Study Materials</a></h3>
-      </div>
-    </div>
+      <a href="FrontPG.html" class="svc-card">
+        <video src="images/5637948-uhd_3840_2160_24fps.mp4" loop autoplay muted playsinline></video>
+        <div class="svc-overlay"></div>
+        <div class="svc-body">
+          <div class="svc-icon"><i class="fas fa-file-alt"></i></div>
+          <h3>Generate Front Page</h3>
+          <span class="svc-arrow"><i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
 
+      <a href="submitQ.html" class="svc-card">
+        <video src="images/Question.mp4" loop autoplay muted playsinline></video>
+        <div class="svc-overlay"></div>
+        <div class="svc-body">
+          <div class="svc-icon"><i class="fas fa-upload"></i></div>
+          <h3>Submit Questions</h3>
+          <span class="svc-arrow"><i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+
+      <a href="PreviousQ.html" class="svc-card">
+        <video src="images/application.mp4" loop autoplay muted playsinline></video>
+        <div class="svc-overlay"></div>
+        <div class="svc-body">
+          <div class="svc-icon"><i class="fas fa-search"></i></div>
+          <h3>Find Previous Questions</h3>
+          <span class="svc-arrow"><i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+
+      <a href="MakeupExam.html" class="svc-card">
+        <video src="images/Makeup_exam.mp4" loop autoplay muted playsinline></video>
+        <div class="svc-overlay"></div>
+        <div class="svc-body">
+          <div class="svc-icon"><i class="fas fa-pen-alt"></i></div>
+          <h3>Apply for Makeup Exam</h3>
+          <span class="svc-arrow"><i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+
+      <a href="Permission.html" class="svc-card">
+        <video src="images/boothPermission.mp4" loop autoplay muted playsinline></video>
+        <div class="svc-overlay"></div>
+        <div class="svc-body">
+          <div class="svc-icon"><i class="fas fa-map-marker-alt"></i></div>
+          <h3>Venue Permission</h3>
+          <span class="svc-arrow"><i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+
+      <a href="study-material.html" class="svc-card">
+        <video src="images/Study.mp4" loop autoplay muted playsinline></video>
+        <div class="svc-overlay"></div>
+        <div class="svc-body">
+          <div class="svc-icon"><i class="fas fa-book-open"></i></div>
+          <h3>Study Materials</h3>
+          <span class="svc-arrow"><i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+
+    </div>
   </section>
   <!-- Services Section End -->
   <!-- Clubs Section Start -->
   <section class="clubs-section blur-bg" id="club">
+
+    <div class="clubs-glow"></div>
+
     <div class="clubs-content">
-      <h1>Want to <span class="highlight">Register a Club?</span></h1>
-      <p>Leading University proudly hosts 16 officially recognized clubs. Would you like to explore and join them?</p>
-      <button class="btn"><a href="clubFrom.html" style="color: beige;">From up now ➜</a></button>
-    </div>
-    <div class="clubs-carousel">
-      <div class="carousel-card">
-        <img src="images/club10.jpg" alt="Club 1" />
+      <span class="clubs-eyebrow"><i class="fas fa-users"></i> University Clubs</span>
+      <h1>Want to <span class="highlight">Register<br>a Club?</span></h1>
+      <p>Leading University proudly hosts <strong>16 officially recognized clubs</strong>. Explore, join, or register your own and be part of something bigger.</p>
+
+      <div class="clubs-stats-row">
+        <div class="clubs-stat-item">
+          <span class="csi-num">16+</span>
+          <span class="csi-label">Active Clubs</span>
+        </div>
+        <div class="clubs-stat-divider"></div>
+        <div class="clubs-stat-item">
+          <span class="csi-num">2K+</span>
+          <span class="csi-label">Members</span>
+        </div>
       </div>
-      <button class="carousel-btn prev">&lt;</button>
-      <button class="carousel-btn next">&gt;</button>
+
+      <a href="clubFrom.html" class="clubs-btn-primary">
+        <span>Register Now</span>
+        <span class="cbp-icon"><i class="fas fa-arrow-right"></i></span>
+      </a>
     </div>
+
+    <!-- Carousel -->
+    <div class="clubs-right">
+      <div class="clubs-carousel">
+        <div class="carousel-card">
+          <img src="images/club10.jpg" alt="Club" />
+        </div>
+        <button class="carousel-btn prev" aria-label="Previous"><i class="fas fa-chevron-left"></i></button>
+        <button class="carousel-btn next" aria-label="Next"><i class="fas fa-chevron-right"></i></button>
+        <div class="carousel-dots" id="carouselDots"></div>
+      </div>
+    </div>
+
   </section>
 
   <script>
@@ -161,25 +250,33 @@
     const carouselCard = document.querySelector(".carousel-card img");
     const prevBtn = document.querySelector(".carousel-btn.prev");
     const nextBtn = document.querySelector(".carousel-btn.next");
+    const dotsContainer = document.getElementById("carouselDots");
+    const thumbs = document.querySelectorAll(".clubs-thumbs img");
+
+    // Build dots
+    images.forEach((_, i) => {
+      const dot = document.createElement("span");
+      dot.className = "dot" + (i === 0 ? " active" : "");
+      dot.addEventListener("click", () => showImage(i));
+      dotsContainer.appendChild(dot);
+    });
 
     function showImage(index) {
       if (index < 0) index = images.length - 1;
       if (index >= images.length) index = 0;
       carouselCard.src = images[index];
       currentIndex = index;
+      document.querySelectorAll(".dot").forEach((d, i) => d.classList.toggle("active", i === currentIndex));
     }
 
-    prevBtn.addEventListener("click", () => {
-      showImage(currentIndex - 1);
+    // Thumb clicks jump to that image
+    thumbs.forEach((thumb, i) => {
+      thumb.addEventListener("click", () => showImage(i));
     });
 
-    nextBtn.addEventListener("click", () => {
-      showImage(currentIndex + 1);
-    });
-    setInterval(() => {
-      showImage(currentIndex + 1);
-    }, 4000);
-
+    prevBtn.addEventListener("click", () => showImage(currentIndex - 1));
+    nextBtn.addEventListener("click", () => showImage(currentIndex + 1));
+    setInterval(() => showImage(currentIndex + 1), 4000);
 
     showImage(currentIndex);
   </script>
@@ -223,21 +320,96 @@
   <!--Modal Script-->
   <!-- Contact Section Start -->
   <section class="contact" id="contact">
-    <h1 class="heading"><span>Contact</span> Us</h1>
-    <div class="row">
-      <form id="contact-form">
-        <input type="text" name="user_name" placeholder="Name" class="box" required>
-        <input type="email" name="user_email" placeholder="Email" class="box" required>
-        <input type="number" name="user_number" placeholder="Number" class="box" required>
-        <textarea name="message" class="box" placeholder="Message" cols="30" rows="10" required></textarea>
-        <input type="submit" value="Send Message" class="btn">
-      </form>
-      <div class="image">
-        <iframe src="https://www.google.com/maps?q=Leading%20University,%20Ragibnagar,%20Sylhet&hl=en&z=15&output=embed"
-          width="620" height="420"
-          style="border: 2px beige; border-radius: 6px;transition: transform 0.3s, box-shadow 0.3s" allowfullscreen=""
-          loading="lazy" referrerpolicy="no-referrer-when-downgrade">
-        </iframe>
+    <div class="contact-container">
+
+      <!-- Left: Dark Panel -->
+      <div class="contact-panel">
+        <div class="contact-panel-top">
+          <span class="contact-eyebrow"><i class="fas fa-paper-plane"></i> Get In Touch</span>
+          <h2 class="contact-heading">Contact <span>Us</span></h2>
+          <p class="contact-desc">Have a question or feedback? We'd love to hear from you. Fill out the form and we'll respond shortly.</p>
+        </div>
+
+        <div class="contact-details">
+          <div class="cd-item">
+            <div class="cd-icon"><i class="fas fa-phone-alt"></i></div>
+            <div class="cd-text">
+              <span class="cd-label">Phone</span>
+              <span class="cd-val">+880-1763-777626</span>
+            </div>
+          </div>
+          <div class="cd-item">
+            <div class="cd-icon"><i class="fas fa-envelope"></i></div>
+            <div class="cd-text">
+              <span class="cd-label">Email</span>
+              <span class="cd-val">cse_2132020056@lus.ac.bd</span>
+            </div>
+          </div>
+          <div class="cd-item">
+            <div class="cd-icon"><i class="fas fa-map-marker-alt"></i></div>
+            <div class="cd-text">
+              <span class="cd-label">Location</span>
+              <span class="cd-val">Leading University, Sylhet, Bangladesh</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-socials">
+          <a href="https://www.facebook.com" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://www.linkedin.com" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="https://www.instagram.com" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        </div>
+      </div>
+
+      <!-- Right: Form + Map -->
+      <div class="contact-right-panel">
+
+        <!-- Form -->
+        <div class="contact-form-wrap">
+          <form id="contact-form" class="contact-form">
+            <div class="cf-row">
+              <div class="cf-group">
+                <label>Full Name</label>
+                <div class="cf-input-wrap">
+                  <i class="fas fa-user"></i>
+                  <input type="text" name="user_name" placeholder="Your name" required>
+                </div>
+              </div>
+              <div class="cf-group">
+                <label>Email Address</label>
+                <div class="cf-input-wrap">
+                  <i class="fas fa-envelope"></i>
+                  <input type="email" name="user_email" placeholder="your@email.com" required>
+                </div>
+              </div>
+            </div>
+            <div class="cf-group">
+              <label>Phone Number</label>
+              <div class="cf-input-wrap">
+                <i class="fas fa-phone-alt"></i>
+                <input type="tel" name="user_number" placeholder="+880 XXXX XXXXXX">
+              </div>
+            </div>
+            <div class="cf-group">
+              <label>Message</label>
+              <div class="cf-input-wrap cf-textarea-wrap">
+                <i class="fas fa-comment-dots"></i>
+                <textarea name="message" placeholder="Write your message here..." rows="4" required></textarea>
+              </div>
+            </div>
+            <button type="submit" class="cf-submit">
+              <span>Send Message</span><i class="fas fa-arrow-right"></i>
+            </button>
+          </form>
+        </div>
+
+        <!-- Map -->
+        <div class="contact-map-wrap">
+          <iframe src="https://www.google.com/maps?q=Leading%20University,%20Ragibnagar,%20Sylhet&hl=en&z=15&output=embed"
+            allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+        </div>
+
       </div>
     </div>
   </section>
@@ -253,69 +425,95 @@
     document.getElementById("contact-form").addEventListener("submit", function (event) {
       event.preventDefault();
 
-      
-      const submitBtn = this.querySelector('input[type="submit"]');
-      const originalValue = submitBtn.value;
-      submitBtn.value = "Sending...";
+      const submitBtn = this.querySelector('button[type="submit"]');
+      const originalHTML = submitBtn.innerHTML;
+      submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
       submitBtn.disabled = true;
 
       emailjs.sendForm("service_kkj5r5g", "template_g5ckcml", this)
         .then(function () {
           alert("✅ Message sent successfully!");
           document.getElementById("contact-form").reset();
-          submitBtn.value = originalValue;
+          submitBtn.innerHTML = originalHTML;
           submitBtn.disabled = false;
         }, function (error) {
           alert("❌ Failed to send message. Error: " + JSON.stringify(error));
           console.log("EmailJS Error:", error);
-          submitBtn.value = originalValue;
+          submitBtn.innerHTML = originalHTML;
           submitBtn.disabled = false;
         });
     });
   </script>
   <!-- About Section Start -->
   <section class="about" id="about">
-    <h1 class="heading">About <span>Developers</span></h1>
-    <div class="box-container">
-      <div class="box">
-        <p>Hello, I'm Masarrat Majed. A frontend developer focused on design and user experience. Skilled in building
-          responsive web interfaces and passionate about clean code and continuous learning.</p>
-        <div class="user">
-          <img src="images/pic-1.jpg" alt="">
-          <div class="user-info">
-            <h3>Majedur Rahman </h3>
-            <span>Frontend Developer</span><br>
-            <span>2132020067</span>
+    <div class="about-header">
+      <span class="about-eyebrow"><i class="fas fa-users"></i> The Team</span>
+      <h2 class="about-title">Meet the <span>Developers</span></h2>
+      <p class="about-subtitle">The passionate minds behind ClassMate building tools that make university life easier.</p>
+    </div>
+
+    <div class="dev-grid">
+
+      <!-- Card 1 -->
+      <div class="dev-card">
+        <div class="dev-card-top">
+          <div class="dev-avatar-wrap">
+            <img src="images/pic-1.jpg" alt="Majedur Rahman">
           </div>
+          <div class="dev-role-badge">Frontend Developer</div>
         </div>
-        <span class="fas fa-quote-right" style="font-size:35px"></span>
+        <div class="dev-card-body">
+          <h3 class="dev-name">Majedur Rahman</h3>
+          <span class="dev-id">ID: 2132020067</span>
+          <p class="dev-bio">Detail-oriented frontend developer specializing in responsive, accessible web interfaces. Passionate about clean code, intuitive design, and delivering polished user experiences. Strong focus on usability and continuous learning, with experience building modern interfaces that enhance performance, accessibility, and overall user engagement.</p>
+        </div>
+        <div class="dev-card-footer">
+          <a href="#" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+        </div>
       </div>
-      <div class="box">
-        <p>Hello, I'm Siratim Mustakim, a Full Stack Developer passionate about coding and building efficient web and
-          mobile apps. I am dedicated to continuous learning and delivering innovative solutions.</p>
-        <div class="user">
-          <img src="images/SMC.jpg" alt="">
-          <div class="user-info">
-            <h3>Siratim Mustakim Chy</h3>
-            <span>Full Stack Developer</span><br>
-            <span>2132020056</span>
+
+      <!-- Card 2 -->
+      <div class="dev-card">
+        <div class="dev-card-top">
+          <div class="dev-avatar-wrap">
+            <img src="images/SMC.jpg" alt="Siratim Mustakim Chy">
           </div>
+          <div class="dev-role-badge">Team Leader · Full Stack Developer</div>
         </div>
-        <span class="fas fa-quote-right" style="font-size:35px"></span>
+        <div class="dev-card-body">
+          <h3 class="dev-name">Siratim Mustakim Chy</h3>
+          <span class="dev-id">ID: 2132020056</span>
+          <p class="dev-bio">Full stack developer and team leader with expertise across the development lifecycle. Led project architecture, implementation, and coordination. After completing the project, redesigned the entire system into a modern UI. Skilled in scalable solutions, API integration, and building efficient, high-performance applications.</p>
+        </div>
+        <div class="dev-card-footer">
+          <a href="#" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+        </div>
       </div>
-      <div class="box">
-        <p>Hello, I'm Raz. A Full Stack Developer i love technology and enjoy turning ideas into easy-to-use websites
-          and apps. I have experience in web and mobile development and like learning new things to get better.</p>
-        <div class="user">
-          <img src="images/raz.jpg" alt="">
-          <div class="user-info">
-            <h3>Ruhit Dhar Raz</h3>
-            <span>Full Stack Developer</span><br>
-            <span>2132020062</span>
+
+      <!-- Card 3 -->
+      <div class="dev-card">
+        <div class="dev-card-top">
+          <div class="dev-avatar-wrap">
+            <img src="images/raz.jpg" alt="Ruhit Dhar Raz">
           </div>
+          <div class="dev-role-badge">Co Team Leader · Full Stack Developer</div>
         </div>
-        <span class="fas fa-quote-right" style="font-size:35px"></span>
+        <div class="dev-card-body">
+          <h3 class="dev-name">Ruhit Dhar Raz</h3>
+          <span class="dev-id">ID: 2132020062</span>
+          <p class="dev-bio">Full stack developer and co-team leader with strong frontend and backend expertise. Contributed across all development phases, supporting architecture, implementation, and testing. Demonstrates strong problem-solving, collaboration, and adaptability, ensuring smooth coordination and delivery of scalable, user-focused web applications.</p>
+        </div>
+        <div class="dev-card-footer">
+          <a href="#" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+        </div>
       </div>
+
     </div>
   </section>
   <!-- About Section End -->
@@ -323,76 +521,121 @@
 
 
   <!-- Footer Section Start -->
-  <section class="footer">
-    <div class="box-container">
+  <footer class="footer">
 
-      <div class="box">
-        <h3>About ClassMate</h3>
-        <p>
-          ClassMate is a student-friendly platform that simplifies university life.
-          It offers academic tools, club management, and exam-related services in one place.
-          Stay connected, organized, and involved throughout your university journey.
-        </p>
+    <!-- Top accent bar -->
+    <div class="footer-accent-bar"></div>
 
+    <div class="footer-top">
+
+      <div class="footer-brand">
+        <div class="footer-logo-wrap">
+          <div class="footer-logo-icon"><i class="fas fa-graduation-cap"></i></div>
+          <h2 class="footer-logo">Class<span>Mate</span></h2>
+        </div>
+        <p>A student-friendly platform that simplifies university life — academic tools, club management, and exam services all in one place.</p>
+        <div class="footer-socials">
+          <a href="https://www.facebook.com" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://www.twitter.com" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+          <a href="https://www.instagram.com" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="https://www.linkedin.com" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        </div>
       </div>
-      <div class="box">
-        <h3>Quick Links</h3>
-        <a href="study-material.html">Study Materials</a>
-        <a href="FrontPG.html">Front Page Generator</a>
-        <a href="PreviousQ.html">Previous Questions</a>
-        <a href="Permission.html">Venu Permission</a>
+
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="study-material.html"><i class="fas fa-chevron-right"></i>Study Materials</a></li>
+          <li><a href="FrontPG.html"><i class="fas fa-chevron-right"></i>Front Page Generator</a></li>
+          <li><a href="PreviousQ.html"><i class="fas fa-chevron-right"></i>Previous Questions</a></li>
+          <li><a href="Permission.html"><i class="fas fa-chevron-right"></i>Venue Permission</a></li>
+          <li><a href="CgpACal.html"><i class="fas fa-chevron-right"></i>CGPA Calculator</a></li>
+          <li><a href="compiler.html"><i class="fas fa-chevron-right"></i>Online Compiler</a></li>
+        </ul>
       </div>
-      <div class="box">
-        <h3>Locations</h3>
-        <a href="https://maps.app.goo.gl/EuNhvDuMvFdUV18p8">Leading University</a>
-        <span>Ragibnagar, South Surma, Sylhet-3112</span><br>
-        <span>Bangladesh</span>
+
+      <div class="footer-col">
+        <h4>Location</h4>
+        <div class="footer-info-item">
+          <div class="fii-icon"><i class="fas fa-map-marker-alt"></i></div>
+          <span><a href="https://maps.app.goo.gl/EuNhvDuMvFdUV18p8" target="_blank">Leading University</a><br>Ragibnagar, South Surma<br>Sylhet-3112, Bangladesh</span>
+        </div>
       </div>
-      <div class="box">
-        <h3>Contact Information</h3>
-        <address>
-          <div class="contact-item">
-            <i class="fas fa-phone"></i>
-            <span>+880-1763-777626</span>
-          </div>
-          <div class="contact-item">
-            <i class="fas fa-envelope"></i>
+
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <div class="footer-info-item">
+          <div class="fii-icon"><i class="fas fa-phone-alt"></i></div>
+          <span>+880-1763-777626</span>
+        </div>
+        <div class="footer-info-item">
+          <div class="fii-icon"><i class="fas fa-envelope"></i></div>
+          <div class="fii-emails">
             <span>cse_2132020056@lus.ac.bd</span>
-          </div>
-          <div class="contact-item">
-            <i class="fas fa-envelope"></i>
             <span>cse_2132020062@lus.ac.bd</span>
-          </div>
-          <div class="contact-item">
-            <i class="fas fa-envelope"></i>
             <span>cse_2132020067@lus.ac.bd</span>
           </div>
-          <div class="contact-item">
-            <i class="fas fa-map-marker-alt"></i>
-            <span>Sylhet, Bangladesh</span>
-          </div>
-        </address>
+        </div>
       </div>
-    </div>
-    <div class="credit">Created by <span>SRM Technologies</span> | &copy; all rights reserved<br>
-      <a href="https://www.facebook.com" target="_blank" aria-label="Facebook">
-        <i class="fab fa-facebook-f"></i>
-      </a>
-      <a href="https://www.twitter.com" target="_blank" aria-label="Twitter">
-        <i class="fab fa-twitter"></i>
-      </a>
-      <a href="https://www.instagram.com" target="_blank" aria-label="Instagram">
-        <i class="fab fa-instagram"></i>
-      </a>
-      <a href="https://www.linkedin.com" target="_blank" aria-label="LinkedIn">
-        <i class="fab fa-linkedin-in"></i>
-      </a>
-    </div>
+
     </div>
 
-  </section>
+    <div class="footer-bottom">
+      <p>&copy; 2025 <strong>ClassMate</strong>. All rights reserved. Created by <span>SRM Technologies</span>.</p>
+      <a href="#" class="footer-back-top" aria-label="Back to top"><i class="fas fa-arrow-up"></i></a>
+    </div>
+
+  </footer>
   <!-- Footer Section End -->
-  <script type="module" src="session.js"></script>
+  <script type="module" src="js/session.js"></script>
+  <script>
+    // ── Navbar scroll effect ──
+    const header = document.getElementById('mainHeader');
+    window.addEventListener('scroll', () => {
+      header.classList.toggle('scrolled', window.scrollY > 20);
+    });
+
+    // ── Hamburger / drawer ──
+    const hamburger  = document.getElementById('hamburger');
+    const navDrawer  = document.getElementById('navDrawer');
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('open');
+      navDrawer.classList.toggle('open');
+      document.body.classList.toggle('drawer-open');
+    });
+
+    // close drawer on link click
+    navDrawer.querySelectorAll('.drawer-link').forEach(link => {
+      link.addEventListener('click', () => {
+        hamburger.classList.remove('open');
+        navDrawer.classList.remove('open');
+        document.body.classList.remove('drawer-open');
+      });
+    });
+
+    // ── User dropdown ──
+    const userBtn      = document.getElementById('userBtn');
+    const userDropdown = document.getElementById('userDropdown');
+    userBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      userDropdown.classList.toggle('open');
+    });
+    document.addEventListener('click', () => userDropdown.classList.remove('open'));
+
+    // ── Active link highlight ──
+    const navLinkEls = document.querySelectorAll('.nav-link');
+    navLinkEls.forEach(l => {
+      const href = l.getAttribute('href');
+      const linkFile = href.split('/').pop().split('?')[0].split('#')[0] || 'index.html';
+      const currentFile = location.pathname.split('/').pop() || 'index.html';
+      // Mark active if same file, or if on index and link is a hash link
+      if (linkFile === currentFile || (currentFile === 'index.html' && href.startsWith('#'))) {
+        // Only mark the first hash link or exact match
+        if (href.startsWith('#') && href === '#home') l.classList.add('active');
+        else if (!href.startsWith('#') && linkFile === currentFile) l.classList.add('active');
+      }
+    });
+  </script>
 </body>
 
 </html>

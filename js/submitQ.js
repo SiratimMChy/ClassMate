@@ -1,19 +1,10 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
 import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-database.js";
 import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js";
+import { firebaseConfig, CLOUDINARY_CLOUD_NAME, CLOUDINARY_UPLOAD_PRESET } from "./firebaseConfig.js";
 
-const cloudName = "dbspyyci2";
-const uploadPreset = "question_upload";
-
-const firebaseConfig = {
-  apiKey: "AIzaSyBw9ZTVtz20p-Q6su5hVMHP0JrI4xmiL54",
-  authDomain: "classmate-2c272.firebaseapp.com",
-  projectId: "classmate-2c272",
-  storageBucket: "classmate-2c272.firebasestorage.app",
-  messagingSenderId: "259430838635",
-  appId: "1:259430838635:web:a49e703aad79f7fdb81c2e",
-  measurementId: "G-TJ6D20JK8F"
-};
+const cloudName    = CLOUDINARY_CLOUD_NAME;
+const uploadPreset = CLOUDINARY_UPLOAD_PRESET;
 
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);

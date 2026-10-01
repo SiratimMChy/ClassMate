@@ -1,59 +1,364 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ClassMate Compiler</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/codemirror.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/theme/dracula.min.css">
-    <link rel="stylesheet" href="compiler.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Online Compiler — ClassMate</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/codemirror.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/theme/dracula.min.css">
+  <link rel="stylesheet" href="css/compiler.css">
 </head>
-
 <body>
-    <header>
-        <h2 class="H1">Online<span>Compiler</span></h2>
-        <label for="toggler">&#9776;</label>
-        <input type="checkbox" id="toggler">
-        <nav class="navbar">
-            <a href="index.html">Home</a>
-            <a href="index.html">About</a>
-            <a href="index.html">Contact</a>
-            <select id="language">
-                <option value="" selected disabled>Select Language</option>
-                <option value="71">Python</option>
-                <option value="54">C++</option>
-                <option value="50">C</option>
-                <option value="62">Java</option>
-                <option value="63">JavaScript</option>
-                <option value="html">HTML/CSS/JS</option>
-            </select>
-        </nav>
-    </header>
 
-    <div class="container">
-        <div class="editor-container">
-            <div class="editor-header">Editor</div>
-            <textarea class="editor"></textarea>
+  <!-- ══════ NAVBAR ══════ -->
+  <header id="mainHeader">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">
+        <div class="nav-logo-icon"><i class="fas fa-code"></i></div>
+        <span>Online<em>Compiler</em></span>
+      </a>
+      <nav class="nav-links">
+        <a href="index.html"     class="nav-link"><i class="fas fa-house"></i> Home</a>
+        <a href="aiChatbot.html" class="nav-link"><i class="fas fa-robot"></i> AI ChatBot</a>
+        <a href="compiler.html"  class="nav-link"><i class="fas fa-code"></i> Compiler</a>
+        <a href="CgpACal.html"   class="nav-link"><i class="fas fa-calculator"></i> CGPA</a>
+        <a href="PreviousQ.html" class="nav-link"><i class="fas fa-book-open"></i> Question Bank</a>
+      </nav>
+      <div class="nav-right">
+        <!-- Hidden select — JS still reads this -->
+        <select id="language" style="display:none">
+          <option value="" selected disabled></option>
+          <option value="71">Python</option>
+          <option value="54">C++</option>
+          <option value="50">C</option>
+          <option value="62">Java</option>
+          <option value="63">JavaScript</option>
+          <option value="html">HTML/CSS/JS</option>
+        </select>
+
+        <!-- Custom logo dropdown -->
+        <div class="lang-picker" id="langPicker">
+          <button class="lang-picker-btn" id="langPickerBtn" type="button">
+            <span class="lp-placeholder">
+              <i class="fas fa-bolt"></i> Select Language
+            </span>
+            <i class="fas fa-chevron-down lp-arrow"></i>
+          </button>
+          <div class="lang-picker-menu" id="langPickerMenu">
+            <div class="lp-item" data-value="71">
+              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python">
+              <span>Python</span>
+            </div>
+            <div class="lp-item" data-value="54">
+              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" alt="C++">
+              <span>C++</span>
+            </div>
+            <div class="lp-item" data-value="50">
+              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg" alt="C">
+              <span>C</span>
+            </div>
+            <div class="lp-item" data-value="62">
+              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java">
+              <span>Java</span>
+            </div>
+            <div class="lp-item" data-value="63">
+              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript">
+              <span>JavaScript</span>
+            </div>
+            <div class="lp-item" data-value="html">
+              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML">
+              <span>HTML/CSS/JS</span>
+            </div>
+          </div>
         </div>
-        <div class="right-panel">
-            <textarea id="io-box" placeholder="Input/Output"></textarea>
-            <button class="run-btn">Run</button>
-            <iframe id="htmlOutput"></iframe>
+
+        <button class="run-btn" id="runBtn">
+          <i class="fas fa-play"></i><span> Run</span>
+        </button>
+      </div>
+      <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="nav-drawer" id="navDrawer">
+      <a href="index.html"     class="drawer-link"><i class="fas fa-house"></i> Home</a>
+      <a href="aiChatbot.html" class="drawer-link"><i class="fas fa-robot"></i> AI ChatBot</a>
+      <a href="compiler.html"  class="drawer-link"><i class="fas fa-code"></i> Online Compiler</a>
+      <a href="CgpACal.html"   class="drawer-link"><i class="fas fa-calculator"></i> CGPA Calculator</a>
+      <a href="PreviousQ.html" class="drawer-link"><i class="fas fa-book-open"></i> Question Bank</a>
+      <div class="drawer-lang-title"><i class="fas fa-code"></i> Select Language</div>
+      <!-- Hidden mobile select — JS reads this -->
+      <select id="language-mobile" style="display:none">
+        <option value="" selected disabled></option>
+        <option value="71">Python</option>
+        <option value="54">C++</option>
+        <option value="50">C</option>
+        <option value="62">Java</option>
+        <option value="63">JavaScript</option>
+        <option value="html">HTML/CSS/JS</option>
+      </select>
+      <div class="drawer-lang-grid" id="drawerLangGrid">
+        <button class="dlg-item" data-value="71">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python">
+          <span>Python</span>
+        </button>
+        <button class="dlg-item" data-value="54">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" alt="C++">
+          <span>C++</span>
+        </button>
+        <button class="dlg-item" data-value="50">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg" alt="C">
+          <span>C</span>
+        </button>
+        <button class="dlg-item" data-value="62">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java">
+          <span>Java</span>
+        </button>
+        <button class="dlg-item" data-value="63">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JS">
+          <span>JavaScript</span>
+        </button>
+        <button class="dlg-item" data-value="html">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML">
+          <span>HTML/CSS/JS</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ══════ IDE ══════ -->
+  <div class="ide-wrap">
+
+    <!-- Editor side -->
+    <div class="editor-side">
+      <div class="panel-bar">
+        <div class="panel-bar-left">
+          <!-- Mobile: custom button triggers bottom sheet -->
+          <button class="mobile-lang-btn" id="mobileLangBtn" type="button">
+            <span id="mobileLangLabel"><i class="fas fa-bolt"></i> Language</span>
+            <i class="fas fa-chevron-up" style="font-size:.55rem;opacity:.5;margin-left:2px"></i>
+          </button>
+          <!-- Desktop: title -->
+          <span class="panel-title desktop-only" id="editorTitle">
+            <i class="fas fa-file-code"></i> Select a language to start
+          </span>
         </div>
+        <div class="panel-bar-right">
+          <div id="htmlTabs" class="html-tabs" style="display:none">
+            <button class="htab active" data-tab="html">HTML</button>
+            <button class="htab" data-tab="css">CSS</button>
+            <button class="htab" data-tab="js">JS</button>
+          </div>
+          <button class="icon-btn" id="copyBtn" title="Copy code"><i class="fas fa-copy"></i></button>
+          <button class="icon-btn" id="clearEditorBtn" title="Clear editor"><i class="fas fa-eraser"></i></button>
+          <button class="mobile-run-btn" id="mobileRunBtn">
+            <i class="fas fa-play"></i> Run
+          </button>
+        </div>
+      </div>
+      <!-- CodeMirror mounts here -->
+      <div id="editorMount"></div>
     </div>
 
+    <!-- Bottom sheet for mobile language selection -->
+    <div class="lang-sheet-overlay" id="langSheetOverlay"></div>
+    <div class="lang-sheet" id="langSheet">
+      <div class="lang-sheet-handle"></div>
+      <div class="lang-sheet-title">Select Language</div>
+      <div class="lang-sheet-grid">
+        <button class="lang-sheet-item" data-value="71">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python">
+          <span>Python</span>
+        </button>
+        <button class="lang-sheet-item" data-value="54">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" alt="C++">
+          <span>C++</span>
+        </button>
+        <button class="lang-sheet-item" data-value="50">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg" alt="C">
+          <span>C</span>
+        </button>
+        <button class="lang-sheet-item" data-value="62">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java">
+          <span>Java</span>
+        </button>
+        <button class="lang-sheet-item" data-value="63">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JS">
+          <span>JavaScript</span>
+        </button>
+        <button class="lang-sheet-item" data-value="html">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML">
+          <span>HTML/CSS/JS</span>
+        </button>
+      </div>
+    </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/codemirror.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/mode/python/python.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/mode/clike/clike.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/mode/javascript/javascript.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/mode/htmlmixed/htmlmixed.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/mode/xml/xml.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/mode/css/css.min.js"></script>
+    <!-- Divider -->
+    <div class="divider" id="divider"></div>
 
+    <!-- Output side -->
+    <div class="output-side">
+      <div class="panel-bar">
+        <div class="panel-bar-left">
+          <span class="panel-title"><i class="fas fa-terminal"></i> Output</span>
+        </div>
+        <div class="panel-bar-right">
+          <button class="icon-btn" id="clearOutputBtn" title="Clear output"><i class="fas fa-xmark"></i></button>
+        </div>
+      </div>
 
-    <script src="compiler.js"></script>
+      <!-- Output text / HTML preview -->
+      <div id="outputBox">
+        <div class="output-placeholder" id="outputPlaceholder">
+          <i class="fas fa-terminal"></i>
+          <p>Run your code to see output here</p>
+          <kbd>Ctrl + Enter</kbd>
+        </div>
+      </div>
+      <iframe id="htmlOutput"></iframe>
+
+      <!-- stdin -->
+      <div class="stdin-section" id="stdinSection">
+        <div class="stdin-label"><i class="fas fa-keyboard"></i> stdin</div>
+        <textarea id="io-box" placeholder="Provide input for your program here…"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <!-- CodeMirror -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/codemirror.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/mode/python/python.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/mode/clike/clike.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/mode/javascript/javascript.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/mode/htmlmixed/htmlmixed.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/mode/xml/xml.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/mode/css/css.min.js"></script>
+  <script src="js/compiler.js"></script>
+
+  <!-- Status bar -->
+  <div class="status-bar" id="statusBar">
+    <span><i class="fas fa-code-branch"></i> ClassMate IDE</span>
+    <span id="statusLang"><i class="fas fa-circle"></i> No language selected</span>
+    <span><i class="fas fa-keyboard"></i> Ctrl+Enter to Run</span>
+  </div>
+
+  <script>
+    /* ── Mobile Run button ── */
+    const mobileRunBtn = document.getElementById('mobileRunBtn');
+    if (mobileRunBtn) {
+      mobileRunBtn.addEventListener('click', () => {
+        document.getElementById('runBtn').click();
+      });
+    }
+
+    /* ── Custom language picker ── */
+    const LANG_LOGOS = {
+      "71":   { name:"Python",     img:"https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" },
+      "54":   { name:"C++",        img:"https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" },
+      "50":   { name:"C",          img:"https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg" },
+      "62":   { name:"Java",       img:"https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" },
+      "63":   { name:"JavaScript", img:"https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" },
+      "html": { name:"HTML/CSS/JS",img:"https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" }
+    };
+
+    const pickerBtn  = document.getElementById('langPickerBtn');
+    const pickerMenu = document.getElementById('langPickerMenu');
+    const hiddenSel  = document.getElementById('language');
+    const hiddenMob  = document.getElementById('language-mobile');
+    const mlpBtn     = document.getElementById('mlpBtn');
+    const mlpMenu    = document.getElementById('mlpMenu');
+    const mlpArrow   = document.getElementById('mlpArrow');
+    const mlpLabel   = document.getElementById('mlpLabel');
+
+    function setPickerValue(val) {
+      const meta = LANG_LOGOS[val];
+      if (!meta) return;
+
+      // Update desktop picker if visible
+      if (pickerBtn) {
+        pickerBtn.querySelector('.lp-placeholder').innerHTML =
+          `<img src="${meta.img}" alt="${meta.name}"><span>${meta.name}</span>`;
+        pickerMenu.classList.remove('open');
+        const arrow = pickerBtn.querySelector('.lp-arrow');
+        if (arrow) arrow.classList.remove('rotated');
+      }
+
+      // Mark active on desktop items
+      document.querySelectorAll('.lp-item').forEach(i =>
+        i.classList.toggle('active', i.dataset.value === val)
+      );
+
+      // Sync hidden selects so compiler.js works
+      hiddenSel.value = val;
+      hiddenMob.value = val;
+      hiddenSel.dispatchEvent(new Event('change'));
+    }
+
+    if (pickerBtn) {
+      pickerBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const open = pickerMenu.classList.toggle('open');
+        pickerBtn.querySelector('.lp-arrow').classList.toggle('rotated', open);
+      });
+    }
+
+    document.querySelectorAll('.lp-item').forEach(item => {
+      item.addEventListener('click', () => setPickerValue(item.dataset.value));
+    });
+
+    // Close desktop picker on outside click
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('#langPicker')) {
+        pickerMenu?.classList.remove('open');
+        pickerBtn?.querySelector('.lp-arrow')?.classList.remove('rotated');
+      }
+    });
+
+    /* ── Mobile bottom sheet lang picker ── */
+    const mobileLangBtn     = document.getElementById('mobileLangBtn');
+    const mobileLangLabel   = document.getElementById('mobileLangLabel');
+    const langSheet         = document.getElementById('langSheet');
+    const langSheetOverlay  = document.getElementById('langSheetOverlay');
+
+    function openSheet()  { langSheet?.classList.add('open'); langSheetOverlay?.classList.add('open'); document.body.style.overflow='hidden'; }
+    function closeSheet() { langSheet?.classList.remove('open'); langSheetOverlay?.classList.remove('open'); document.body.style.overflow=''; }
+
+    mobileLangBtn?.addEventListener('click', openSheet);
+    langSheetOverlay?.addEventListener('click', closeSheet);
+
+    document.querySelectorAll('.lang-sheet-item').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const val  = btn.dataset.value;
+        const meta = LANG_LOGOS[val];
+        setPickerValue(val);
+        if (meta && mobileLangLabel) {
+          mobileLangLabel.innerHTML = `<img src="${meta.img}" style="width:14px;height:14px;vertical-align:middle;margin-right:4px">${meta.name}`;
+        }
+        document.querySelectorAll('.lang-sheet-item').forEach(b => b.classList.toggle('active', b === btn));
+        closeSheet();
+      });
+    });
+
+    /* ── Mobile drawer grid ── */
+    document.querySelectorAll('.dlg-item').forEach(btn => {
+      btn.addEventListener('click', () => {
+        setPickerValue(btn.dataset.value);
+        document.querySelectorAll('.dlg-item').forEach(b => b.classList.toggle('active', b === btn));
+        hamburger.classList.remove('open');
+        navDrawer.classList.remove('open');
+      });
+    });
+
+    /* ── Status bar update ── */
+    hiddenSel.addEventListener('change', function() {
+      const meta = LANG_LOGOS[this.value];
+      if (meta) {
+        document.getElementById('statusLang').innerHTML =
+          `<img src="${meta.img}" alt="${meta.name}" style="width:12px;height:12px;"> ${meta.name}`;
+      }
+    });
+  </script>
 </body>
-
 </html>
+

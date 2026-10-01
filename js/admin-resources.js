@@ -1,22 +1,14 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
+import { firebaseConfig, CLOUDINARY_CLOUD_NAME, CLOUDINARY_UPLOAD_PRESET } from "./firebaseConfig.js";
 import { getDatabase, ref, set, push, onValue, remove } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-database.js";
 import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js";
 
-const firebaseConfig = {
-  apiKey: "AIzaSyBw9ZTVtz20p-Q6su5hVMHP0JrI4xmiL54",
-  authDomain: "classmate-2c272.firebaseapp.com",
-  projectId: "classmate-2c272",
-  storageBucket: "classmate-2c272.firebasestorage.app",
-  messagingSenderId: "259430838635",
-  appId: "1:259430838635:web:a49e703aad79f7fdb81c2e",
-  measurementId: "G-TJ6D20JK8F"
-};
 
-const app = initializeApp(firebaseConfig);
-const db = getDatabase(app);
-const auth = getAuth(app);
-const cloudName = "dbspyyci2";
-const uploadPreset = "question_upload";
+const app          = initializeApp(firebaseConfig);
+const db           = getDatabase(app);
+const auth         = getAuth(app);
+const cloudName    = CLOUDINARY_CLOUD_NAME;
+const uploadPreset = CLOUDINARY_UPLOAD_PRESET;
 const ADMIN_UIDS = [];
 
 const resType = document.getElementById("resType"),
@@ -56,28 +48,51 @@ function matchesFilter(r, q) {
   return [r.title, r.description, r.type, r.fileName, r.link].some(f => (f || "").toLowerCase().includes(q));
 }
 
+const typeIcon = { pdf: 'fa-file-pdf', video: 'fa-play-circle', link: 'fa-link' };
+const typeLabel = { pdf: 'PDF', video: 'Video', link: 'Link' };
+
 function renderResources(items) {
-  const c = document.createElement("div");
-  c.style.display = "grid"; c.style.gap = "0.6rem";
+  const c = document.createElement('div');
+  c.className = 'resource-grid';
   const keys = Object.keys(items || {});
+
+  // Update count badge
+  const countEl = document.getElementById('resourceCount');
+  if (countEl) countEl.textContent = keys.length;
+
   if (!keys.length) {
-    c.innerHTML = `<div style="background:#fff;padding:10px;border-radius:8px;box-shadow:0 4px 12px rgba(0,0,0,0.04)">No resources yet.</div>`;
+    c.innerHTML = `
+      <div class="empty-state">
+        <i class="fas fa-folder-open"></i>
+        <p>No resources yet. Add one above.</p>
+      </div>`;
     return c;
   }
+
   for (const k of keys) {
-    const r = items[k], el = document.createElement("div");
-    el.style = "background:#fff;padding:10px;border-radius:8px;box-shadow:0 4px 12px rgba(0,0,0,0.04)";
-    el.innerHTML = `<strong>${r.title || "Untitled"}</strong><div style="color:#6b7280">${r.type} • ${r.addedBy || "admin"}</div>`;
-    const actions = document.createElement("div");
-    actions.style.marginTop = "6px";
-    const link = document.createElement("a");
-    link.href = r.fileURL || r.link; link.target = "_blank"; link.rel = "noopener";
-    link.textContent = r.fileURL ? "Open File" : r.link ? "Open Link" : "";
-    link.style.color = "#0b6eff"; if (link.textContent) actions.appendChild(link);
-    const rm = document.createElement("button");
-    rm.textContent = "Remove"; rm.style = "margin-left:8px;background:#ef4444;color:#fff;border:none;padding:6px 8px;border-radius:6px;cursor:pointer";
-    rm.onclick = () => deleteResource(k, r);
-    actions.appendChild(rm); el.appendChild(actions); c.appendChild(el);
+    const r = items[k];
+    const el = document.createElement('div');
+    el.className = 'resource-item';
+    const icon = typeIcon[r.type] || 'fa-file';
+    const label = typeLabel[r.type] || r.type;
+    const url = r.fileURL || r.link || '#';
+    el.innerHTML = `
+      <div class="resource-type-icon ${r.type || 'link'}">
+        <i class="fas ${icon}"></i>
+      </div>
+      <div class="resource-info">
+        <div class="resource-title">${r.title || 'Untitled'}</div>
+        ${r.description ? `<div class="resource-desc">${r.description}</div>` : ''}
+        <div class="resource-meta">
+          <span class="resource-tag">${label}</span>
+          ${r.addedBy ? `<span class="resource-tag">${r.addedBy === 'local-admin' ? 'Admin' : r.addedBy}</span>` : ''}
+        </div>
+      </div>
+      <div class="resource-actions">
+        ${url !== '#' ? `<a href="${url}" target="_blank" rel="noopener" class="btn btn-view"><i class="fas fa-external-link-alt"></i> Open</a>` : ''}
+        <button class="btn btn-remove" data-key="${k}"><i class="fas fa-trash-alt"></i> Remove</button>
+      </div>`;
+    c.appendChild(el);
   }
   return c;
 }
@@ -88,8 +103,19 @@ function updateResourceList(f = (searchInput?.value.trim() || "")) {
     const r = currentResources[k];
     if (r && matchesFilter(r, f)) filtered[k] = r;
   }
-  const holder = document.getElementById("resourceListHolder") || document.querySelector("#list");
-  if (holder) { holder.innerHTML = ""; holder.appendChild(renderResources(filtered)); }
+  const holder = document.getElementById("resourceListHolder");
+  if (holder) {
+    holder.innerHTML = "";
+    const grid = renderResources(filtered);
+    holder.appendChild(grid);
+    // Bind remove buttons
+    holder.querySelectorAll('.btn-remove').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const key = btn.dataset.key;
+        deleteResource(key, currentResources[key]);
+      });
+    });
+  }
 }
 
 searchInput?.addEventListener("input", () => {
