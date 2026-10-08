@@ -8,24 +8,13 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/codemirror.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/theme/dracula.min.css">
   <link rel="stylesheet" href="css/compiler.css">
+  <script src="js/components/navbar.js"></script>
 </head>
 <body>
 
   <!-- ══════ NAVBAR ══════ -->
-  <header id="mainHeader">
-    <div class="nav-container">
-      <a href="index.html" class="nav-logo">
-        <div class="nav-logo-icon"><i class="fas fa-code"></i></div>
-        <span>Online<em>Compiler</em></span>
-      </a>
-      <nav class="nav-links">
-        <a href="index.html"     class="nav-link"><i class="fas fa-house"></i> Home</a>
-        <a href="aiChatbot.html" class="nav-link"><i class="fas fa-robot"></i> AI ChatBot</a>
-        <a href="compiler.html"  class="nav-link"><i class="fas fa-code"></i> Compiler</a>
-        <a href="CgpACal.html"   class="nav-link"><i class="fas fa-calculator"></i> CGPA</a>
-        <a href="PreviousQ.html" class="nav-link"><i class="fas fa-book-open"></i> Question Bank</a>
-      </nav>
-      <div class="nav-right">
+  <classmate-navbar home-link="index.html">
+    <template data-target="nav-extra-container">
         <!-- Hidden select — JS still reads this -->
         <select id="language" style="display:none">
           <option value="" selected disabled></option>
@@ -76,17 +65,9 @@
         <button class="run-btn" id="runBtn">
           <i class="fas fa-play"></i><span> Run</span>
         </button>
-      </div>
-      <button class="nav-hamburger" id="hamburger" aria-label="Menu">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
-    <div class="nav-drawer" id="navDrawer">
-      <a href="index.html"     class="drawer-link"><i class="fas fa-house"></i> Home</a>
-      <a href="aiChatbot.html" class="drawer-link"><i class="fas fa-robot"></i> AI ChatBot</a>
-      <a href="compiler.html"  class="drawer-link"><i class="fas fa-code"></i> Online Compiler</a>
-      <a href="CgpACal.html"   class="drawer-link"><i class="fas fa-calculator"></i> CGPA Calculator</a>
-      <a href="PreviousQ.html" class="drawer-link"><i class="fas fa-book-open"></i> Question Bank</a>
+    </template>
+    
+    <template data-target="navDrawer">
       <div class="drawer-lang-title"><i class="fas fa-code"></i> Select Language</div>
       <!-- Hidden mobile select — JS reads this -->
       <select id="language-mobile" style="display:none">
@@ -124,8 +105,8 @@
           <span>HTML/CSS/JS</span>
         </button>
       </div>
-    </div>
-  </header>
+    </template>
+  </classmate-navbar>
 
   <!-- ══════ IDE ══════ -->
   <div class="ide-wrap">

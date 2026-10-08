@@ -8,69 +8,13 @@
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
   <link rel="stylesheet" href="css/mainPageStylesheet.css">
+  <script src="js/components/navbar.js"></script>
 </head>
 
 <body>
 
   <!-- ══════════════ NAVBAR ══════════════ -->
-  <header id="mainHeader">
-    <div class="nav-container">
-
-      <!-- Logo -->
-      <a href="#home" class="nav-logo">
-        <div class="nav-logo-icon"><i class="fas fa-graduation-cap"></i></div>
-        <span>Class<em>Mate</em></span>
-      </a>
-
-      <!-- Desktop links -->
-      <nav class="nav-links" id="navLinks">
-        <a href="#home"          class="nav-link"><i class="fas fa-house"></i> Home</a>
-        <a href="aiChatbot.html" class="nav-link"><i class="fas fa-robot"></i> AI ChatBot</a>
-        <a href="CgpACal.html"   class="nav-link"><i class="fas fa-calculator"></i> CGPA</a>
-        <a href="compiler.html"  class="nav-link"><i class="fas fa-code"></i> Compiler</a>
-        <a href="#contact"       class="nav-link"><i class="fas fa-envelope"></i> Contact</a>
-        <a href="#about"         class="nav-link"><i class="fas fa-users"></i> About</a>
-        <a href="admin.html"     class="nav-link admin-only" style="display:none;">
-          <i class="fas fa-shield-halved"></i> Admin
-        </a>
-      </nav>
-
-      <!-- Right actions -->
-      <div class="nav-actions">
-        <!-- User dropdown (logged in) / Auth buttons (logged out) -->
-        <div class="nav-user" id="userMenu">
-          <button class="nav-user-btn" id="userBtn" aria-label="Account" style="display:none">
-            <i class="fas fa-user-circle"></i>
-            <i class="fas fa-chevron-down nav-chevron"></i>
-          </button>
-          <div class="nav-dropdown" id="userDropdown">
-            <div id="user-dropdown-menu"></div>
-          </div>
-        </div>
-
-        <!-- Hamburger -->
-        <button class="nav-hamburger" id="hamburger" aria-label="Menu">
-          <span></span><span></span><span></span>
-        </button>
-      </div>
-    </div>
-
-    <!-- Mobile drawer -->
-    <div class="nav-drawer" id="navDrawer">
-      <a href="#home"          class="drawer-link"><i class="fas fa-house"></i> Home</a>
-      <a href="aiChatbot.html" class="drawer-link"><i class="fas fa-robot"></i> AI ChatBot</a>
-      <a href="CgpACal.html"   class="drawer-link"><i class="fas fa-calculator"></i> CGPA Calculator</a>
-      <a href="compiler.html"  class="drawer-link"><i class="fas fa-code"></i> Online Compiler</a>
-      <a href="#contact"       class="drawer-link"><i class="fas fa-envelope"></i> Contact</a>
-      <a href="#about"         class="drawer-link"><i class="fas fa-users"></i> About Us</a>
-      <a href="admin.html"     class="drawer-link admin-only" style="display:none;">
-        <i class="fas fa-shield-halved"></i> Admin Dashboard
-      </a>
-      <div class="drawer-divider"></div>
-      <a href="login.html"    class="drawer-link"><i class="fas fa-right-to-bracket"></i> Login</a>
-      <a href="register.html" class="drawer-link drawer-signup"><i class="fas fa-user-plus"></i> Sign Up</a>
-    </div>
-  </header>
+  <classmate-navbar home-link="#home"></classmate-navbar>
   <!-- ══════════════ NAVBAR END ══════════════ -->
 
   <!-- Home Section Start -->
@@ -588,54 +532,6 @@
   </footer>
   <!-- Footer Section End -->
   <script type="module" src="js/session.js"></script>
-  <script>
-    // ── Navbar scroll effect ──
-    const header = document.getElementById('mainHeader');
-    window.addEventListener('scroll', () => {
-      header.classList.toggle('scrolled', window.scrollY > 20);
-    });
-
-    // ── Hamburger / drawer ──
-    const hamburger  = document.getElementById('hamburger');
-    const navDrawer  = document.getElementById('navDrawer');
-    hamburger.addEventListener('click', () => {
-      hamburger.classList.toggle('open');
-      navDrawer.classList.toggle('open');
-      document.body.classList.toggle('drawer-open');
-    });
-
-    // close drawer on link click
-    navDrawer.querySelectorAll('.drawer-link').forEach(link => {
-      link.addEventListener('click', () => {
-        hamburger.classList.remove('open');
-        navDrawer.classList.remove('open');
-        document.body.classList.remove('drawer-open');
-      });
-    });
-
-    // ── User dropdown ──
-    const userBtn      = document.getElementById('userBtn');
-    const userDropdown = document.getElementById('userDropdown');
-    userBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      userDropdown.classList.toggle('open');
-    });
-    document.addEventListener('click', () => userDropdown.classList.remove('open'));
-
-    // ── Active link highlight ──
-    const navLinkEls = document.querySelectorAll('.nav-link');
-    navLinkEls.forEach(l => {
-      const href = l.getAttribute('href');
-      const linkFile = href.split('/').pop().split('?')[0].split('#')[0] || 'index.html';
-      const currentFile = location.pathname.split('/').pop() || 'index.html';
-      // Mark active if same file, or if on index and link is a hash link
-      if (linkFile === currentFile || (currentFile === 'index.html' && href.startsWith('#'))) {
-        // Only mark the first hash link or exact match
-        if (href.startsWith('#') && href === '#home') l.classList.add('active');
-        else if (!href.startsWith('#') && linkFile === currentFile) l.classList.add('active');
-      }
-    });
-  </script>
 </body>
 
 </html>

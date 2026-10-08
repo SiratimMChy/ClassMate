@@ -13,9 +13,10 @@ const app  = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
 function updateNavBar() {
-    const dropdownMenu = document.getElementById('user-dropdown-menu');
-    const adminOnlyEls = document.querySelectorAll('.admin-only');
-    const userBtn      = document.getElementById('userBtn');
+    const navRoot = document.querySelector('classmate-navbar')?.shadowRoot || document;
+    const dropdownMenu = navRoot.getElementById('user-dropdown-menu');
+    const adminOnlyEls = navRoot.querySelectorAll('.admin-only');
+    const userBtn      = navRoot.getElementById('userBtn');
 
     if (!dropdownMenu) return;
 
@@ -32,6 +33,9 @@ function updateNavBar() {
         const email    = currentUser.email || '';
         const role     = isAdmin ? 'Administrator' : 'Student';
         const initial  = email.charAt(0).toUpperCase();
+
+        // Remove any existing auth buttons first
+        navRoot.querySelectorAll('.nav-auth-btn').forEach(el => el.remove());
 
         // Show dropdown trigger, hide login button
         if (userBtn) {
@@ -71,7 +75,7 @@ function updateNavBar() {
           </a>
         `;
 
-        document.getElementById('signOutBtn')?.addEventListener('click', async (e) => {
+        navRoot.getElementById('signOutBtn')?.addEventListener('click', async (e) => {
             e.preventDefault();
             localStorage.removeItem('user');
             try { if (!isAdmin) await signOut(auth); } catch (err) { console.error(err); }
@@ -84,9 +88,9 @@ function updateNavBar() {
 
         // Put login/signup directly in the dropdown menu div
         // but also show them as inline buttons via the nav-actions area
-        const navActions = document.querySelector('.nav-actions');
+        const navActions = navRoot.querySelector('.nav-actions');
         // Remove any existing auth buttons first
-        document.querySelectorAll('.nav-auth-btn').forEach(el => el.remove());
+        navRoot.querySelectorAll('.nav-auth-btn').forEach(el => el.remove());
 
         if (navActions) {
             const loginBtn = document.createElement('a');
@@ -94,7 +98,7 @@ function updateNavBar() {
             loginBtn.className = 'nav-auth-btn nav-login-btn';
             loginBtn.innerHTML = 'Get Started';
 
-            const hamburger = document.getElementById('hamburger');
+            const hamburger = navRoot.getElementById('hamburger');
             navActions.insertBefore(loginBtn, hamburger);
         }
     }

@@ -9,35 +9,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <link rel="stylesheet" href="css/FrontPG.css">
+  <script src="js/components/navbar.js"></script>
 </head>
 
 <body>
   <!-- Navbar -->
-  <header id="fpHeader">
-    <div class="fp-nav-container">
-      <a href="index.html" class="fp-nav-logo">
-        <div class="fp-nav-logo-icon"><i class="fas fa-graduation-cap"></i></div>
-        <span>Class<em>Mate</em></span>
-      </a>
-      <nav class="fp-nav-links">
-        <a href="index.html"       class="fp-nav-link"><i class="fas fa-house"></i> Home</a>
-        <a href="aiChatbot.html"   class="fp-nav-link"><i class="fas fa-robot"></i> AI ChatBot</a>
-        <a href="compiler.html"    class="fp-nav-link"><i class="fas fa-code"></i> Compiler</a>
-        <a href="PreviousQ.html"   class="fp-nav-link"><i class="fas fa-book-open"></i> Question Bank</a>
-        <a href="FrontPG.html"     class="fp-nav-link"><i class="fas fa-file-alt"></i> Front Page</a>
-      </nav>
-      <button class="fp-hamburger" id="fpHamburger" aria-label="Menu">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
-    <div class="fp-drawer" id="fpDrawer">
-      <a href="index.html"       class="fp-drawer-link"><i class="fas fa-house"></i> Home</a>
-      <a href="aiChatbot.html"   class="fp-drawer-link"><i class="fas fa-robot"></i> AI ChatBot</a>
-      <a href="compiler.html"    class="fp-drawer-link"><i class="fas fa-code"></i> Compiler</a>
-      <a href="PreviousQ.html"   class="fp-drawer-link"><i class="fas fa-book-open"></i> Question Bank</a>
-      <a href="FrontPG.html"     class="fp-drawer-link"><i class="fas fa-file-alt"></i> Front Page</a>
-    </div>
-  </header>
+    <classmate-navbar home-link="index.html"></classmate-navbar>
 
   <div id="pageHero">
     <div class="container">

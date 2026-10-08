@@ -6,36 +6,12 @@
   <title>CGPA Calculator — ClassMate</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <link rel="stylesheet" href="css/CgpAstyle.css" />
+  <script src="js/components/navbar.js"></script>
 </head>
 <body>
 
   <!-- ══════════ NAVBAR ══════════ -->
-  <header id="mainHeader">
-    <div class="nav-container">
-      <a href="index.html" class="nav-logo">
-        <div class="nav-logo-icon"><i class="fas fa-calculator"></i></div>
-        <span>CGPA<em>Calc</em></span>
-      </a>
-      <nav class="nav-links">
-        <a href="index.html"     class="nav-link"><i class="fas fa-house"></i> Home</a>
-        <a href="aiChatbot.html" class="nav-link"><i class="fas fa-robot"></i> AI ChatBot</a>
-        <a href="compiler.html"  class="nav-link"><i class="fas fa-code"></i> Compiler</a>
-        <a href="CgpACal.html"   class="nav-link"><i class="fas fa-calculator"></i> CGPA</a>
-        <a href="PreviousQ.html" class="nav-link"><i class="fas fa-book-open"></i> Question Bank</a>
-      </nav>
-      <button class="nav-hamburger" id="hamburger" aria-label="Menu">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
-    <div class="nav-drawer" id="navDrawer">
-      <a href="index.html"     class="drawer-link"><i class="fas fa-house"></i> Home</a>
-      <a href="aiChatbot.html" class="drawer-link"><i class="fas fa-robot"></i> AI ChatBot</a>
-      <a href="compiler.html"  class="drawer-link"><i class="fas fa-code"></i> Online Compiler</a>
-      <a href="CgpACal.html"   class="drawer-link"><i class="fas fa-calculator"></i> CGPA Calculator</a>
-      <a href="PreviousQ.html" class="drawer-link"><i class="fas fa-book-open"></i> Question Bank</a>
-    </div>
-    </div>
-  </header>
+    <classmate-navbar home-link="index.html"></classmate-navbar>
 
   <!-- ══════════ HERO ══════════ -->
   <section class="hero">

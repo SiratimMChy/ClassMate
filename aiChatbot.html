@@ -7,35 +7,12 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <link rel="stylesheet" href="css/aiChatbot.css">
+  <script src="js/components/navbar.js"></script>
 </head>
 <body>
 
   <!-- Navbar -->
-  <header id="mainHeader">
-    <div class="nav-container">
-      <a href="index.html" class="nav-logo">
-        <div class="nav-logo-icon"><i class="fas fa-robot"></i></div>
-        <span>Class<em>Mate</em></span>
-      </a>
-      <nav class="nav-links">
-        <a href="index.html"     class="nav-link"><i class="fas fa-house"></i> Home</a>
-        <a href="aiChatbot.html" class="nav-link"><i class="fas fa-robot"></i> AI ChatBot</a>
-        <a href="compiler.html"  class="nav-link"><i class="fas fa-code"></i> Compiler</a>
-        <a href="PreviousQ.html" class="nav-link"><i class="fas fa-book-open"></i> Question Bank</a>
-        <a href="CgpACal.html"   class="nav-link"><i class="fas fa-calculator"></i> CGPA</a>
-      </nav>
-      <button class="nav-hamburger" id="hamburger" aria-label="Menu">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
-    <div class="nav-drawer" id="navDrawer">
-      <a href="index.html"     class="drawer-link"><i class="fas fa-house"></i> Home</a>
-      <a href="aiChatbot.html" class="drawer-link"><i class="fas fa-robot"></i> AI ChatBot</a>
-      <a href="compiler.html"  class="drawer-link"><i class="fas fa-code"></i> Online Compiler</a>
-      <a href="PreviousQ.html" class="drawer-link"><i class="fas fa-book-open"></i> Question Bank</a>
-      <a href="CgpACal.html"   class="drawer-link"><i class="fas fa-calculator"></i> CGPA Calculator</a>
-    </div>
-  </header>
+  <classmate-navbar home-link="index.html"></classmate-navbar>
 
   <!-- Welcome screen -->
   <div class="welcome-screen" id="welcomeScreen">
@@ -82,26 +59,6 @@
 
   <script src="js/aiChatbot.js"></script>
   <script>
-    // Navbar
-    const hamburger = document.getElementById('hamburger');
-    const navDrawer = document.getElementById('navDrawer');
-    const mainHeader = document.getElementById('mainHeader');
-
-    window.addEventListener('scroll', () => mainHeader.classList.toggle('scrolled', window.scrollY > 10));
-    hamburger.addEventListener('click', () => {
-      hamburger.classList.toggle('open');
-      navDrawer.classList.toggle('open');
-    });
-    navDrawer.querySelectorAll('.drawer-link').forEach(l => l.addEventListener('click', () => {
-      hamburger.classList.remove('open');
-      navDrawer.classList.remove('open');
-    }));
-    document.querySelectorAll('.nav-link').forEach(l => {
-      const linkFile = l.getAttribute('href').split('/').pop().split('?')[0];
-      const currentFile = location.pathname.split('/').pop() || 'index.html';
-      if (linkFile === currentFile) l.classList.add('active');
-    });
-
     // Quick chips
     document.querySelectorAll('.chip').forEach(chip => {
       chip.addEventListener('click', () => {
